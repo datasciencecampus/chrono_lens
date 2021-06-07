@@ -31,5 +31,5 @@ script:
   # ...and run the tests on dsc_lib
   - PYTHONPATH=../..:.. pytest --cov-config .coveragerc --cov=./ ../dsc_lib_tests/
 
- after_success:
+after_success:
   - bash <(curl -s https://codecov.io/bash)
