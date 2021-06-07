@@ -24,6 +24,6 @@ repos:
     rev: v3.4.0
     hooks:
       - id: check-added-large-files
-        args: ["--maxkb=60000"]
+        args: ["--maxkb=5000"]
       - id: end-of-file-fixer
       - id: trailing-whitespace

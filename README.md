@@ -97,6 +97,11 @@ Installing requirements.txt will install the pre-commit tool, which now needs to
 
 ...which will then pull configuration from `.pre-commit-config.yaml`.
 
+**NOTE** the `check-added-large-files` pre-commit test has its maximum kB size in
+`.pre-commit-config.yaml` is temporarily increased to 60Mb when adding the RCNN model file
+`cloud/dsc_lib_tests/test_data/test_detector_data/fig_frcnn_rebuscov-3.pb`.
+The limit is then reverted to 5Mb as a sensible "normal" upper limit.
+
 #### Pre-Commit First Use
 
 Its recommended to run a sweep across all files before proceeding, just to ensure nothing is already
