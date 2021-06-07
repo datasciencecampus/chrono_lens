@@ -1,0 +1,30 @@
+{
+  "creation_datetime": "20200610 1700",
+  "notes": [
+    "scenecut_threshold:",
+    "the ssim value is between [0,1], the higher, the more similar to the previous image.",
+    "0.4 is an experimental value to check scenecut.",
+    "If in the future, we have a set of video scenecut data, we can use some learning algorithm to calculate this",
+    "threshold",
+    "",
+    "minimum_mask_proportion:",
+    "objects may not cover all the bounding box, so it is tricky to compare the overlapped area between the",
+    "foreground mask and the bounding box for a vehicle, if it turning around against the bbox, in the worst case,",
+    "it will cover 1/2 of the bounding box.",
+    "considering disturbance from the illumination change, occlusion, missing foreground pixels, here set 25% of",
+    "foreground to filter the static vehicles.",
+    "",
+    "minimum_mask_proportion_person, confidence_person:",
+    "person's bounding box is very different from vehicles.",
+    "As person and its bounding box is very small, the mask can be problematic if some disturbance from",
+    "illumination changes, occluded vehicles and camera shaking.",
+    "Here I gave much more confidence to the probability score from the detector when the mask is not stable with",
+    "small static area included in the bounding box of person.",
+    "Here the threshold values are some experimental values."
+  ],
+  "scenecut_threshold": 0.4,
+  "minimum_mask_proportion": 0.25,
+  "minimum_mask_proportion_person": 0.10,
+  "confidence_person": 0.80,
+  "contour_area_threshold": 50
+}

@@ -1,0 +1,4002 @@
+[
+  {
+    "systemCodeNumber": "CM_A69A1",
+    "definitions": [
+      {
+        "shortDescription": "A69 / Corby Hill",
+        "longDescription": "Cumbria - A69 / Corby Hill",
+        "point": {
+          "easting": 347903,
+          "northing": 557086,
+          "latitude": 54.9057618392964000,
+          "longitude": -2.8140275427280400
+        },
+        "lastUpdated": "2018-11-07T14:49:22.433+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A1114A1",
+    "definitions": [
+      {
+        "shortDescription": "A1114 / Cross Ln",
+        "longDescription": "Gateshead - A1114 Handy Drive / Cross Lane",
+        "point": {
+          "easting": 421861,
+          "northing": 562736,
+          "latitude": 54.9587822801620000,
+          "longitude": -1.6601435633512400
+        },
+        "lastUpdated": "2016-02-08T10:32:36.947+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A167F1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / Tyne Brg",
+        "longDescription": "Gateshead - A167 Tyne Bridge / Hills Street / Bottle Bank",
+        "point": {
+          "easting": 425467,
+          "northing": 563505,
+          "latitude": 54.9655223345915000,
+          "longitude": -1.6037608799676100
+        },
+        "lastUpdated": "2016-02-08T12:10:43.983+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A167G1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / Coulthards Ln",
+        "longDescription": "Gateshead - A167 Gateshead Highway / Coulthards Lane",
+        "point": {
+          "easting": 425727,
+          "northing": 563350,
+          "latitude": 54.9641225615863000,
+          "longitude": -1.5997213179957400
+        },
+        "lastUpdated": "2016-02-08T12:09:29.357+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A167H1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / Whitehall Rd",
+        "longDescription": "Gateshead - A167 Gateshead Highway / Whitehall Road",
+        "point": {
+          "easting": 425718,
+          "northing": 562276,
+          "latitude": 54.9544737007949000,
+          "longitude": -1.5999508478345300
+        },
+        "lastUpdated": "2016-05-06T17:35:47.400+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A167I1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / Prince Consort Rd",
+        "longDescription": "Gateshead - A167 Durham Road / Prince Consort Road",
+        "point": {
+          "easting": 425785,
+          "northing": 561741,
+          "latitude": 54.9496542865274000,
+          "longitude": -1.5989607503657600
+        },
+        "lastUpdated": "2016-02-08T10:00:50.723+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A167J1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / Belle Vue Bank",
+        "longDescription": "Gateshead - A167 Durham Road / Belle Vue Bank / Beaconsfield Road",
+        "point": {
+          "easting": 425752,
+          "northing": 560327,
+          "latitude": 54.9369557805606000,
+          "longitude": -1.5996000902704300
+        },
+        "lastUpdated": "2016-02-08T10:00:15.380+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A167K1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / Kells Ln",
+        "longDescription": "Gateshead - A167 Durham Road / Kells Lane / Chowdene Bank",
+        "point": {
+          "easting": 425901,
+          "northing": 559599,
+          "latitude": 54.9304065903027000,
+          "longitude": -1.5973400716469700
+        },
+        "lastUpdated": "2016-02-08T09:59:37.923+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A167L1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / Lynmouth Rd",
+        "longDescription": "Gateshead - A167 Durham Road / Lynmouth Road",
+        "point": {
+          "easting": 426063,
+          "northing": 559166,
+          "latitude": 54.9265070897645000,
+          "longitude": -1.5948502026542400
+        },
+        "lastUpdated": "2016-04-15T08:11:30.060+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A167M1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / A1 J66 (N)",
+        "longDescription": "Gateshead - A167 Durham Road / A1 J66 (North) Eighton Lodge",
+        "point": {
+          "easting": 426711,
+          "northing": 557548,
+          "latitude": 54.9119289667983000,
+          "longitude": -1.5848907730588500
+        },
+        "lastUpdated": "2016-02-08T09:53:20.837+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A167N1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / A1 J66 (S)",
+        "longDescription": "Gateshead - A167 Newcastle Bank / A1 J66 (South)",
+        "point": {
+          "easting": 426724,
+          "northing": 557392,
+          "latitude": 54.9105291354126000,
+          "longitude": -1.5847007326996900
+        },
+        "lastUpdated": "2016-02-08T09:52:51.883+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A167O1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / B1288 Birtley Ln",
+        "longDescription": "Gateshead - A167 Durham Road / B1288 Birtley Lane",
+        "point": {
+          "easting": 427202,
+          "northing": 556034,
+          "latitude": 54.8983006942943000,
+          "longitude": -1.5773710837727800
+        },
+        "lastUpdated": "2016-02-08T09:51:22.003+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A167P1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / Birtley Supermkt",
+        "longDescription": "Gateshead - A167 Durham Road / Birtley Supermarket",
+        "point": {
+          "easting": 427191,
+          "northing": 555605,
+          "latitude": 54.8944511468382000,
+          "longitude": -1.5775808819598200
+        },
+        "lastUpdated": "2016-04-15T07:47:38.570+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A184A1",
+    "definitions": [
+      {
+        "shortDescription": "A184 / Wellington St",
+        "longDescription": "Gateshead - A184 Askew Road / Wellington Street",
+        "point": {
+          "easting": 425349,
+          "northing": 563408,
+          "latitude": 54.9646624082558000,
+          "longitude": -1.6056206094415200
+        },
+        "lastUpdated": "2016-02-08T12:10:00.060+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A184A2",
+    "definitions": [
+      {
+        "shortDescription": "A184 / A1114 Derwentwater Rd",
+        "longDescription": "Gateshead - A184 / A1114 Derwentwater Road",
+        "point": {
+          "easting": 423810,
+          "northing": 561936,
+          "latitude": 54.9515135998047000,
+          "longitude": -1.6297770060821500
+        },
+        "lastUpdated": "2017-12-01T13:24:07.580+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A184B1",
+    "definitions": [
+      {
+        "shortDescription": "A184 / Nelson St",
+        "longDescription": "Gateshead - A184 (West Central Route) / Nelson Street / West Street",
+        "point": {
+          "easting": 425412,
+          "northing": 563291,
+          "latitude": 54.9636025486231000,
+          "longitude": -1.6046406827368500
+        },
+        "lastUpdated": "2016-02-08T12:03:55.987+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A184C1",
+    "definitions": [
+      {
+        "shortDescription": "A184 / B1426 Bensham Rd",
+        "longDescription": "Gateshead - A184 (West Central Route) / B1426 Bensham Road",
+        "point": {
+          "easting": 425314,
+          "northing": 562924,
+          "latitude": 54.9603129144328000,
+          "longitude": -1.6062103371060500
+        },
+        "lastUpdated": "2016-02-08T12:03:24.563+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A184D1",
+    "definitions": [
+      {
+        "shortDescription": "A184 / St. James Rd",
+        "longDescription": "Gateshead - A184 Park Road / St. James Road / Shearlegs Road",
+        "point": {
+          "easting": 426412,
+          "northing": 563112,
+          "latitude": 54.9619429816222000,
+          "longitude": -1.5890425454241100
+        },
+        "lastUpdated": "2016-02-08T12:08:48.917+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A184E1",
+    "definitions": [
+      {
+        "shortDescription": "A184 / A185 & B1426 Shields Rd",
+        "longDescription": "Gateshead - A184 Felling Bypass / A185 & B1426 Shields Road",
+        "point": {
+          "easting": 428669,
+          "northing": 562016,
+          "latitude": 54.9519746955981000,
+          "longitude": -1.5539064542608200
+        },
+        "lastUpdated": "2016-02-08T12:08:17.493+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A184F1",
+    "definitions": [
+      {
+        "shortDescription": "A184 / A195 Lingey Ln",
+        "longDescription": "Gateshead - A184 Felling Bypass / A195 Lingey Lane",
+        "point": {
+          "easting": 429901,
+          "northing": 561377,
+          "latitude": 54.9461556761985000,
+          "longitude": -1.5347385680699200
+        },
+        "lastUpdated": "2016-04-15T15:39:55.323+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A692A1",
+    "definitions": [
+      {
+        "shortDescription": "A692 / B6317 Whickham Hwy",
+        "longDescription": "Gateshead - A692 Consett Road & Lobley Hill Road / B6317 Whickham Highway",
+        "point": {
+          "easting": 423245,
+          "northing": 560590,
+          "latitude": 54.9394448940589000,
+          "longitude": -1.6387053460475000
+        },
+        "lastUpdated": "2016-04-15T14:16:00.907+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A692B1",
+    "definitions": [
+      {
+        "shortDescription": "A692 / A6076 Burdon Plain",
+        "longDescription": "Gateshead - A692 Gateshead Road / A6076 Burdon Plain, Potters Wheel.",
+        "point": {
+          "easting": 420912,
+          "northing": 558674,
+          "latitude": 54.9223263695451000,
+          "longitude": -1.6752600259819800
+        },
+        "lastUpdated": "2016-04-15T11:53:54.710+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A694A1",
+    "definitions": [
+      {
+        "shortDescription": "A694 / A695 / A1114",
+        "longDescription": "Gateshead - A694 & A695 Derwenthaugh Road / A1114 Riverside Way",
+        "point": {
+          "easting": 420272,
+          "northing": 563107,
+          "latitude": 54.9621915025554000,
+          "longitude": -1.6849306370124900
+        },
+        "lastUpdated": "2016-04-15T09:00:04.720+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A695A1",
+    "definitions": [
+      {
+        "shortDescription": "A695 / B6315 Woodside Ln",
+        "longDescription": "Gateshead - A695 Crawcrook & Ryton Bypass / B6315 Woodside Lane",
+        "point": {
+          "easting": 414705,
+          "northing": 563533,
+          "latitude": 54.9662097206900000,
+          "longitude": -1.7718500095656100
+        },
+        "lastUpdated": "2016-04-28T08:04:43.003+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A695B1",
+    "definitions": [
+      {
+        "shortDescription": "A695 / Stargate Ln",
+        "longDescription": "Gateshead - A695 Crawcrook & Ryton Bypass / Stargate Lane",
+        "point": {
+          "easting": 416314,
+          "northing": 563304,
+          "latitude": 54.9641003471314000,
+          "longitude": -1.7467330382259300
+        },
+        "lastUpdated": "2016-05-06T17:24:10.150+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A695C1",
+    "definitions": [
+      {
+        "shortDescription": "A695 / B6317 Bridge St",
+        "longDescription": "Gateshead - A695 Blaydon Highway / B6317 Bridge Street / Garden Street",
+        "point": {
+          "easting": 418288,
+          "northing": 563499,
+          "latitude": 54.9657906102641000,
+          "longitude": -1.7158869512511800
+        },
+        "lastUpdated": "2016-04-15T08:48:48.857+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_A695D1",
+    "definitions": [
+      {
+        "shortDescription": "A695 / Scotswood Brg",
+        "longDescription": "Gateshead - A695 Derwenthaugh Road / Scotswood Bridge",
+        "point": {
+          "easting": 420079,
+          "northing": 563456,
+          "latitude": 54.9653310856395000,
+          "longitude": -1.6879204081547600
+        },
+        "lastUpdated": "2016-04-15T08:55:29.430+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_B1288A1",
+    "definitions": [
+      {
+        "shortDescription": "B1288 / A1231 Sunderland Hwy",
+        "longDescription": "Gateshead - B1288 / A1231 Sunderland Highway / Sheddons Hill Road",
+        "point": {
+          "easting": 428402,
+          "northing": 557035,
+          "latitude": 54.9072299226615000,
+          "longitude": -1.5585638256686600
+        },
+        "lastUpdated": "2019-02-18T08:11:38.877+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_B1296A1",
+    "definitions": [
+      {
+        "shortDescription": "B1296 / Split Crow Rd",
+        "longDescription": "Gateshead - B1296 Old Durham Road / Split Crow Road",
+        "point": {
+          "easting": 425960,
+          "northing": 561995,
+          "latitude": 54.9519340583787000,
+          "longitude": -1.5962011975547100
+        },
+        "lastUpdated": "2016-04-15T11:08:34.573+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_B1296B1",
+    "definitions": [
+      {
+        "shortDescription": "B1296 / Queen Elizabeth Ave",
+        "longDescription": "Gateshead - B1296 Old Durham Road / Queen Elizabeth Avenue / Southend Road",
+        "point": {
+          "easting": 426701,
+          "northing": 560410,
+          "latitude": 54.9376459234783000,
+          "longitude": -1.5847819623538300
+        },
+        "lastUpdated": "2016-02-08T10:14:09.230+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_B1296C1",
+    "definitions": [
+      {
+        "shortDescription": "B1296 / Beacon Lough Rd",
+        "longDescription": "Gateshead - B1296 Old Durham Road / Beacon Lough Road",
+        "point": {
+          "easting": 426895,
+          "northing": 559998,
+          "latitude": 54.9339364080723000,
+          "longitude": -1.5817921639478500
+        },
+        "lastUpdated": "2016-02-08T12:27:20.447+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_B1296D1",
+    "definitions": [
+      {
+        "shortDescription": "B1296 / High St",
+        "longDescription": "Gateshead - B1296 Springwell Road / High Street",
+        "point": {
+          "easting": 427320,
+          "northing": 559082,
+          "latitude": 54.9256874841612000,
+          "longitude": -1.5752425998299500
+        },
+        "lastUpdated": "2016-04-15T15:20:35.260+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_B1426A1",
+    "definitions": [
+      {
+        "shortDescription": "B1426 / Kingsway North",
+        "longDescription": "Gateshead - B1426 Lobley Hill Road / Kingsway North",
+        "point": {
+          "easting": 424123,
+          "northing": 560969,
+          "latitude": 54.9428047039006000,
+          "longitude": -1.6249672061655700
+        },
+        "lastUpdated": "2016-02-08T12:23:42.897+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_B1426B1",
+    "definitions": [
+      {
+        "shortDescription": "B1426 / Sidney Gr",
+        "longDescription": "Gateshead - B1426 Bensham Road / Sidney Grove",
+        "point": {
+          "easting": 424700,
+          "northing": 562013,
+          "latitude": 54.9521537344380000,
+          "longitude": -1.6158687636922900
+        },
+        "lastUpdated": "2016-02-08T10:25:33.013+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_B1426C1",
+    "definitions": [
+      {
+        "shortDescription": "B1426 / Osborne Tce",
+        "longDescription": "Gateshead - B1426 Bensham Road / Osborne Terrace / Barrington Place",
+        "point": {
+          "easting": 424921,
+          "northing": 562547,
+          "latitude": 54.9569432200643000,
+          "longitude": -1.6123794162658200
+        },
+        "lastUpdated": "2016-02-08T10:24:26.183+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_B1426D1",
+    "definitions": [
+      {
+        "shortDescription": "B1426 / Chad House",
+        "longDescription": "Gateshead - B1426 Sunderland Road / Chad House",
+        "point": {
+          "easting": 426009,
+          "northing": 562726,
+          "latitude": 54.9585032930000000,
+          "longitude": -1.5953716013302900
+        },
+        "lastUpdated": "2016-02-08T10:30:08.317+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_B1426E1",
+    "definitions": [
+      {
+        "shortDescription": "B1426 / Churchill Rd",
+        "longDescription": "Gateshead - B1426 Sunderland Road / Churchill Road",
+        "point": {
+          "easting": 426900,
+          "northing": 562277,
+          "latitude": 54.9544139876120000,
+          "longitude": -1.5815031374100600
+        },
+        "lastUpdated": "2016-02-08T10:27:28.127+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_B6317A1",
+    "definitions": [
+      {
+        "shortDescription": "B6317 / Fellside Rd",
+        "longDescription": "Gateshead - B6317 Front Street & Swalwell Bank / Fellside Road",
+        "point": {
+          "easting": 420375,
+          "northing": 561236,
+          "latitude": 54.9453735166102000,
+          "longitude": -1.6834600547180200
+        },
+        "lastUpdated": "2016-05-06T17:44:53.277+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_CBSA1",
+    "definitions": [
+      {
+        "shortDescription": "Cuthbert St / A184",
+        "longDescription": "Gateshead - Cuthbert Street / A184",
+        "point": {
+          "easting": 424701,
+          "northing": 562520,
+          "latitude": 54.9567131953800000,
+          "longitude": -1.6158089795225200
+        },
+        "lastUpdated": "2016-04-15T14:25:30.093+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_DNRA1",
+    "definitions": [
+      {
+        "shortDescription": "Dunston Rd / A1 J70",
+        "longDescription": "Gateshead - Dunston Road / Park Terrace / A1 J70",
+        "point": {
+          "easting": 422561,
+          "northing": 561905,
+          "latitude": 54.9512833323986000,
+          "longitude": -1.6492745724706400
+        },
+        "lastUpdated": "2019-02-18T12:13:03.637+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "GH_KSWA1",
+    "definitions": [
+      {
+        "shortDescription": "Kingsway South / Eleventh Ave",
+        "longDescription": "Gateshead - Kingsway South / Eleventh Avenue",
+        "point": {
+          "easting": 424877,
+          "northing": 558742,
+          "latitude": 54.9227572530138000,
+          "longitude": -1.6133877295448500
+        },
+        "lastUpdated": "2016-02-08T12:24:10.350+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "MC4092",
+    "definitions": [
+      {
+        "shortDescription": "MC / Cross Ln",
+        "longDescription": "Gateshead - Metrocentre / Scotswood View / Cross Lane / Blue Car Park",
+        "point": {
+          "easting": 421715,
+          "northing": 562582,
+          "latitude": 54.9574124078497000,
+          "longitude": -1.6624332162904000
+        },
+        "lastUpdated": "2016-02-08T10:37:12.360+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "MCA1Onslip",
+    "definitions": [
+      {
+        "shortDescription": "MC / A1 J71 SB Entry Slip",
+        "longDescription": "Gateshead - Metrocentre / Hollinside Road / A1 J71 SB Entry Slip / St. Michael's Way",
+        "point": {
+          "easting": 420960,
+          "northing": 562427,
+          "latitude": 54.9560523909494000,
+          "longitude": -1.6742316876754500
+        },
+        "lastUpdated": "2012-01-23T17:12:32.190+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "MCJ05111",
+    "definitions": [
+      {
+        "shortDescription": "MC / Scotswood Vw",
+        "longDescription": "Gateshead - Metrocentre / Hollinside Road / Scotswood View",
+        "point": {
+          "easting": 421023,
+          "northing": 562868,
+          "latitude": 54.9600119372093000,
+          "longitude": -1.6732219935051800
+        },
+        "lastUpdated": "2012-01-23T17:23:50.563+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "MCJ05141",
+    "definitions": [
+      {
+        "shortDescription": "MC / Red Car Pk (Flyover)",
+        "longDescription": "Gateshead - Metrocentre / Hollinside Road / Red Car Park Flyover",
+        "point": {
+          "easting": 420955,
+          "northing": 562540,
+          "latitude": 54.9570622702848000,
+          "longitude": -1.6743017249504400
+        },
+        "lastUpdated": "2012-01-23T17:20:20.030+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "MCJ05161",
+    "definitions": [
+      {
+        "shortDescription": "MC / A1 J71 Brg",
+        "longDescription": "Gateshead - Metrocentre / Hollinside Road / A1 J71 Bridge",
+        "point": {
+          "easting": 420959,
+          "northing": 562419,
+          "latitude": 54.9559724001219000,
+          "longitude": -1.6742516815479900
+        },
+        "lastUpdated": "2012-01-23T17:15:05.017+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "MCJ05171",
+    "definitions": [
+      {
+        "shortDescription": "MC / Yellow Car Pk",
+        "longDescription": "Gateshead - Metrocentre / Hollinside Road / Yellow Car Park",
+        "point": {
+          "easting": 421018,
+          "northing": 562862,
+          "latitude": 54.9599519431088000,
+          "longitude": -1.6733019808285500
+        },
+        "lastUpdated": "2012-01-23T17:22:20.690+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00002",
+    "definitions": [
+      {
+        "shortDescription": "B6918 / NCL Airport Acc",
+        "longDescription": "Newcastle - B6918 Ponteland Road / Newcastle Airport Maintenance Access",
+        "point": {
+          "easting": 419416,
+          "northing": 570256,
+          "latitude": 55.0264636943294000,
+          "longitude": -1.6978219626288000
+        },
+        "lastUpdated": "2013-10-28T11:11:28.467+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00003",
+    "definitions": [
+      {
+        "shortDescription": "Clayton Tce Rd / Garesfield",
+        "longDescription": "Gateshead - Clayton Terrace Road / Garesfield",
+        "point": {
+          "easting": 412597,
+          "northing": 559401,
+          "latitude": 54.9291336172287000,
+          "longitude": -1.8049542190757000
+        },
+        "lastUpdated": "2013-10-28T11:11:29.247+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00007",
+    "definitions": [
+      {
+        "shortDescription": "A1018 / B1299 Moor Ln",
+        "longDescription": "South Tyneside - A1018 Sunderland Road / B1299 Moor Lane",
+        "point": {
+          "easting": 438903,
+          "northing": 561508,
+          "latitude": 54.9467177590806000,
+          "longitude": -1.3941860456868200
+        },
+        "lastUpdated": "2013-10-28T11:11:29.467+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00009",
+    "definitions": [
+      {
+        "shortDescription": "A185 / B1306 Mill Ln",
+        "longDescription": "South Tyneside - A185 Victoria Road West / B1306 Mill Lane",
+        "point": {
+          "easting": 430459,
+          "northing": 563058,
+          "latitude": 54.9612340260822000,
+          "longitude": -1.5258503653642500
+        },
+        "lastUpdated": "2013-10-28T11:11:29.670+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00010",
+    "definitions": [
+      {
+        "shortDescription": "A1058 / Norham Rd",
+        "longDescription": "North Tyneside - A1058 Coast Road / Norham Road",
+        "point": {
+          "easting": 432910,
+          "northing": 568671,
+          "latitude": 55.0115086660121000,
+          "longitude": -1.4869275235200600
+        },
+        "lastUpdated": "2013-10-28T11:11:30.123+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00011",
+    "definitions": [
+      {
+        "shortDescription": "A1 / J71 (S)",
+        "longDescription": "Gateshead - A1 / J71 Metrocentre (Facing South)",
+        "point": {
+          "easting": 421900,
+          "northing": 562034,
+          "latitude": 54.9524730357042000,
+          "longitude": -1.6595933442079800
+        },
+        "lastUpdated": "2013-10-28T11:11:30.403+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00012",
+    "definitions": [
+      {
+        "shortDescription": "A1/ J71 (N)",
+        "longDescription": "Gateshead - A1 / J71 Metrocentre (Facing North)",
+        "point": {
+          "easting": 421895,
+          "northing": 562036,
+          "latitude": 54.9524930322796000,
+          "longitude": -1.6596633364196900
+        },
+        "lastUpdated": "2013-10-28T11:11:31.060+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00013",
+    "definitions": [
+      {
+        "shortDescription": "A194(M) / A1(M) SB Entry (N)",
+        "longDescription": "Sunderland - A194(M) / A1(M) Southbound Entry Slip (Facing North)",
+        "point": {
+          "easting": 428406,
+          "northing": 556272,
+          "latitude": 54.9003707345435000,
+          "longitude": -1.5585735107096800
+        },
+        "lastUpdated": "2013-10-28T11:11:31.340+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00014",
+    "definitions": [
+      {
+        "shortDescription": "A194(M) / A1(M) SB Entry (S)",
+        "longDescription": "Sunderland - A194(M) / A1(M) Southbound Entry Slip (Facing South)",
+        "point": {
+          "easting": 428406,
+          "northing": 556264,
+          "latitude": 54.9003007428294000,
+          "longitude": -1.5585735075091500
+        },
+        "lastUpdated": "2013-10-28T11:11:31.513+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00015",
+    "definitions": [
+      {
+        "shortDescription": "A19 / A1058 (S) (N)",
+        "longDescription": "North Tyneside - A19 / A1058 Silverlink (South) (Facing North)",
+        "point": {
+          "easting": 432384,
+          "northing": 568086,
+          "latitude": 55.0062891575826000,
+          "longitude": -1.4952162512183000
+        },
+        "lastUpdated": "2013-10-28T11:11:31.670+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00016",
+    "definitions": [
+      {
+        "shortDescription": "A19 / A1058 (S) (S)",
+        "longDescription": "North Tyneside - A19 / A1058 Silverlink (South) (Facing South)",
+        "point": {
+          "easting": 432390,
+          "northing": 568080,
+          "latitude": 55.0062391648780000,
+          "longitude": -1.4951262600991800
+        },
+        "lastUpdated": "2013-10-28T11:11:31.793+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00018",
+    "definitions": [
+      {
+        "shortDescription": "A1 / B6354 Berwick (N)",
+        "longDescription": "Northumberland - A1 / B6354 Berwick-upon-Tweed (North)",
+        "point": {
+          "easting": 398506,
+          "northing": 650582,
+          "latitude": 55.7486130528662000,
+          "longitude": -2.0253641023816100
+        },
+        "lastUpdated": "2016-04-27T10:39:12.543+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00019",
+    "definitions": [
+      {
+        "shortDescription": "A1 / B6354 Berwick (S)",
+        "longDescription": "Northumberland - A1 / B6354 Berwick-upon-Tweed (South)",
+        "point": {
+          "easting": 398516,
+          "northing": 650573,
+          "latitude": 55.7485330647583000,
+          "longitude": -2.0252041189706200
+        },
+        "lastUpdated": "2016-04-27T10:42:08.160+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00020",
+    "definitions": [
+      {
+        "shortDescription": "A1 / Haggerston (N)",
+        "longDescription": "Northumberland - A1 / Haggerston (North)",
+        "point": {
+          "easting": 403861,
+          "northing": 643635,
+          "latitude": 55.6861817476343000,
+          "longitude": -1.9401519990411400
+        },
+        "lastUpdated": "2016-04-27T10:42:09.173+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00021",
+    "definitions": [
+      {
+        "shortDescription": "A1 / Haggerston (S)",
+        "longDescription": "Northumberland - A1 / Haggerston (South)",
+        "point": {
+          "easting": 403876,
+          "northing": 643626,
+          "latitude": 55.6861017605796000,
+          "longitude": -1.9399220244559500
+        },
+        "lastUpdated": "2016-04-27T10:42:09.520+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00022",
+    "definitions": [
+      {
+        "shortDescription": "A696 / Ottercops",
+        "longDescription": "Northumberland - A696 / Ottercops",
+        "point": {
+          "easting": 394525,
+          "northing": 589304,
+          "latitude": 55.1979675596553000,
+          "longitude": -2.0875510446134500
+        },
+        "lastUpdated": "2016-04-27T10:42:09.847+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00023",
+    "definitions": [
+      {
+        "shortDescription": "A1 / Stannington (N)",
+        "longDescription": "Northumberland - A1 / Stannington (North)",
+        "point": {
+          "easting": 420887,
+          "northing": 581237,
+          "latitude": 55.1250723671134000,
+          "longitude": -1.6740094511571000
+        },
+        "lastUpdated": "2016-09-09T09:28:42.053+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "METCCTV00024",
+    "definitions": [
+      {
+        "shortDescription": "A1 / Stannington (S)",
+        "longDescription": "Northumberland - A1 / Stannington (South)",
+        "point": {
+          "easting": 420891,
+          "northing": 581226,
+          "latitude": 55.1249823786873000,
+          "longitude": -1.6739494545068400
+        },
+        "lastUpdated": "2016-09-09T09:29:21.930+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NB_A1061A1",
+    "definitions": [
+      {
+        "shortDescription": "A1061 / A192 Laverock Hall",
+        "longDescription": "Northumberland - A1061 Laverock Hall Road / A192",
+        "point": {
+          "easting": 428182,
+          "northing": 578543,
+          "latitude": 55.1005070094215000,
+          "longitude": -1.5598825568855600
+        },
+        "lastUpdated": "2016-08-17T14:02:16.670+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NB_A1061B1",
+    "definitions": [
+      {
+        "shortDescription": "A1061 / B1523 South Newsham Rd",
+        "longDescription": "Northumberland - A1061 / B1523 South Newsham Road",
+        "point": {
+          "easting": 430345,
+          "northing": 578790,
+          "latitude": 55.1026072775289000,
+          "longitude": -1.5259568845100200
+        },
+        "lastUpdated": "2016-09-16T18:51:00.007+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NB_A1068A1",
+    "definitions": [
+      {
+        "shortDescription": "A1068 / A1 Alnwick",
+        "longDescription": "Northumberland - A1068 / A1 Alnwick / Willowburn Avenue",
+        "point": {
+          "easting": 419557,
+          "northing": 611847,
+          "latitude": 55.4001794486356000,
+          "longitude": -1.6927498606327100
+        },
+        "lastUpdated": "2016-03-29T17:41:59.233+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NB_A1068B1",
+    "definitions": [
+      {
+        "shortDescription": "A1068 / A192 Plessey Checks",
+        "longDescription": "Northumberland - A1068 Fisher Lane / A192 Plessey Checks",
+        "point": {
+          "easting": 424481,
+          "northing": 579083,
+          "latitude": 55.1055555306767000,
+          "longitude": -1.6178355621428400
+        },
+        "lastUpdated": "2016-03-29T17:24:20.797+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NB_A1167A1",
+    "definitions": [
+      {
+        "shortDescription": "A1167 / Berwick Rly Stn",
+        "longDescription": "Northumberland - A1167 Castlegate / Berwick-upon-Tweed Railway Station",
+        "point": {
+          "easting": 399501,
+          "northing": 653479,
+          "latitude": 55.7746401915150000,
+          "longitude": -2.0095273313363500
+        },
+        "lastUpdated": "2016-03-30T08:28:46.107+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NB_A189A1",
+    "definitions": [
+      {
+        "shortDescription": "A189 / B1344 Newbiggin Rd",
+        "longDescription": "Northumberland - A189 / B1344 Newbiggin Road",
+        "point": {
+          "easting": 429829,
+          "northing": 586390,
+          "latitude": 55.1709290684926000,
+          "longitude": -1.5332491510810800
+        },
+        "lastUpdated": "2016-11-28T11:54:35.950+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NB_A189A2",
+    "definitions": [
+      {
+        "shortDescription": "A189 / A192 / B1505 Horton Rd",
+        "longDescription": "Northumberland - A189 / A192 / B1505 Horton Road",
+        "point": {
+          "easting": 427845,
+          "northing": 579224,
+          "latitude": 55.1066462024304000,
+          "longitude": -1.5651021901705000
+        },
+        "lastUpdated": "2016-08-24T15:06:05.723+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NB_A192A1",
+    "definitions": [
+      {
+        "shortDescription": "A192 / Morpeth Ct",
+        "longDescription": "Northumberland - A192 Castle Bank / Morpeth Court",
+        "point": {
+          "easting": 420166,
+          "northing": 585630,
+          "latitude": 55.1645775175673000,
+          "longitude": -1.6849998974890500
+        },
+        "lastUpdated": "2016-03-31T12:53:00.590+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NB_A193A1",
+    "definitions": [
+      {
+        "shortDescription": "A193 / Chase Farm Dr",
+        "longDescription": "Northumberland - A193 Cowpen Road / Chase Farm Drive",
+        "point": {
+          "easting": 428518,
+          "northing": 581622,
+          "latitude": 55.1281538176439000,
+          "longitude": -1.5543145327121900
+        },
+        "lastUpdated": "2016-03-31T11:56:00.097+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NB_A193A2",
+    "definitions": [
+      {
+        "shortDescription": "A193 / Old Cowpen Rd",
+        "longDescription": "Northumberland - A193 Cowpen Road / Old Cowpen Road",
+        "point": {
+          "easting": 430541,
+          "northing": 582048,
+          "latitude": 55.1318638624672000,
+          "longitude": -1.5225386699997600
+        },
+        "lastUpdated": "2016-08-16T08:03:26.283+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NB_A193A3",
+    "definitions": [
+      {
+        "shortDescription": "A193 / B1523 Plessey Rd",
+        "longDescription": "Northumberland - A193 Broadway & Rotary Way / B1523 Plessey Road",
+        "point": {
+          "easting": 431240,
+          "northing": 580623,
+          "latitude": 55.1190155500857000,
+          "longitude": -1.5117394197726500
+        },
+        "lastUpdated": "2016-08-24T15:08:39.993+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NB_A193B1",
+    "definitions": [
+      {
+        "shortDescription": "A193 / A1061 South Newsham Rd",
+        "longDescription": "Northumberland - A193 Links Road & Rotary Way / A1061 South Newsham Road / B1329 Links Road",
+        "point": {
+          "easting": 431839,
+          "northing": 579507,
+          "latitude": 55.1089468849021000,
+          "longitude": -1.5024701075679700
+        },
+        "lastUpdated": "2016-03-31T12:41:04.557+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NB_A6079A1",
+    "definitions": [
+      {
+        "shortDescription": "A6079 / Hexham Brg",
+        "longDescription": "Northumberland - A6079 Rotary Way / Hexham Bridge",
+        "point": {
+          "easting": 394118,
+          "northing": 564780,
+          "latitude": 54.9775936075361000,
+          "longitude": -2.0934304821359200
+        },
+        "lastUpdated": "2016-03-30T09:58:53.417+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NB_B1329A1",
+    "definitions": [
+      {
+        "shortDescription": "B1329 / Wellington St East",
+        "longDescription": "Northumberland - B1329 Ridley Avenue & Bridge Street / Wellington Street East",
+        "point": {
+          "easting": 431844,
+          "northing": 581469,
+          "latitude": 55.1265847992489000,
+          "longitude": -1.5021709654969100
+        },
+        "lastUpdated": "2016-08-16T07:58:46.510+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A1058A1",
+    "definitions": [
+      {
+        "shortDescription": "A1058 / Osborne Ave",
+        "longDescription": "Newcastle - A1058 Cradlewell / Osborne Avenue",
+        "point": {
+          "easting": 426024,
+          "northing": 565865,
+          "latitude": 54.9866999614042000,
+          "longitude": -1.5948529578602800
+        },
+        "lastUpdated": "2016-02-08T12:14:42.817+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A1058B1",
+    "definitions": [
+      {
+        "shortDescription": "A1058 / Heaton Rd",
+        "longDescription": "Newcastle - A1058 Stephenson Road / Heaton Road / Newton Road",
+        "point": {
+          "easting": 426762,
+          "northing": 566368,
+          "latitude": 54.9911896053012000,
+          "longitude": -1.5832746038363900
+        },
+        "lastUpdated": "2016-02-08T11:06:50.597+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A1058C1",
+    "definitions": [
+      {
+        "shortDescription": "A1058 / A188 Chillingham Rd",
+        "longDescription": "Newcastle - A1058 Coast Road / A188 Chillingham Road & Benton Road",
+        "point": {
+          "easting": 427053,
+          "northing": 566557,
+          "latitude": 54.9928694756971000,
+          "longitude": -1.5787052492756700
+        },
+        "lastUpdated": "2016-02-08T12:16:22.413+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A1058D1",
+    "definitions": [
+      {
+        "shortDescription": "A1058 / Benfield Rd",
+        "longDescription": "Newcastle - A1058 Coast Road / Benfield Road / Red Hall Drive",
+        "point": {
+          "easting": 427847,
+          "northing": 566729,
+          "latitude": 54.9943694868159000,
+          "longitude": -1.5662768639431800
+        },
+        "lastUpdated": "2016-02-08T11:05:09.830+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A167A1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / A191 Kenton Ln",
+        "longDescription": "Newcastle - A167 Ponteland Road / A191 Kenton Lane / Etal Lane",
+        "point": {
+          "easting": 421425,
+          "northing": 567472,
+          "latitude": 55.0013671384167000,
+          "longitude": -1.6666047029291500
+        },
+        "lastUpdated": "2016-02-08T11:37:12.083+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A167B1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / A191 Springfield Rd",
+        "longDescription": "Newcastle - A167 Ponteland Road / A191 Springfield Road",
+        "point": {
+          "easting": 421741,
+          "northing": 566802,
+          "latitude": 54.9953279276523000,
+          "longitude": -1.6617150355109500
+        },
+        "lastUpdated": "2016-02-08T11:37:52.663+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A167C1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / B1305 Two Ball Lonnen",
+        "longDescription": "Newcastle - A167 Ponteland Road & Stamfordham Road / B1305 Two Ball Lonnen",
+        "point": {
+          "easting": 422018,
+          "northing": 566206,
+          "latitude": 54.9899586284643000,
+          "longitude": -1.6574253239601500
+        },
+        "lastUpdated": "2016-02-08T11:38:22.883+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A167D1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / A189 Grandstand Rd",
+        "longDescription": "Newcastle - A167 / A189 Grandstand Road",
+        "point": {
+          "easting": 423223,
+          "northing": 566093,
+          "latitude": 54.9888890395229000,
+          "longitude": -1.6386076160023300
+        },
+        "lastUpdated": "2016-02-08T12:13:19.033+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A167D2",
+    "definitions": [
+      {
+        "shortDescription": "A167(M) SB / B1318",
+        "longDescription": "Newcastle - A167(M) Central Motorway East (Southbound) / B1318 Great North Road",
+        "point": {
+          "easting": 424937,
+          "northing": 565439,
+          "latitude": 54.9829301498328000,
+          "longitude": -1.6118806674958600
+        },
+        "lastUpdated": "2020-03-09T09:32:13.217+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A167E1",
+    "definitions": [
+      {
+        "shortDescription": "A167(M) / A193 New Bridge St",
+        "longDescription": "Newcastle - A167(M) Central Motorway East / A193 New Bridge Street",
+        "point": {
+          "easting": 425300,
+          "northing": 564510,
+          "latitude": 54.9745612258878000,
+          "longitude": -1.6062809805225100
+        },
+        "lastUpdated": "2016-02-08T12:14:05.177+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A186A1",
+    "definitions": [
+      {
+        "shortDescription": "A186 / Slatyford Ln",
+        "longDescription": "Newcastle - A186 West Road / Slatyford Lane / Broadwood Road",
+        "point": {
+          "easting": 420049,
+          "northing": 565473,
+          "latitude": 54.9834589333785000,
+          "longitude": -1.6882511925314700
+        },
+        "lastUpdated": "2016-02-08T10:42:02.057+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A186B1",
+    "definitions": [
+      {
+        "shortDescription": "A186 / Gowland Ave",
+        "longDescription": "Newcastle - A186 West Road / Gowland Avenue / Hampstead Road",
+        "point": {
+          "easting": 422291,
+          "northing": 564613,
+          "latitude": 54.9756303881907000,
+          "longitude": -1.6532851846394900
+        },
+        "lastUpdated": "2016-02-08T10:43:59.637+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A186B2",
+    "definitions": [
+      {
+        "shortDescription": "A186 / Brighton Gr",
+        "longDescription": "Newcastle - A186 Westgate Road / Brighton Grove",
+        "point": {
+          "easting": 422980,
+          "northing": 564410,
+          "latitude": 54.9737807696708000,
+          "longitude": -1.6425364368317800
+        },
+        "lastUpdated": "2019-02-07T08:06:27.700+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A188A1",
+    "definitions": [
+      {
+        "shortDescription": "A188 / Cragside",
+        "longDescription": "Newcastle - A188 Benton Road / Cragside",
+        "point": {
+          "easting": 426898,
+          "northing": 567162,
+          "latitude": 54.9983087954490000,
+          "longitude": -1.5810752043524500
+        },
+        "lastUpdated": "2016-02-08T11:10:35.167+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A188B1",
+    "definitions": [
+      {
+        "shortDescription": "A188 / Warton Tce",
+        "longDescription": "Newcastle - A188 Chillingham Road / Warton Terrace",
+        "point": {
+          "easting": 427151,
+          "northing": 565901,
+          "latitude": 54.9869701967422000,
+          "longitude": -1.5772351611752700
+        },
+        "lastUpdated": "2016-02-08T11:11:42.683+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A188C1",
+    "definitions": [
+      {
+        "shortDescription": "A188 / Hartford St",
+        "longDescription": "Newcastle - A188 Chillingham Road / Hartford Street",
+        "point": {
+          "easting": 427258,
+          "northing": 565489,
+          "latitude": 54.9832606608459000,
+          "longitude": -1.5756051935289100
+        },
+        "lastUpdated": "2016-02-08T11:11:09.713+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A189C1",
+    "definitions": [
+      {
+        "shortDescription": "A189 / Brighton Gr",
+        "longDescription": "Newcastle - A189 Barrack Road / Brighton Grove / Hunter's Road",
+        "point": {
+          "easting": 423397,
+          "northing": 565253,
+          "latitude": 54.9813299749640000,
+          "longitude": -1.6359575999612600
+        },
+        "lastUpdated": "2016-03-31T16:25:51.457+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A189D1",
+    "definitions": [
+      {
+        "shortDescription": "A189 / A695 Scotswood Rd",
+        "longDescription": "Newcastle - A189 St. James' Boulevard / A695 Scotswood Road",
+        "point": {
+          "easting": 424168,
+          "northing": 563586,
+          "latitude": 54.9663219326905000,
+          "longitude": -1.6240483946386800
+        },
+        "lastUpdated": "2017-11-20T10:01:38.997+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A191A2",
+    "definitions": [
+      {
+        "shortDescription": "A191 / A189 Killingworth Rd",
+        "longDescription": "Newcastle - A191 Benton Park Road / A189 Killingworth Road",
+        "point": {
+          "easting": 425636,
+          "northing": 568131,
+          "latitude": 55.0070874576387000,
+          "longitude": -1.6007131643174200
+        },
+        "lastUpdated": "2017-01-13T11:09:58.380+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A193J1",
+    "definitions": [
+      {
+        "shortDescription": "A193 / Pembroke Ave",
+        "longDescription": "Newcastle - A193 Shields Road / Pembroke Avenue",
+        "point": {
+          "easting": 428162,
+          "northing": 565571,
+          "latitude": 54.9839507938991000,
+          "longitude": -1.5614669831512500
+        },
+        "lastUpdated": "2016-02-08T11:33:03.123+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A193L1",
+    "definitions": [
+      {
+        "shortDescription": "A193 / B1600 Gibson St",
+        "longDescription": "Newcastle - A193 New Bridge Street / B1600 Gibson Street",
+        "point": {
+          "easting": 425810,
+          "northing": 564511,
+          "latitude": 54.9745513476833000,
+          "longitude": -1.5983219696040400
+        },
+        "lastUpdated": "2016-02-08T11:31:56.513+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A695E1",
+    "definitions": [
+      {
+        "shortDescription": "A695 / Mill Garage",
+        "longDescription": "Newcastle - A695 Scotswood Road / Mill Garage",
+        "point": {
+          "easting": 420968,
+          "northing": 563543,
+          "latitude": 54.9660812061332000,
+          "longitude": -1.6740321692405800
+        },
+        "lastUpdated": "2016-03-31T13:27:54.773+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_A695F1",
+    "definitions": [
+      {
+        "shortDescription": "A695 / William Armstrong Dr (E)",
+        "longDescription": "Newcastle - A695 Scotswood Road / William Armstrong Drive (East)",
+        "point": {
+          "easting": 422832,
+          "northing": 563221,
+          "latitude": 54.9631019980612000,
+          "longitude": -1.6449456496960400
+        },
+        "lastUpdated": "2016-03-31T13:24:07.127+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_B1307A1",
+    "definitions": [
+      {
+        "shortDescription": "B1307 / Haymarket & Eldon Sq Bus",
+        "longDescription": "Newcastle - B1307 Percy Street / Haymarket & Eldon Square Interchange",
+        "point": {
+          "easting": 424696,
+          "northing": 564707,
+          "latitude": 54.9763708688865000,
+          "longitude": -1.6156998922572100
+        },
+        "lastUpdated": "2016-02-08T12:06:00.507+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_B1307B1",
+    "definitions": [
+      {
+        "shortDescription": "B1307 / B1311 Gallowgate",
+        "longDescription": "Newcastle - B1307 Percy Street / B1311 Gallowgate / Newgate Street",
+        "point": {
+          "easting": 424615,
+          "northing": 564468,
+          "latitude": 54.9742211039758000,
+          "longitude": -1.6169896335095200
+        },
+        "lastUpdated": "2016-02-08T12:12:06.360+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_B1312A1",
+    "definitions": [
+      {
+        "shortDescription": "B1312 / Brinkburn St",
+        "longDescription": "Newcastle - B1312 Shields Road / Brinkburn Street / Edwin Street",
+        "point": {
+          "easting": 426919,
+          "northing": 564795,
+          "latitude": 54.9770413160834000,
+          "longitude": -1.5809642417766300
+        },
+        "lastUpdated": "2018-12-06T09:22:51.603+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_B1318A1",
+    "definitions": [
+      {
+        "shortDescription": "B1318 / Polwarth Dr",
+        "longDescription": "Newcastle - B1318 Great North Road / Polwarth Drive",
+        "point": {
+          "easting": 424250,
+          "northing": 569967,
+          "latitude": 55.0236551688905000,
+          "longitude": -1.6222312464926400
+        },
+        "lastUpdated": "2016-02-08T10:49:46.460+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_B1318A2",
+    "definitions": [
+      {
+        "shortDescription": "B1318 / Brunton Ln",
+        "longDescription": "Newcastle - B1318 Great North Road / Brunton Lane",
+        "point": {
+          "easting": 424215,
+          "northing": 570578,
+          "latitude": 55.0291445111311000,
+          "longitude": -1.6227214373664800
+        },
+        "lastUpdated": "2017-11-20T09:59:43.823+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_B1318B1",
+    "definitions": [
+      {
+        "shortDescription": "B1318 / Hawthorn Rd",
+        "longDescription": "Newcastle - B1318 High Street / Hawthorn Road",
+        "point": {
+          "easting": 424381,
+          "northing": 567779,
+          "latitude": 55.0039875271361000,
+          "longitude": -1.6203605774068800
+        },
+        "lastUpdated": "2016-02-08T10:46:45.563+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_B1318B2",
+    "definitions": [
+      {
+        "shortDescription": "B1318 / A191 Church Rd",
+        "longDescription": "Newcastle - B1318 High Street / A191 Church Road & Salters' Road",
+        "point": {
+          "easting": 424414,
+          "northing": 568118,
+          "latitude": 55.0070271752359000,
+          "longitude": -1.6198207839073000
+        },
+        "lastUpdated": "2017-11-20T09:55:53.817+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_B1318B3",
+    "definitions": [
+      {
+        "shortDescription": "B1318 / Hollywood Ave",
+        "longDescription": "Newcastle - B1318 Great North Road / Hollywood Avenue / Regent Centre (North)",
+        "point": {
+          "easting": 424359,
+          "northing": 568723,
+          "latitude": 55.0124665186128000,
+          "longitude": -1.6206309324768500
+        },
+        "lastUpdated": "2017-11-20T09:57:43.147+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_B1318C1",
+    "definitions": [
+      {
+        "shortDescription": "B1318 / A167(M)",
+        "longDescription": "Newcastle - B1318 Great North Road / A167(M) Central Motorway East / Clayton Road",
+        "point": {
+          "easting": 424855,
+          "northing": 565691,
+          "latitude": 54.9851998620645000,
+          "longitude": -1.6131306160025500
+        },
+        "lastUpdated": "2016-02-08T12:15:25.053+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_B1318D1",
+    "definitions": [
+      {
+        "shortDescription": "B1318 / Claremont Rd",
+        "longDescription": "Newcastle - B1318 Barras Bridge & Great North Road / Claremont Road",
+        "point": {
+          "easting": 424903,
+          "northing": 565041,
+          "latitude": 54.9793605641459000,
+          "longitude": -1.6124404344208500
+        },
+        "lastUpdated": "2016-02-08T12:06:40.930+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_B6324A1",
+    "definitions": [
+      {
+        "shortDescription": "B6324 / Queens Rd",
+        "longDescription": "Newcastle - B6324 Stamfordham Road / Queens Road",
+        "point": {
+          "easting": 420082,
+          "northing": 567113,
+          "latitude": 54.9981971969383000,
+          "longitude": -1.6876219426739600
+        },
+        "lastUpdated": "2016-02-08T10:55:57.377+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_B6324A2",
+    "definitions": [
+      {
+        "shortDescription": "B6324 / A167 / A1 J76",
+        "longDescription": "Newcastle - A167 & B6324 Stamfordham Road / A1 J76",
+        "point": {
+          "easting": 420501,
+          "northing": 566836,
+          "latitude": 54.9956875926697000,
+          "longitude": -1.6810926407327800
+        },
+        "lastUpdated": "2019-02-18T08:24:09.027+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_B6324B1",
+    "definitions": [
+      {
+        "shortDescription": "A167 / A191 Silver Lonnen",
+        "longDescription": "Newcastle - A167 Stamfordham Road / A191 Silver Lonnen & Springfield Road",
+        "point": {
+          "easting": 421235,
+          "northing": 566200,
+          "latitude": 54.9899384461094000,
+          "longitude": -1.6696638004438100
+        },
+        "lastUpdated": "2016-02-08T11:01:03.900+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_B6918A1",
+    "definitions": [
+      {
+        "shortDescription": "B6918 / Callerton Ln",
+        "longDescription": "Newcastle - B6918 Ponteland Road / Callerton Lane",
+        "point": {
+          "easting": 419211,
+          "northing": 570511,
+          "latitude": 55.0287633737952000,
+          "longitude": -1.7010116703447700
+        },
+        "lastUpdated": "2016-03-30T13:12:02.510+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_CHLA1",
+    "definitions": [
+      {
+        "shortDescription": "Coach Ln / Westminster Way",
+        "longDescription": "Newcastle - Coach Lane / Westminster Way",
+        "point": {
+          "easting": 427458,
+          "northing": 567666,
+          "latitude": 55.0028083961014000,
+          "longitude": -1.5722765056694300
+        },
+        "lastUpdated": "2016-02-08T11:03:10.887+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_FMRA1",
+    "definitions": [
+      {
+        "shortDescription": "Freeman Rd / Castle Farm Rd",
+        "longDescription": "Newcastle - Freeman Road / Castle Farm Road",
+        "point": {
+          "easting": 425868,
+          "northing": 567628,
+          "latitude": 55.0025580484559000,
+          "longitude": -1.5971334018066600
+        },
+        "lastUpdated": "2016-03-31T13:37:11.270+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_GNSA1",
+    "definitions": [
+      {
+        "shortDescription": "Grainger St / Newgate St",
+        "longDescription": "Newcastle - Grainger Street / Newgate Street / Bigg Market",
+        "point": {
+          "easting": 424754,
+          "northing": 564163,
+          "latitude": 54.9714714620396000,
+          "longitude": -1.6148497737399200
+        },
+        "lastUpdated": "2016-02-08T12:12:42.847+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_JDSA1",
+    "definitions": [
+      {
+        "shortDescription": "John Dobson St / New Bridge St W",
+        "longDescription": "Newcastle - John Dobson Street / New Bridge Street West",
+        "point": {
+          "easting": 425079,
+          "northing": 564520,
+          "latitude": 54.9746711604549000,
+          "longitude": -1.6097405554200000
+        },
+        "lastUpdated": "2018-06-20T08:47:05.533+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_KPRA1",
+    "definitions": [
+      {
+        "shortDescription": "Kingston Pk Rd / Shoreswood Way",
+        "longDescription": "Newcastle - Kingston Park Road / Shoreswood Way",
+        "point": {
+          "easting": 421793,
+          "northing": 569673,
+          "latitude": 55.0211248872231000,
+          "longitude": -1.6606763441646600
+        },
+        "lastUpdated": "2016-03-31T13:43:00.657+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NC_PGSA1",
+    "definitions": [
+      {
+        "shortDescription": "Pilgrim St / Market St",
+        "longDescription": "Newcastle - Pilgrim Street / Market Street",
+        "point": {
+          "easting": 425003,
+          "northing": 564353,
+          "latitude": 54.9731713199194000,
+          "longitude": -1.6109403375880400
+        },
+        "lastUpdated": "2018-06-20T08:19:29.713+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A1056A1",
+    "definitions": [
+      {
+        "shortDescription": "A1056 / B1505 Station Rd",
+        "longDescription": "North Tyneside - A1056 Killingworth Way / B1505 Station Road",
+        "point": {
+          "easting": 426929,
+          "northing": 571734,
+          "latitude": 55.0393939424214000,
+          "longitude": -1.5801572084681900
+        },
+        "lastUpdated": "2016-03-30T14:10:40.600+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A1058E1",
+    "definitions": [
+      {
+        "shortDescription": "A1058 / Battle Hill Dr",
+        "longDescription": "North Tyneside - A1058 Coast Road / Battle Hill Drive / Churchill Street",
+        "point": {
+          "easting": 431767,
+          "northing": 568251,
+          "latitude": 55.0078088305918000,
+          "longitude": -1.5048451238791600
+        },
+        "lastUpdated": "2016-03-30T11:06:20.933+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A1058E2",
+    "definitions": [
+      {
+        "shortDescription": "A1058 / A1108 / B1316 Billy Mill",
+        "longDescription": "North Tyneside - A1058 Coast Road & Beach Road / A1108 Billy Mill Avenue / B1316 Lynn Road",
+        "point": {
+          "easting": 433991,
+          "northing": 569059,
+          "latitude": 55.0149285200997000,
+          "longitude": -1.4699797898281300
+        },
+        "lastUpdated": "2016-03-30T11:23:32.120+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A1058F1",
+    "definitions": [
+      {
+        "shortDescription": "A1058 / A192 Preston Rd",
+        "longDescription": "North Tyneside - A1058 Beach Road / A192 Preston North Road",
+        "point": {
+          "easting": 435037,
+          "northing": 569900,
+          "latitude": 55.0224078861834000,
+          "longitude": -1.4535221837662300
+        },
+        "lastUpdated": "2016-03-30T13:50:28.630+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A188A2",
+    "definitions": [
+      {
+        "shortDescription": "A188 / Balliol & Quorum",
+        "longDescription": "North Tyneside - A188 Benton Lane / Quorum & Balliol Business Parks",
+        "point": {
+          "easting": 426641,
+          "northing": 569530,
+          "latitude": 55.0196062149680000,
+          "longitude": -1.5848757103754000
+        },
+        "lastUpdated": "2016-11-18T13:47:39.667+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A188A3",
+    "definitions": [
+      {
+        "shortDescription": "A188 / West Farm Ave",
+        "longDescription": "North Tyneside - A188 Benton Lane / West Farm Avenue / Goathland Avenue",
+        "point": {
+          "easting": 426821,
+          "northing": 568802,
+          "latitude": 55.0130570325320000,
+          "longitude": -1.5821257514549400
+        },
+        "lastUpdated": "2017-08-16T17:30:28.027+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A189B1",
+    "definitions": [
+      {
+        "shortDescription": "A189 / Gosforth Park Way",
+        "longDescription": "North Tyneside - A189 Salters' Lane / Gosforth Park Way",
+        "point": {
+          "easting": 425763,
+          "northing": 569298,
+          "latitude": 55.0175662480068000,
+          "longitude": -1.5986239055104100
+        },
+        "lastUpdated": "2016-03-30T13:08:16.800+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A189B2",
+    "definitions": [
+      {
+        "shortDescription": "A189 / White House Dr",
+        "longDescription": "North Tyneside - A189 / White House Drive / Great Lime Road",
+        "point": {
+          "easting": 426253,
+          "northing": 570893,
+          "latitude": 55.0318746714082000,
+          "longitude": -1.5908155352812900
+        },
+        "lastUpdated": "2016-09-26T09:01:15.930+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A191A1",
+    "definitions": [
+      {
+        "shortDescription": "A191 / A188 Four Lane Ends I/C",
+        "longDescription": "North Tyneside - A191 Front Street & Benton Park Road / A188 Benton Road & Benton Lane",
+        "point": {
+          "easting": 427076,
+          "northing": 568374,
+          "latitude": 55.0091975496858000,
+          "longitude": -1.5781760654632900
+        },
+        "lastUpdated": "2016-02-08T11:53:46.080+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A191B1",
+    "definitions": [
+      {
+        "shortDescription": "A191 / Coach Ln",
+        "longDescription": "North Tyneside - A191 Front Street / Coach Lane",
+        "point": {
+          "easting": 427359,
+          "northing": 568496,
+          "latitude": 55.0102774891930000,
+          "longitude": -1.5737366674934300
+        },
+        "lastUpdated": "2016-02-08T11:52:37.423+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A191C1",
+    "definitions": [
+      {
+        "shortDescription": "A191 / B1317 Station Rd",
+        "longDescription": "North Tyneside - A191 Whitley Road / B1317 Station Road / Tyneview Park",
+        "point": {
+          "easting": 427853,
+          "northing": 568594,
+          "latitude": 55.0111275059518000,
+          "longitude": -1.5660076682700600
+        },
+        "lastUpdated": "2016-02-08T11:53:08.907+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A191D1",
+    "definitions": [
+      {
+        "shortDescription": "A191 / A186 Station Rd",
+        "longDescription": "North Tyneside - A191 Whitley Road / A186 Station Road",
+        "point": {
+          "easting": 428938,
+          "northing": 568998,
+          "latitude": 55.0146973417592000,
+          "longitude": -1.5489999488332700
+        },
+        "lastUpdated": "2016-03-31T13:48:44.790+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A191E1",
+    "definitions": [
+      {
+        "shortDescription": "A191 / A19 Holystone (W)",
+        "longDescription": "North Tyneside - A191 Holystone Way / A19 Holystone (West)",
+        "point": {
+          "easting": 430521,
+          "northing": 570495,
+          "latitude": 55.0280561388690000,
+          "longitude": -1.5240836657892400
+        },
+        "lastUpdated": "2016-03-30T12:22:33.293+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A191E2",
+    "definitions": [
+      {
+        "shortDescription": "A191 / A186 / A19 Holystone (E)",
+        "longDescription": "North Tyneside - A191 Benton Road / A186 Rotary Road / A19 Holystone (East)",
+        "point": {
+          "easting": 430656,
+          "northing": 570643,
+          "latitude": 55.0293760148396000,
+          "longitude": -1.5219639905770200
+        },
+        "lastUpdated": "2019-04-11T16:07:02.727+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A191G1",
+    "definitions": [
+      {
+        "shortDescription": "A191 / A192 Preston North Rd",
+        "longDescription": "North Tyneside - A191 Rake Lane / A192 Preston North Road",
+        "point": {
+          "easting": 434551,
+          "northing": 570714,
+          "latitude": 55.0297569008944000,
+          "longitude": -1.4610215917994600
+        },
+        "lastUpdated": "2016-03-30T13:35:58.077+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A193C1",
+    "definitions": [
+      {
+        "shortDescription": "A193 / A1148 Monkseaton Dr",
+        "longDescription": "North Tyneside - A193 The Links / A1148 Monkseaton Drive",
+        "point": {
+          "easting": 435131,
+          "northing": 573256,
+          "latitude": 55.0525643430962000,
+          "longitude": -1.4516338195643800
+        },
+        "lastUpdated": "2016-03-30T11:57:44.520+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A193D1",
+    "definitions": [
+      {
+        "shortDescription": "A193 / Whitley Rd",
+        "longDescription": "North Tyneside - A193 Park Avenue / Whitley Road",
+        "point": {
+          "easting": 435481,
+          "northing": 572083,
+          "latitude": 55.0419956766941000,
+          "longitude": -1.4463039916245800
+        },
+        "lastUpdated": "2016-02-08T11:55:12.800+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A193E1",
+    "definitions": [
+      {
+        "shortDescription": "A193 / Marden Rd",
+        "longDescription": "North Tyneside - A193 Park View / Marden Road",
+        "point": {
+          "easting": 435418,
+          "northing": 572073,
+          "latitude": 55.0419156709984000,
+          "longitude": -1.4472938647138100
+        },
+        "lastUpdated": "2016-02-08T11:54:39.990+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A193F1",
+    "definitions": [
+      {
+        "shortDescription": "A193 / Stead St",
+        "longDescription": "North Tyneside - A193 Tynemouth Road / Stead Street",
+        "point": {
+          "easting": 432462,
+          "northing": 567173,
+          "latitude": 54.9980801467737000,
+          "longitude": -1.4941060098672800
+        },
+        "lastUpdated": "2016-02-08T11:36:15.207+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A193G1",
+    "definitions": [
+      {
+        "shortDescription": "A193 / North Tce",
+        "longDescription": "North Tyneside - A193 Church Bank / Wagon Way / North Terrace",
+        "point": {
+          "easting": 430859,
+          "northing": 566625,
+          "latitude": 54.9932603345233000,
+          "longitude": -1.5192126655718100
+        },
+        "lastUpdated": "2016-02-08T11:35:40.160+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A193H1",
+    "definitions": [
+      {
+        "shortDescription": "A193 / Alexandra St",
+        "longDescription": "North Tyneside - A193 High Street East / Alexandra Street",
+        "point": {
+          "easting": 430282,
+          "northing": 566472,
+          "latitude": 54.9919203554726000,
+          "longitude": -1.5282514798987700
+        },
+        "lastUpdated": "2016-02-08T11:34:58.813+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_A193I1",
+    "definitions": [
+      {
+        "shortDescription": "A193 / Sycamore St",
+        "longDescription": "North Tyneside - A193 High Street East / Sycamore Street",
+        "point": {
+          "easting": 430009,
+          "northing": 566413,
+          "latitude": 54.9914103508392000,
+          "longitude": -1.5325209255267400
+        },
+        "lastUpdated": "2016-02-08T11:34:10.640+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "NT_SVLA1",
+    "definitions": [
+      {
+        "shortDescription": "The Silverlink / A19 / A1058",
+        "longDescription": "North Tyneside - The Silverlink / A19 / A1058 Coast Road",
+        "point": {
+          "easting": 432245,
+          "northing": 568487,
+          "latitude": 55.0098986975464000,
+          "longitude": -1.4973461531862900
+        },
+        "lastUpdated": "2019-04-29T08:34:54.460+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "PS190",
+    "definitions": [
+      {
+        "shortDescription": "A189 / A186 Westmorland Rd",
+        "longDescription": "Newcastle - A189 St. James' Boulevard / A186 Westmorland Road & Westgate Road",
+        "point": {
+          "easting": 424253,
+          "northing": 563935,
+          "latitude": 54.9694515826016000,
+          "longitude": -1.6226887067676200
+        },
+        "lastUpdated": "2015-03-27T14:42:10.037+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "PS191",
+    "definitions": [
+      {
+        "shortDescription": "A189 / Strawberry Pl",
+        "longDescription": "Newcastle - A189 Barrack Road & Gallowgate / Strawberry Place",
+        "point": {
+          "easting": 424276,
+          "northing": 564462,
+          "latitude": 54.9741810285013000,
+          "longitude": -1.6222889727707800
+        },
+        "lastUpdated": "2015-03-18T12:45:32.583+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "PS192",
+    "definitions": [
+      {
+        "shortDescription": "A186 / Mosley St",
+        "longDescription": "Newcastle - A186 Pilgrim Street / Mosley Street",
+        "point": {
+          "easting": 425086,
+          "northing": 564183,
+          "latitude": 54.9716415204915000,
+          "longitude": -1.6096604266881800
+        },
+        "lastUpdated": "2015-03-18T17:08:39.863+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "PS195",
+    "definitions": [
+      {
+        "shortDescription": "A186 / Clayton St W",
+        "longDescription": "Newcastle - A186 Neville Street & Westmorland Road / Clayton Street West",
+        "point": {
+          "easting": 424403,
+          "northing": 563833,
+          "latitude": 54.9685217279918000,
+          "longitude": -1.6203589538845500
+        },
+        "lastUpdated": "2015-03-18T13:20:35.733+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "PS196",
+    "definitions": [
+      {
+        "shortDescription": "A189 / B1311 Gallowgate",
+        "longDescription": "Newcastle - A189 St. James' Boulevard / B1311 Gallowgate",
+        "point": {
+          "easting": 424339,
+          "northing": 564380,
+          "latitude": 54.9734411309663000,
+          "longitude": -1.6213090607649800
+        },
+        "lastUpdated": "2015-03-18T14:05:36.497+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "PS212",
+    "definitions": [
+      {
+        "shortDescription": "A695 / Scotswood Rd",
+        "longDescription": "Newcastle - A695 Marlborough Crescent / Scotswood Road",
+        "point": {
+          "easting": 424329,
+          "northing": 563689,
+          "latitude": 54.9672318630530000,
+          "longitude": -1.6215287494730100
+        },
+        "lastUpdated": "2015-03-18T14:45:59.377+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "PS303",
+    "definitions": [
+      {
+        "shortDescription": "B1600 / Swing Brg",
+        "longDescription": "Newcastle - B1600 Sandhill / Javel Groupe / Swing Bridge",
+        "point": {
+          "easting": 425149,
+          "northing": 563809,
+          "latitude": 54.9682719339609000,
+          "longitude": -1.6087103905634500
+        },
+        "lastUpdated": "2018-08-10T08:22:56.367+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A1018C1",
+    "definitions": [
+      {
+        "shortDescription": "A1018 / B1291 Charlton Rd",
+        "longDescription": "Sunderland - A1018 Newcastle Road / B1291 Charlton Road & Thompson Road",
+        "point": {
+          "easting": 439236,
+          "northing": 559387,
+          "latitude": 54.9276300939160000,
+          "longitude": -1.3892857689985600
+        },
+        "lastUpdated": "2016-02-08T11:45:03.097+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A1018D1",
+    "definitions": [
+      {
+        "shortDescription": "A1018 / A1290 Southwick Rd",
+        "longDescription": "Sunderland - A1018 Newcastle Road & North Bridge Street / A1290 Southwick Road",
+        "point": {
+          "easting": 439657,
+          "northing": 558019,
+          "latitude": 54.9153116502065000,
+          "longitude": -1.3828959909356700
+        },
+        "lastUpdated": "2016-02-08T11:45:37.880+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A1018E1",
+    "definitions": [
+      {
+        "shortDescription": "A1018 / A183 Dame Dorothy St",
+        "longDescription": "Sunderland - A1018 North Bridge Street & Wearmouth Bridge / A183 Dame Dorothy St",
+        "point": {
+          "easting": 439649,
+          "northing": 557602,
+          "latitude": 54.9115620910893000,
+          "longitude": -1.3830857937416600
+        },
+        "lastUpdated": "2016-02-08T11:46:06.300+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A1018F1",
+    "definitions": [
+      {
+        "shortDescription": "A1018 / A1231 White House Rd",
+        "longDescription": "Sunderland - A1018 Commercial Road & Hendon Road / A1231 White House Road",
+        "point": {
+          "easting": 440581,
+          "northing": 556510,
+          "latitude": 54.9016734827074000,
+          "longitude": -1.3686971198188400
+        },
+        "lastUpdated": "2017-04-03T10:01:28.437+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A1231C1",
+    "definitions": [
+      {
+        "shortDescription": "A1231 / A19 (W)",
+        "longDescription": "Sunderland - A1231 Sunderland Highway / A19 (West)",
+        "point": {
+          "easting": 434562,
+          "northing": 557269,
+          "latitude": 54.9089411844835000,
+          "longitude": -1.4624658272496900
+        },
+        "lastUpdated": "2019-04-15T08:44:07.780+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A1231D1",
+    "definitions": [
+      {
+        "shortDescription": "A1231 / A19 (E)",
+        "longDescription": "Sunderland - A1231 Wessington Way / A19 (East)",
+        "point": {
+          "easting": 434749,
+          "northing": 557320,
+          "latitude": 54.9093911758573000,
+          "longitude": -1.4595462101470100
+        },
+        "lastUpdated": "2019-04-15T08:45:11.220+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A1231D2",
+    "definitions": [
+      {
+        "shortDescription": "A1231 / A1290 Wessington Way",
+        "longDescription": "Sunderland - A1231 Northern Spire Bridge / A1290 Wessington Way / Castletown Way",
+        "point": {
+          "easting": 436863,
+          "northing": 558454,
+          "latitude": 54.9194304944536000,
+          "longitude": -1.4264307813521300
+        },
+        "lastUpdated": "2018-01-03T15:42:03.217+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A1231D3",
+    "definitions": [
+      {
+        "shortDescription": "A1231 / Paul Watson Way",
+        "longDescription": "Sunderland - A1231 Northern Spire Bridge & Cowies Way / Paul Watson Way",
+        "point": {
+          "easting": 437169,
+          "northing": 557902,
+          "latitude": 54.9144511560526000,
+          "longitude": -1.4217211355607900
+        },
+        "lastUpdated": "2018-06-20T07:20:51.023+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A1231G1",
+    "definitions": [
+      {
+        "shortDescription": "A1231 / Cowan Tce",
+        "longDescription": "Sunderland - A1231 Stockton Road / Cowan Terrace",
+        "point": {
+          "easting": 439456,
+          "northing": 556541,
+          "latitude": 54.9020431693228000,
+          "longitude": -1.3862349626272100
+        },
+        "lastUpdated": "2016-02-08T12:02:44.813+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A1290A1",
+    "definitions": [
+      {
+        "shortDescription": "A1290 / Cherry Blossom Way",
+        "longDescription": "Sunderland - A1290 Washington Road / Cherry Blossom Way",
+        "point": {
+          "easting": 432837,
+          "northing": 558324,
+          "latitude": 54.9185396390653000,
+          "longitude": -1.4892529455632400
+        },
+        "lastUpdated": "2016-09-26T09:02:26.450+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A1290B1",
+    "definitions": [
+      {
+        "shortDescription": "A1290 / Nissan",
+        "longDescription": "Sunderland - A1290 Washington Road / Nissan",
+        "point": {
+          "easting": 433789,
+          "northing": 558820,
+          "latitude": 54.9229393460191000,
+          "longitude": -1.4743349993132700
+        },
+        "lastUpdated": "2016-02-08T12:22:51.270+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A1290E1",
+    "definitions": [
+      {
+        "shortDescription": "A1290 / B1291 Southwick Rd",
+        "longDescription": "Sunderland - A1290 Keir Hardie Way / B1291 Southwick Road",
+        "point": {
+          "easting": 438893,
+          "northing": 558364,
+          "latitude": 54.9184710937241000,
+          "longitude": -1.3947746639115400
+        },
+        "lastUpdated": "2017-04-03T10:25:27.477+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A1290F1",
+    "definitions": [
+      {
+        "shortDescription": "A1290 / Northern Way",
+        "longDescription": "Sunderland - A1290 Wessington Way / Northern Way",
+        "point": {
+          "easting": 438130,
+          "northing": 558337,
+          "latitude": 54.9182809335515000,
+          "longitude": -1.4066731791943900
+        },
+        "lastUpdated": "2018-12-06T09:21:00.283+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A182B1",
+    "definitions": [
+      {
+        "shortDescription": "A182 / Park View",
+        "longDescription": "Sunderland - A182 Front Street / John Street / Park View",
+        "point": {
+          "easting": 435289,
+          "northing": 547509,
+          "latitude": 54.8211917242724000,
+          "longitude": -1.4523130534904600
+        },
+        "lastUpdated": "2016-02-08T11:51:05.200+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A183A2",
+    "definitions": [
+      {
+        "shortDescription": "A183 / B1291 Dykelands Rd",
+        "longDescription": "Sunderland - A183 Whitburn Road / B1291 Dykelands Road",
+        "point": {
+          "easting": 440564,
+          "northing": 560193,
+          "latitude": 54.9347695692429000,
+          "longitude": -1.3684486853554000
+        },
+        "lastUpdated": "2017-05-19T11:59:41.430+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A183A3",
+    "definitions": [
+      {
+        "shortDescription": "A183 / Lowry Rd",
+        "longDescription": "Sunderland - A183 Whitburn Road & Whitburn Bents Road / Lowry Road",
+        "point": {
+          "easting": 440570,
+          "northing": 560475,
+          "latitude": 54.9372992719493000,
+          "longitude": -1.3683088201465700
+        },
+        "lastUpdated": "2017-05-03T17:44:54.727+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A183B1",
+    "definitions": [
+      {
+        "shortDescription": "A183 / A1018 Wearmouth Brg",
+        "longDescription": "Sunderland - A183 St. Mary's Boulevard / A1018 West Wear Street & Wearmouth Bridge",
+        "point": {
+          "easting": 439704,
+          "northing": 557250,
+          "latitude": 54.9083924786903000,
+          "longitude": -1.3822757474246200
+        },
+        "lastUpdated": "2017-02-24T12:34:47.853+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A183C1",
+    "definitions": [
+      {
+        "shortDescription": "A183 / Cumberland St",
+        "longDescription": "Sunderland - A183 St. Mary's Boulevard / Cumberland Street",
+        "point": {
+          "easting": 439564,
+          "northing": 557196,
+          "latitude": 54.9079225006614000,
+          "longitude": -1.3844654541404400
+        },
+        "lastUpdated": "2017-03-01T16:10:01.210+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A183D1",
+    "definitions": [
+      {
+        "shortDescription": "A183 / Keel Sq",
+        "longDescription": "Sunderland - A183 St. Mary's Boulevard / Keel Square",
+        "point": {
+          "easting": 439413,
+          "northing": 557172,
+          "latitude": 54.9077124892566000,
+          "longitude": -1.3868251518141500
+        },
+        "lastUpdated": "2016-09-26T15:43:58.683+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A183E1",
+    "definitions": [
+      {
+        "shortDescription": "A183 / Livingstone Rd Car Pk",
+        "longDescription": "Sunderland - A183 St. Mary's Boulevard / Livingstone Road Car Park",
+        "point": {
+          "easting": 439243,
+          "northing": 557172,
+          "latitude": 54.9077324461841000,
+          "longitude": -1.3894748241726700
+        },
+        "lastUpdated": "2016-09-26T15:02:16.820+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A183F1",
+    "definitions": [
+      {
+        "shortDescription": "A183 / A1231 St. Michael's Way",
+        "longDescription": "Sunderland - A183 St. Mary's Boulevard / A1231 St. Michael's Way & Silksworth Row",
+        "point": {
+          "easting": 439153,
+          "northing": 557107,
+          "latitude": 54.9071524931688000,
+          "longitude": -1.3908846225173800
+        },
+        "lastUpdated": "2016-12-28T12:31:06.123+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A183G1",
+    "definitions": [
+      {
+        "shortDescription": "A183 / Westbourne Rd",
+        "longDescription": "Sunderland - A183 Chester Road / Westbourne Road",
+        "point": {
+          "easting": 438920,
+          "northing": 556678,
+          "latitude": 54.9033128909479000,
+          "longitude": -1.3945739874269800
+        },
+        "lastUpdated": "2016-02-08T11:43:57.533+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A183H1",
+    "definitions": [
+      {
+        "shortDescription": "A183 / Kayll Road",
+        "longDescription": "Sunderland - A183 Chester Road / Kayll Road / Ormonde Street",
+        "point": {
+          "easting": 437979,
+          "northing": 556377,
+          "latitude": 54.9006829763070000,
+          "longitude": -1.4092920409427000
+        },
+        "lastUpdated": "2016-02-08T11:43:25.580+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A183I1",
+    "definitions": [
+      {
+        "shortDescription": "A183 / B1405 Springwell Rd",
+        "longDescription": "Sunderland - A183 The Broadway / B1405 Springwell Road & Holborn Road",
+        "point": {
+          "easting": 436731,
+          "northing": 555746,
+          "latitude": 54.8951033371753000,
+          "longitude": -1.4288293609854600
+        },
+        "lastUpdated": "2016-02-08T11:42:57.843+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A183J1",
+    "definitions": [
+      {
+        "shortDescription": "A183 / A19 (E)",
+        "longDescription": "Sunderland - A183 Chester Road / A19 (East)",
+        "point": {
+          "easting": 434926,
+          "northing": 555140,
+          "latitude": 54.8897935337752000,
+          "longitude": -1.4570456179630600
+        },
+        "lastUpdated": "2019-04-29T08:33:23.620+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A183K1",
+    "definitions": [
+      {
+        "shortDescription": "A183 / A19 (W)",
+        "longDescription": "Sunderland - A183 Chester Road / A19 (West)",
+        "point": {
+          "easting": 434750,
+          "northing": 555151,
+          "latitude": 54.8899034788756000,
+          "longitude": -1.4597852833414600
+        },
+        "lastUpdated": "2019-05-08T13:32:02.767+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A183K2",
+    "definitions": [
+      {
+        "shortDescription": "A183 / Herrington Country Pk",
+        "longDescription": "Sunderland - A183 Chester Road / Herrington Country Park / Penshaw Monument",
+        "point": {
+          "easting": 433524,
+          "northing": 554140,
+          "latitude": 54.8808942514624000,
+          "longitude": -1.4790124854573800
+        },
+        "lastUpdated": "2019-04-29T08:31:32.780+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A183L1",
+    "definitions": [
+      {
+        "shortDescription": "A183 / B1519 / A182 Shiney Row",
+        "longDescription": "Sunderland - A183 & B1519 Chester Road / A182",
+        "point": {
+          "easting": 432424,
+          "northing": 552631,
+          "latitude": 54.8674155825327000,
+          "longitude": -1.4963297205370000
+        },
+        "lastUpdated": "2016-02-08T11:51:38.060+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A195A1",
+    "definitions": [
+      {
+        "shortDescription": "A195 / Emerson Rd",
+        "longDescription": "Sunderland - A195 Western Highway / Emerson Road",
+        "point": {
+          "easting": 429003,
+          "northing": 554635,
+          "latitude": 54.8856326180549000,
+          "longitude": -1.5494339705394100
+        },
+        "lastUpdated": "2019-06-19T08:19:53.470+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A690A1",
+    "definitions": [
+      {
+        "shortDescription": "A690 / A1231 St. Michael's Way",
+        "longDescription": "Sunderland - A690 New Durham Road / A1231 St. Michael's Way",
+        "point": {
+          "easting": 439242,
+          "northing": 556651,
+          "latitude": 54.9030429998328000,
+          "longitude": -1.3895645960587700
+        },
+        "lastUpdated": "2016-02-08T11:41:53.030+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A690B1",
+    "definitions": [
+      {
+        "shortDescription": "A690 / Barnes Park Rd",
+        "longDescription": "Sunderland - A690 Durham Road / Barnes Park Road",
+        "point": {
+          "easting": 438425,
+          "northing": 555560,
+          "latitude": 54.8933039547472000,
+          "longitude": -1.4024425492539300
+        },
+        "lastUpdated": "2016-02-08T11:41:17.887+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A690C1",
+    "definitions": [
+      {
+        "shortDescription": "A690 / Grindon Ln",
+        "longDescription": "Sunderland - A690 Durham Road / Grindon Lane / Pancras Road",
+        "point": {
+          "easting": 437142,
+          "northing": 554581,
+          "latitude": 54.8846046756439000,
+          "longitude": -1.4225696528487700
+        },
+        "lastUpdated": "2016-02-08T11:40:45.543+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A690D1",
+    "definitions": [
+      {
+        "shortDescription": "A690 / Bridle Path",
+        "longDescription": "Sunderland - A690 Durham Road / Bridle Path",
+        "point": {
+          "easting": 436187,
+          "northing": 553520,
+          "latitude": 54.8751455650960000,
+          "longitude": -1.4375873557561300
+        },
+        "lastUpdated": "2016-02-08T11:40:14.387+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A690E1",
+    "definitions": [
+      {
+        "shortDescription": "A690 / A19 (SE)",
+        "longDescription": "Sunderland - A690 Durham Road / B1286 City Way / A19 (South East)",
+        "point": {
+          "easting": 435728,
+          "northing": 552396,
+          "latitude": 54.8650766450006000,
+          "longitude": -1.4448859880654400
+        },
+        "lastUpdated": "2019-04-08T08:06:01.270+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A690E2",
+    "definitions": [
+      {
+        "shortDescription": "A690 / A19 (NE)",
+        "longDescription": "Sunderland - A690 Durham Road / A19 (North East)",
+        "point": {
+          "easting": 435611,
+          "northing": 552433,
+          "latitude": 54.8654165770870000,
+          "longitude": -1.4466957794577300
+        },
+        "lastUpdated": "2019-07-29T10:56:12.697+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A690F1",
+    "definitions": [
+      {
+        "shortDescription": "A690 / High Ln",
+        "longDescription": "Sunderland - A690 Durham Road / High Lane, Stony Gate",
+        "point": {
+          "easting": 435154,
+          "northing": 551556,
+          "latitude": 54.8575673954173000,
+          "longitude": -1.4539245231254300
+        },
+        "lastUpdated": "2017-04-10T18:12:17.020+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_A690G1",
+    "definitions": [
+      {
+        "shortDescription": "A690 / A182 Houghton Cut",
+        "longDescription": "Sunderland - A690 Houghton Cut / A182 Northbound Entry Slip",
+        "point": {
+          "easting": 434310,
+          "northing": 550322,
+          "latitude": 54.8465384973431000,
+          "longitude": -1.4672223696877100
+        },
+        "lastUpdated": "2017-04-10T17:54:42.850+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_B1284A1",
+    "definitions": [
+      {
+        "shortDescription": "B1284 / Rainton Bridge",
+        "longDescription": "Sunderland - B1284 / Rainton Bridge Business Park / A690 Durham Road",
+        "point": {
+          "easting": 433533,
+          "northing": 548772,
+          "latitude": 54.8326599521830000,
+          "longitude": -1.4795002132177600
+        },
+        "lastUpdated": "2017-03-31T09:21:45.370+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_B1405A1",
+    "definitions": [
+      {
+        "shortDescription": "B1405 / A1231 Pallion New Rd",
+        "longDescription": "Sunderland - B1405 European Way / A1231 Pallion New Road & Woodbine Terrace / Pallion Subway",
+        "point": {
+          "easting": 437493,
+          "northing": 557707,
+          "latitude": 54.9126714438309000,
+          "longitude": -1.4166916771770900
+        },
+        "lastUpdated": "2018-01-03T15:44:35.003+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_B1522A1",
+    "definitions": [
+      {
+        "shortDescription": "B1522 / The Cedars",
+        "longDescription": "Sunderland - B1522 Ryhope Road / The Cedars / Villette Road",
+        "point": {
+          "easting": 440069,
+          "northing": 555621,
+          "latitude": 54.8937242987883000,
+          "longitude": -1.3768057466024700
+        },
+        "lastUpdated": "2016-02-08T11:48:17.057+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_B1522B1",
+    "definitions": [
+      {
+        "shortDescription": "B1522 / Ocean Rd",
+        "longDescription": "Sunderland - B1522 Ryhope Road / Ocean Road",
+        "point": {
+          "easting": 440766,
+          "northing": 554630,
+          "latitude": 54.8847655239955000,
+          "longitude": -1.3660766617026700
+        },
+        "lastUpdated": "2016-02-08T11:48:44.463+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_B1522C1",
+    "definitions": [
+      {
+        "shortDescription": "B1522 / B1405 Toll Bar Rd",
+        "longDescription": "Sunderland - B1522 Ryhope Road / B1405 Toll Bar Road & Salterfen Road",
+        "point": {
+          "easting": 441064,
+          "northing": 553865,
+          "latitude": 54.8778664101064000,
+          "longitude": -1.3615469036696900
+        },
+        "lastUpdated": "2016-02-08T12:17:53.870+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_BRRA1",
+    "definitions": [
+      {
+        "shortDescription": "Holmeside / Park Ln",
+        "longDescription": "Sunderland - Holmeside / Vine Place / Park Lane",
+        "point": {
+          "easting": 439492,
+          "northing": 556791,
+          "latitude": 54.9042829133015000,
+          "longitude": -1.3856451394020100
+        },
+        "lastUpdated": "2016-02-08T12:18:38.793+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_BRRB1",
+    "definitions": [
+      {
+        "shortDescription": "Borough Rd / Burdon Rd",
+        "longDescription": "Sunderland - Borough Road / Holmeside / Burdon Road",
+        "point": {
+          "easting": 439798,
+          "northing": 556804,
+          "latitude": 54.9043829749122000,
+          "longitude": -1.3808657366266000
+        },
+        "lastUpdated": "2016-02-08T12:17:22.447+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_HLRA1",
+    "definitions": [
+      {
+        "shortDescription": "Hylton Rd / Kayll Rd",
+        "longDescription": "Sunderland - Hylton Road / Kayll Road / Pallion Road",
+        "point": {
+          "easting": 437769,
+          "northing": 556742,
+          "latitude": 54.9039825362311000,
+          "longitude": -1.4125217928841600
+        },
+        "lastUpdated": "2016-02-08T11:47:23.617+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "SL_HLRB1",
+    "definitions": [
+      {
+        "shortDescription": "Hylton Rd / Sorley St",
+        "longDescription": "Sunderland - Hylton Road / Sorley Street",
+        "point": {
+          "easting": 438091,
+          "northing": 556920,
+          "latitude": 54.9055524278817000,
+          "longitude": -1.4074724915613200
+        },
+        "lastUpdated": "2016-02-08T11:47:02.913+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A1018A1",
+    "definitions": [
+      {
+        "shortDescription": "A1018 / A194 / A183 Beach Rd",
+        "longDescription": "South Tyneside - A1018 Westoe Road / A194 Crossgate / A183 Beach Road",
+        "point": {
+          "easting": 436548,
+          "northing": 566847,
+          "latitude": 54.9948715036404000,
+          "longitude": -1.4302737968554900
+        },
+        "lastUpdated": "2016-02-08T11:57:59.460+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A1018B1",
+    "definitions": [
+      {
+        "shortDescription": "A1018 / B1298 Chichester Rd",
+        "longDescription": "South Tyneside - A1018 Westoe Road / B1298 Chichester Road",
+        "point": {
+          "easting": 436735,
+          "northing": 566437,
+          "latitude": 54.9911719857459000,
+          "longitude": -1.4274039818931500
+        },
+        "lastUpdated": "2016-02-08T11:58:43.557+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A1290C1",
+    "definitions": [
+      {
+        "shortDescription": "A1290 / A19 (W)",
+        "longDescription": "South Tyneside - A1290 Downhill Lane / A19 (West)",
+        "point": {
+          "easting": 434101,
+          "northing": 559812,
+          "latitude": 54.9318283697797000,
+          "longitude": -1.4693560268398300
+        },
+        "lastUpdated": "2016-02-08T12:20:10.547+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A1290D1",
+    "definitions": [
+      {
+        "shortDescription": "A1290 / A19 (E)",
+        "longDescription": "South Tyneside - A1290 Downhill Lane / A19 (East)",
+        "point": {
+          "easting": 434222,
+          "northing": 559905,
+          "latitude": 54.9326583005659000,
+          "longitude": -1.4674563009011900
+        },
+        "lastUpdated": "2016-02-08T12:19:28.780+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A1300A1",
+    "definitions": [
+      {
+        "shortDescription": "A1300 / B1298 Boldon Ln",
+        "longDescription": "South Tyneside - A1300 John Reid Road / B1298 Boldon Lane & Whiteleas Way",
+        "point": {
+          "easting": 436084,
+          "northing": 563756,
+          "latitude": 54.9671246720967000,
+          "longitude": -1.4379115618277100
+        },
+        "lastUpdated": "2016-07-06T08:36:00.353+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A1300B1",
+    "definitions": [
+      {
+        "shortDescription": "A1300 / Lynwood Way",
+        "longDescription": "South Tyneside - A1300 Prince Edward Road / Lynwood Way",
+        "point": {
+          "easting": 437626,
+          "northing": 564281,
+          "latitude": 54.9717344966073000,
+          "longitude": -1.4137647748318900
+        },
+        "lastUpdated": "2016-02-08T11:56:28.880+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A1300C1",
+    "definitions": [
+      {
+        "shortDescription": "A1300 / Gorse Ave",
+        "longDescription": "South Tyneside - A1300 Prince Edward Road / Gorse Avenue",
+        "point": {
+          "easting": 437956,
+          "northing": 564284,
+          "latitude": 54.9717345758042000,
+          "longitude": -1.4086054156980900
+        },
+        "lastUpdated": "2016-02-08T11:56:53.290+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A183A1",
+    "definitions": [
+      {
+        "shortDescription": "A183 / Winchester St",
+        "longDescription": "South Tyneside - A183 Anderson Street / Winchester Street",
+        "point": {
+          "easting": 436645,
+          "northing": 567079,
+          "latitude": 54.9969512809686000,
+          "longitude": -1.4287340847508800
+        },
+        "lastUpdated": "2016-07-06T08:41:41.020+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A183A4",
+    "definitions": [
+      {
+        "shortDescription": "A183 / Nicholas Ave",
+        "longDescription": "South Tyneside - A183 East Street & Whitburn Bents Road / Nicholas Avenue",
+        "point": {
+          "easting": 440814,
+          "northing": 561736,
+          "latitude": 54.9486179933331000,
+          "longitude": -1.3643298396816600
+        },
+        "lastUpdated": "2018-11-09T12:06:52.177+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A184G1",
+    "definitions": [
+      {
+        "shortDescription": "A184 / Abingdon Way",
+        "longDescription": "South Tyneside - A184 Newcastle Road / B1298 Abingdon Way",
+        "point": {
+          "easting": 434240,
+          "northing": 560933,
+          "latitude": 54.9418872140602000,
+          "longitude": -1.4670567761358100
+        },
+        "lastUpdated": "2016-07-06T08:46:51.480+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A184H1",
+    "definitions": [
+      {
+        "shortDescription": "A184 / B1299 Station Rd",
+        "longDescription": "South Tyneside - A184 Sunderland Road & Front Street / B1299 Station Road",
+        "point": {
+          "easting": 436773,
+          "northing": 561236,
+          "latitude": 54.9444375181676000,
+          "longitude": -1.4274718082349200
+        },
+        "lastUpdated": "2016-07-06T08:50:36.283+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A185A1",
+    "definitions": [
+      {
+        "shortDescription": "A185 / A19 Tyne Tunnel",
+        "longDescription": "South Tyneside - A185 Howard Street / A19 Tyne Tunnel",
+        "point": {
+          "easting": 433206,
+          "northing": 565030,
+          "latitude": 54.9787726072610000,
+          "longitude": -1.4827165336763000
+        },
+        "lastUpdated": "2016-07-06T08:55:37.307+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A185B1",
+    "definitions": [
+      {
+        "shortDescription": "A185 / A19 Tyne Tunnel",
+        "longDescription": "South Tyneside - A185 Straker Street / A19 Tyne Tunnel",
+        "point": {
+          "easting": 433437,
+          "northing": 564869,
+          "latitude": 54.9773128349785000,
+          "longitude": -1.4791269123345200
+        },
+        "lastUpdated": "2016-07-06T09:01:49.100+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A185C1",
+    "definitions": [
+      {
+        "shortDescription": "A185 / Hobson Way",
+        "longDescription": "South Tyneside - A185 Jarrow Road / Hobson Way",
+        "point": {
+          "easting": 434957,
+          "northing": 564807,
+          "latitude": 54.9766532761441000,
+          "longitude": -1.4553898314409600
+        },
+        "lastUpdated": "2019-07-06T11:22:47.473+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A194A1",
+    "definitions": [
+      {
+        "shortDescription": "A194 / B1302 Hudson St",
+        "longDescription": "South Tyneside - A194 Western Approach / B1302 Hudson Street",
+        "point": {
+          "easting": 435522,
+          "northing": 565020,
+          "latitude": 54.9785231902170000,
+          "longitude": -1.4465410174914200
+        },
+        "lastUpdated": "2016-07-06T09:06:57.450+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A194A5",
+    "definitions": [
+      {
+        "shortDescription": "A194 / Garden Ln",
+        "longDescription": "South Tyneside - A194 Crossgate / Garden Lane",
+        "point": {
+          "easting": 436486,
+          "northing": 566771,
+          "latitude": 54.9941915691310000,
+          "longitude": -1.4312536435184600
+        },
+        "lastUpdated": "2019-11-11T13:10:10.443+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A194B1",
+    "definitions": [
+      {
+        "shortDescription": "A194 / A1300 John Reid Rd",
+        "longDescription": "South Tyneside - A194 Leam Lane & Newcastle Road / A1300 John Reid Road",
+        "point": {
+          "easting": 434210,
+          "northing": 563796,
+          "latitude": 54.9676241649241000,
+          "longitude": -1.4671779493660900
+        },
+        "lastUpdated": "2016-02-08T12:00:53.090+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A194B2",
+    "definitions": [
+      {
+        "shortDescription": "A194 / Shaftesbury Ave",
+        "longDescription": "South Tyneside - A194 Newcastle Road / Shaftesbury Avenue",
+        "point": {
+          "easting": 434555,
+          "northing": 564140,
+          "latitude": 54.9706838856728000,
+          "longitude": -1.4617487652809800
+        },
+        "lastUpdated": "2019-02-28T09:49:00.150+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A194B4",
+    "definitions": [
+      {
+        "shortDescription": "A194 / Elswick Way",
+        "longDescription": "South Tyneside - A194 Newcastle Road / Elswick Way / Hobson Way",
+        "point": {
+          "easting": 435172,
+          "northing": 564645,
+          "latitude": 54.9751835013094000,
+          "longitude": -1.4520501783848200
+        },
+        "lastUpdated": "2019-07-04T12:42:40.690+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A194C1",
+    "definitions": [
+      {
+        "shortDescription": "A194 / A19 Lindisfarne (E)",
+        "longDescription": "South Tyneside - A194 Leam Lane / A19 Lindisfarne (East)",
+        "point": {
+          "easting": 433845,
+          "northing": 563612,
+          "latitude": 54.9659942703155000,
+          "longitude": -1.4729071623256100
+        },
+        "lastUpdated": "2016-02-08T12:00:13.310+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A194C2",
+    "definitions": [
+      {
+        "shortDescription": "A194 / A19 Lindisfarne (W)",
+        "longDescription": "South Tyneside - A194 Leam Lane / A19 Lindisfarne (West)",
+        "point": {
+          "easting": 433691,
+          "northing": 563506,
+          "latitude": 54.9650443459607000,
+          "longitude": -1.4753168191086900
+        },
+        "lastUpdated": "2016-09-09T09:09:30.900+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_A194D1",
+    "definitions": [
+      {
+        "shortDescription": "A194 / B1306 Mill Ln",
+        "longDescription": "South Tyneside - A194 Leam Lane / B1306 Mill Lane",
+        "point": {
+          "easting": 431711,
+          "northing": 562025,
+          "latitude": 54.9518754305031000,
+          "longitude": -1.5064123493411600
+        },
+        "lastUpdated": "2016-07-06T09:10:58.130+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_B1298A1",
+    "definitions": [
+      {
+        "shortDescription": "B1298 / Talbot Rd",
+        "longDescription": "South Tyneside - B1298 Stanhope Road / Talbot Road",
+        "point": {
+          "easting": 436230,
+          "northing": 564880,
+          "latitude": 54.9772135145889000,
+          "longitude": -1.4354923296235200
+        },
+        "lastUpdated": "2016-02-08T11:50:08.510+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_B1298B1",
+    "definitions": [
+      {
+        "shortDescription": "B1298 / B1302 Boldon Ln",
+        "longDescription": "South Tyneside - B1298 Stanhope Road / B1302 Boldon Lane",
+        "point": {
+          "easting": 435916,
+          "northing": 564557,
+          "latitude": 54.9743337797273000,
+          "longitude": -1.4404415813320300
+        },
+        "lastUpdated": "2016-02-08T11:49:35.400+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_B1298C1",
+    "definitions": [
+      {
+        "shortDescription": "B1298 / North Rd",
+        "longDescription": "South Tyneside - B1298 Hubert Street / North Road",
+        "point": {
+          "easting": 434560,
+          "northing": 561737,
+          "latitude": 54.9490964385017000,
+          "longitude": -1.4619577419614200
+        },
+        "lastUpdated": "2016-02-08T12:07:20.447+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_B1301A1",
+    "definitions": [
+      {
+        "shortDescription": "B1301 / B1298 Stanhope Pde",
+        "longDescription": "South Tyneside - B1301 Dean Road / B1298 Stanhope Parade",
+        "point": {
+          "easting": 436481,
+          "northing": 565886,
+          "latitude": 54.9862425075250000,
+          "longitude": -1.4314432512576900
+        },
+        "lastUpdated": "2019-02-28T09:50:25.220+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_B1344A1",
+    "definitions": [
+      {
+        "shortDescription": "B1344 / B1303 Station Rd",
+        "longDescription": "South Tyneside - B1344 Ferry Street / B1303 Station Road / Church Way",
+        "point": {
+          "easting": 436000,
+          "northing": 567036,
+          "latitude": 54.9966111667065000,
+          "longitude": -1.4388128161437400
+        },
+        "lastUpdated": "2016-07-06T09:14:16.870+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "ST_FOWA1",
+    "definitions": [
+      {
+        "shortDescription": "Fowler St / Keppel St",
+        "longDescription": "South Tyneside - Fowler Street / Keppel Street",
+        "point": {
+          "easting": 436455,
+          "northing": 567224,
+          "latitude": 54.9982610806214000,
+          "longitude": -1.4316837788738300
+        },
+        "lastUpdated": "2019-11-14T09:43:10.763+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "TT2North1",
+    "definitions": [
+      {
+        "shortDescription": "A19 / Jarrow Cemetery",
+        "longDescription": "Tyne Tunnels - A19 / Jarrow Cemetery",
+        "point": {
+          "easting": 433618,
+          "northing": 564407,
+          "latitude": 54.9731533698589000,
+          "longitude": -1.4763570643726400
+        },
+        "lastUpdated": "2012-09-17T12:17:55.753+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "TT2North2",
+    "definitions": [
+      {
+        "shortDescription": "A19 / Railway & Metro Brg",
+        "longDescription": "Tyne Tunnels - A19 / Tyne Tunnel Railway & Metro Bridge",
+        "point": {
+          "easting": 433402,
+          "northing": 564764,
+          "latitude": 54.9763729377216000,
+          "longitude": -1.4796867993404000
+        },
+        "lastUpdated": "2012-09-17T12:17:55.957+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "TT2North3",
+    "definitions": [
+      {
+        "shortDescription": "A19 / Tunnel Entry NB",
+        "longDescription": "Tyne Tunnels - A19 / Tyne Tunnel Entrance Northbound",
+        "point": {
+          "easting": 433233,
+          "northing": 565025,
+          "latitude": 54.9787326184132000,
+          "longitude": -1.4822965840185600
+        },
+        "lastUpdated": "2012-09-17T12:17:56.067+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "TT2North4",
+    "definitions": [
+      {
+        "shortDescription": "A19 / Tunnel NB",
+        "longDescription": "Tyne Tunnels - A19 / Tyne Tunnel Northbound",
+        "point": {
+          "easting": 432982,
+          "northing": 565839,
+          "latitude": 54.9860616919802000,
+          "longitude": -1.4861264465850100
+        },
+        "lastUpdated": "2012-09-17T12:17:56.173+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "TT2South1",
+    "definitions": [
+      {
+        "shortDescription": "A19 / A1058 (S) (N)",
+        "longDescription": "Tyne Tunnels - A19 / A1058 Silverlink (South) (Facing North)",
+        "point": {
+          "easting": 432428,
+          "northing": 568082,
+          "latitude": 55.0062491728547000,
+          "longitude": -1.4945263351731500
+        },
+        "lastUpdated": "2012-09-17T12:17:54.910+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "TT2South2",
+    "definitions": [
+      {
+        "shortDescription": "A19 / A193",
+        "longDescription": "Tyne Tunnels - A19 / A193",
+        "point": {
+          "easting": 432805,
+          "northing": 567635,
+          "latitude": 55.0022097404663000,
+          "longitude": -1.4886868746045800
+        },
+        "lastUpdated": "2012-09-17T12:17:55.347+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "TT2South3",
+    "definitions": [
+      {
+        "shortDescription": "A19 / Toll Plaza SB",
+        "longDescription": "Tyne Tunnels - A19 / Tyne Tunnel Toll Plaza Southbound",
+        "point": {
+          "easting": 433083,
+          "northing": 566967,
+          "latitude": 54.9961905185732000,
+          "longitude": -1.4844171272046300
+        },
+        "lastUpdated": "2012-09-17T12:17:55.487+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "TT2South4",
+    "definitions": [
+      {
+        "shortDescription": "A19 / Tunnel Entry SB",
+        "longDescription": "Tyne Tunnels - A19 / Tyne Tunnel Entrance Southbound",
+        "point": {
+          "easting": 433092,
+          "northing": 566481,
+          "latitude": 54.9918210372691000,
+          "longitude": -1.4843369351816600
+        },
+        "lastUpdated": "2012-09-17T12:17:55.630+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "UO_NGATE02",
+    "definitions": [
+      {
+        "shortDescription": "Newgate St / St. Andrew's St",
+        "longDescription": "Newcastle - Newgate Street / St. Andrew's Street",
+        "point": {
+          "easting": 424570,
+          "northing": 564330,
+          "latitude": 54.9729812399254000,
+          "longitude": -1.6177094872752700
+        },
+        "lastUpdated": "2018-06-27T09:19:21.367+0100"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV12",
+    "definitions": [
+      {
+        "shortDescription": "Durham - A68 Tow Law - B6296 Hig",
+        "longDescription": "Durham - A68 Tow Law - B6296 High Stoop",
+        "point": {
+          "easting": 410172,
+          "northing": 540453,
+          "latitude": 54.7589131964557000,
+          "longitude": -1.8434618240805700
+        },
+        "lastUpdated": "2016-02-09T10:37:00.860+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV13",
+    "definitions": [
+      {
+        "shortDescription": "Durham - A689 Lanehead - School",
+        "longDescription": "Durham - A689 Lanehead - School Hill",
+        "point": {
+          "easting": 384090,
+          "northing": 541737,
+          "latitude": 54.7702959051591000,
+          "longitude": -2.2488220909772100
+        },
+        "lastUpdated": "2016-02-09T10:37:01.173+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV2359",
+    "definitions": [
+      {
+        "shortDescription": "Darlington - Great Stainton - El",
+        "longDescription": "Darlington - Great Stainton - Elstob Lane",
+        "point": {
+          "easting": 433629,
+          "northing": 522325,
+          "latitude": 54.5949980328347000,
+          "longitude": -1.4810492195068100
+        },
+        "lastUpdated": "2016-02-09T10:37:01.783+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV2360",
+    "definitions": [
+      {
+        "shortDescription": "Durham - A6072 Redworth - Shildo",
+        "longDescription": "Durham - A6072 Redworth - Shildon Road / Red House Lane",
+        "point": {
+          "easting": 423705,
+          "northing": 523878,
+          "latitude": 54.6095139942699000,
+          "longitude": -1.6345109711422500
+        },
+        "lastUpdated": "2016-02-09T10:37:02.097+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV2394",
+    "definitions": [
+      {
+        "shortDescription": "Darlington - A1(M) - Coniscliffe",
+        "longDescription": "Darlington - A1(M) - Coniscliffe / Newton Lane",
+        "point": {
+          "easting": 425803,
+          "northing": 516992,
+          "latitude": 54.5475318004848000,
+          "longitude": -1.6026321280402300
+        },
+        "lastUpdated": "2016-02-09T10:37:02.393+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV30",
+    "definitions": [
+      {
+        "shortDescription": "Stockton - A66 Elton - Sandy Lea",
+        "longDescription": "Stockton - A66 Elton - Sandy Leas Lane",
+        "point": {
+          "easting": 439253,
+          "northing": 517120,
+          "latitude": 54.5478149247970000,
+          "longitude": -1.3947077073935100
+        },
+        "lastUpdated": "2016-02-09T10:37:02.707+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV3382",
+    "definitions": [
+      {
+        "shortDescription": "Durham - A181 Running Waters",
+        "longDescription": "Durham - A181 Running Waters",
+        "point": {
+          "easting": 432985,
+          "northing": 540433,
+          "latitude": 54.7577586689114000,
+          "longitude": -1.4889756204735500
+        },
+        "lastUpdated": "2016-02-09T10:37:03.020+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV49",
+    "definitions": [
+      {
+        "shortDescription": "Durham - B6277 Forest-in-Teesdal",
+        "longDescription": "Durham - B6277 Forest-in-Teesdale",
+        "point": {
+          "easting": 387140,
+          "northing": 529459,
+          "latitude": 54.6600496503803000,
+          "longitude": -2.2008632714981000
+        },
+        "lastUpdated": "2016-02-09T10:37:03.347+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV50",
+    "definitions": [
+      {
+        "shortDescription": "Durham - A66 North Bitts - The S",
+        "longDescription": "Durham - A66 North Bitts - The Street",
+        "point": {
+          "easting": 404370,
+          "northing": 513792,
+          "latitude": 54.5194101839961000,
+          "longitude": -1.9340001084714900
+        },
+        "lastUpdated": "2016-02-09T10:37:03.660+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV51",
+    "definitions": [
+      {
+        "shortDescription": "Durham - B6309 Medomsley - Ebche",
+        "longDescription": "Durham - B6309 Medomsley - Ebchester Hill / Whinny Lane",
+        "point": {
+          "easting": 410833,
+          "northing": 554279,
+          "latitude": 54.8831486496513000,
+          "longitude": -1.8326787080298900
+        },
+        "lastUpdated": "2016-02-09T10:37:03.957+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV54",
+    "definitions": [
+      {
+        "shortDescription": "Durham - A689 Bradbury - Gipsy L",
+        "longDescription": "Durham - A689 Bradbury - Gipsy Lane",
+        "point": {
+          "easting": 431281,
+          "northing": 528923,
+          "latitude": 54.6544404651540000,
+          "longitude": -1.5166775140448400
+        },
+        "lastUpdated": "2016-02-09T10:36:59.253+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV56",
+    "definitions": [
+      {
+        "shortDescription": "Durham - B1432 Hawthorn - Stockt",
+        "longDescription": "Durham - B1432 Hawthorn - Stockton Road",
+        "point": {
+          "easting": 441466,
+          "northing": 546006,
+          "latitude": 54.8072148481581000,
+          "longitude": -1.3564042771067500
+        },
+        "lastUpdated": "2016-02-09T10:36:59.643+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV57",
+    "definitions": [
+      {
+        "shortDescription": "Durham - B6302 Ushaw Moor - Cock",
+        "longDescription": "Durham - B6302 Ushaw Moor - Cockhouse Lane / Broadgate Road",
+        "point": {
+          "easting": 421325,
+          "northing": 542987,
+          "latitude": 54.7813431379480000,
+          "longitude": -1.6699643038020700
+        },
+        "lastUpdated": "2016-02-09T10:36:59.940+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV58",
+    "definitions": [
+      {
+        "shortDescription": "Durham - A689 Toronto - Addison",
+        "longDescription": "Durham - A689 Toronto - Addison Road / B1286",
+        "point": {
+          "easting": 419002,
+          "northing": 531111,
+          "latitude": 54.6747151976323000,
+          "longitude": -1.7068549608113400
+        },
+        "lastUpdated": "2016-02-09T10:37:00.253+0000"
+      }
+    ]
+  },
+  {
+    "systemCodeNumber": "VAISALACCTV59",
+    "definitions": [
+      {
+        "shortDescription": "Cumbria - A66 Stainmore",
+        "longDescription": "Cumbria - A66 Stainmore",
+        "point": {
+          "easting": 385648,
+          "northing": 514107,
+          "latitude": 54.5220456530133000,
+          "longitude": -2.2232345905100700
+        },
+        "lastUpdated": "2016-02-09T10:37:00.550+0000"
+      }
+    ]
+  }
+]

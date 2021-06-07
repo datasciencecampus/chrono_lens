@@ -1,0 +1,4 @@
+trigger-http
+runtime=python38
+memory=2048MB
+timeout=180s

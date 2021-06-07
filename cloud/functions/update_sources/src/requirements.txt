@@ -1,0 +1,25 @@
+# Automatically pre-installed packages
+# from https://cloud.google.com/functions/docs/writing/specifying-dependencies-python#pre-installed_packages
+click==7.1.2
+Flask==1.1.2
+itsdangerous==1.1.0
+Jinja2==2.11.3
+MarkupSafe==1.1.1
+# pip==20.1.1
+requests==2.24.0
+setuptools==47.3.1
+Werkzeug==1.0.1
+# auto installed wheel==0.34.2
+wheel==0.35.0
+
+# Additional local requirements
+google-cloud-storage==1.33.0
+BeautifulSoup4==4.9.3
+lxml==4.6.3
+
+python-json-logger==2.0.1
+google-cloud-logging==2.0.2
+
+opentelemetry-api==0.15b0
+opentelemetry-exporter-google-cloud==0.15b0
+opentelemetry-sdk==0.15b0
