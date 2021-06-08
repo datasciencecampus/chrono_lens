@@ -1,0 +1,35 @@
+language: python
+
+matrix:
+  include:
+    # Use the built in venv for linux builds
+    - os: linux
+      sudo: required
+      python: "3.8.6"
+      dist: xenial
+
+install:
+  - python --version
+  - python -m pip install -U pip
+  #  - python -m easy_install -U setuptools
+  # command to install dependencies\
+  - pip install --use-feature=2020-resolver -r requirements.txt
+  # includes extra 'test' specific dependencies
+  - pip install --use-feature=2020-resolver -r tests/requirements.txt
+
+script:
+  # for codecov support
+  - pip install pytest==4.3.1 pytest-cov==2.9.0
+  # to report installed packages
+  - pip freeze
+  # command to run tests
+  - PYTHONPATH=.:cloud pytest --cov-config .coveragerc --cov=./ tests/
+  - # Now install requirements for dsc_lib
+  - pip install --use-feature=2020-resolver -r cloud/dsc_lib_tests/requirements.txt
+  - pip freeze
+  - cd cloud/dsc_lib
+  # ...and run the tests on dsc_lib
+  - PYTHONPATH=../..:.. pytest --cov-config .coveragerc --cov=./ ../dsc_lib_tests/
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

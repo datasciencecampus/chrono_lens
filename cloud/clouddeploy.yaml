@@ -1,0 +1,76 @@
+#
+# Format defined in https://cloud.google.com/cloud-build/docs/build-config
+#
+# Automatically substituted variables defined in
+# https://cloud.google.com/cloud-build/docs/configuring-builds/substitute-variable-values
+#
+steps:
+  - id: 'Run Unit Tests'
+    name: 'python:3.8'  # 3.8 to match same environment as cloud functions execution
+    dir: 'cloud/functions/${_FUNCTION_NAME}'
+    entrypoint: '/bin/bash'
+    #    Note: arguments are "daisy chained" so "pip install -r" only runs if "pip install pytest" succeeds etc
+    args:
+      - -c
+      - |
+        echo "" \
+        && echo "Python system platform:" \
+        && python -c "import sys; print(sys.platform)" \
+        && echo "" \
+        && echo "Installed python version:" \
+        && python -V \
+        && echo "" \
+        && echo "PROJECT_ID=$PROJECT_ID" \
+        && echo "" \
+        && echo "Copying 'dsc_lib' folder as subdir to 'src' to enable local reuse of shared folder" \
+        && cp -r ../../dsc_lib src/ \
+        && echo "Copying 'dsc_lib_tests' folder as subdir to 'tests' to enable local reuse of shared folder" \
+        && cp -r ../../dsc_lib_tests . \
+        && echo "" \
+        && echo "Base folder:" \
+        && ls  \
+        && echo "" \
+        && echo "src folder:" \
+        && ls src \
+        && echo "" \
+        && echo "tests folder:" \
+        && ls tests \
+        && echo "" \
+        && pip install pytest \
+        && pip install -r src/requirements.txt \
+        && if [ -f "tests/requirements.txt" ]; then pip install -r tests/requirements.txt; fi \
+        && pip install -r dsc_lib_tests/requirements.txt \
+        && cd src \
+        && echo "GCP_PROJECT=$PROJECT_ID python -m pytest -v ../tests" \
+        && GCP_PROJECT=$PROJECT_ID python -m pytest -v ../tests \
+        && echo "GCP_PROJECT=$PROJECT_ID python -m pytest -v ../dsc_lib_tests" \
+        && GCP_PROJECT=$PROJECT_ID python -m pytest -v ../dsc_lib_tests
+
+  - id: 'Deploy Function'
+    name: 'gcr.io/cloud-builders/gcloud'
+    dir: 'cloud/functions/${_FUNCTION_NAME}'
+    args:
+      - functions
+      - deploy
+      - ${_FUNCTION_NAME}
+      - --source=src
+      - --${_TRIGGER_TYPE}
+      - --${_RUNTIME}
+      - --${_TIMEOUT}
+      - --region=europe-west2
+      - --${_MEMORY}
+      #
+      # Add environment variables that are of interest to scripts; given a script only uses
+      # the ones it is interested in and ignores the others, we simply declare all known variables.
+      # Note that $PROJECT_ID is provided by default - for a complete list, see:
+      #
+      # https://cloud.google.com/cloud-build/docs/configuring-builds/substitute-variable-values
+      #
+      # Bucket names... these are project-specific so cannot be hard-coded
+      - --set-env-vars=SOURCES_BUCKET_NAME=sources-$PROJECT_ID
+      - --set-env-vars=DATA_BUCKET_NAME=data-$PROJECT_ID
+      - --set-env-vars=MODELS_BUCKET_NAME=models-$PROJECT_ID
+      - --set-env-vars=VM_INSTANCE_NAME=impute-seats
+      - --set-env-vars=VM_ZONE_NAME=europe-west2-a
+      - --set-env-vars=GCP_PROJECT=$PROJECT_ID
+      - --set-env-vars=FUNCTION_REGION=europe-west2

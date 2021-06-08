@@ -1,0 +1,18 @@
+{
+  "creation_datetime": "20200616 1700",
+  "notes": [
+    "identical_area_proportion_threshold:",
+    "Percentage of image detected as a pure grey (R=G=B), for an image to be considered faulty",
+    "",
+    "row_similarity_threshold:",
+    "Percentage of pixels to match between rows (i.e. if row1[x] == row2[x] for more than the defined percentage x, ",
+    "we consider the row a match)",
+    "",
+    "consecutive_matching_rows_threshold:",
+    "Percentage of height that must have consecutive matching rows (taking into account #row_similarity_threshold)",
+    "for an image to be considered as faulty"
+  ],
+  "identical_area_proportion_threshold": 0.33,
+  "row_similarity_threshold": 0.8,
+  "consecutive_matching_rows_threshold": 0.2
+}

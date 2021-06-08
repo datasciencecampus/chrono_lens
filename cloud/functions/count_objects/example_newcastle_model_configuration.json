@@ -1,0 +1,12 @@
+{
+  "creation_datetime": "20200320",
+  "notes": [
+    "Based on Tom Komar's repository (part of Newcastle University's Urban Observatory):",
+    "https://github.com/TomKomar/uo-object_counting",
+    "",
+    "file: app/fig_frcnn_rebuscov-3.pb",
+    "commit: https://github.com/TomKomar/uo-object_counting/blob/26c9f29b46ba7afa6294934ab8326fd4d5f3418d/app/fig_frcnn_rebuscov-3.pb"
+  ],
+  "serialized_graph_name": "fig_frcnn_rebuscov-3.pb",
+  "minimum_confidence": 0.33
+}
