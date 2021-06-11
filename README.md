@@ -235,7 +235,7 @@ the Cloud setup scripts will create a service account with these permissions (`b
 
 Version | Date | Notes
 -|-|-
-0.9.0 Beta | ? | First release of public repository
+1.0.0 | 2021-06-08 | First release of public repository
 
 ## Future Work
 
