@@ -1,4 +1,4 @@
-[![build status](http://img.shields.io/travis/datasciencecampus/chrono_lens/main.svg?style=flat)](https://travis-ci.org/datasciencecampus/chrono_lens)
+[![build status](https://travis-ci.com/datasciencecampus/chrono_lens.svg?branch=main)](https://travis-ci.com/datasciencecampus/chrono_lens)
 [![codecov](https://codecov.io/gh/datasciencecampus/chrono_lens/branch/main/graph/badge.svg)](https://codecov.io/gh/datasciencecampus/chrono_lens)
 [![LICENSE.](https://img.shields.io/badge/license-OGL--3-blue.svg?style=flat)](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)
 
