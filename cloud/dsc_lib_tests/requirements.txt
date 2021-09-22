@@ -21,8 +21,8 @@ aiohttp==3.7.4
 opencv-python-headless==4.3.0.36
 opencv-contrib-python==4.3.0.36
 
-numpy==1.19.5  # to keep tensorflow 2.5.0 happy
-tensorflow==2.5.0
+numpy==1.19.5  # to keep tensorflow 2.5.1 happy
+tensorflow==2.5.1
 
 scikit-image==0.17.2
 BeautifulSoup4==4.9.1

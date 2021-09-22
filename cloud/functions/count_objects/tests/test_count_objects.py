@@ -1149,3 +1149,72 @@ class TestCountObjects(TestCase):
         self.assertEqual(0, results['van'])  # correct (static objects removed)
         self.assertEqual(False, results['missing'])
         self.assertEqual(False, results['faulty'])
+
+    def test_preprocess_and_object_count_and_postprocess_flags_faulty_with_missing_next_image(self):
+        image_blob_0040_name = 'TfL-images/20200501/0040/00001.08859.jpg'
+        image_blob_0050_name = 'TfL-images/20200501/0050/00001.08859.jpg'
+        image_blob_0100_name = 'TfL-images/20200501/0100/00001.08859.jpg'
+
+        fault_filter_blob_name = 'FaultyImageFilter-test16'
+        fault_filter_configuration_json = f"""
+        {{
+            "identical_area_proportion_threshold": 0.33,
+            "row_similarity_threshold": 0.8,
+            "consecutive_matching_rows_threshold": 0.2,
+            "stuff to ignore": "warned you"
+        }}
+        """
+
+        object_detector_blob_name = 'Newcastle-test16'
+        object_detector_serialised_graph_name = 'magic-3.pb'
+        object_detector_configuration_json = f"""
+        {{
+            "serialized_graph_name": "{object_detector_serialised_graph_name}",
+            "minimum_confidence": 0.33,
+            "stuff to ignore": "warned you"
+        }}
+        """
+
+        filter_blob_name = 'StaticObjectFilter-test16'
+        static_filter_configuration_json = """
+        {
+            "scenecut_threshold": 0.4,
+            "minimum_mask_proportion": 0.25,
+            "minimum_mask_proportion_person": 0.10,
+            "confidence_person": 0.80,
+            "contour_area_threshold": 50
+        }
+        """
+
+        main.data_bucket = create_mock_bucket([
+            (image_blob_0040_name, None),
+            (image_blob_0050_name, self.raw_static_object_test_image_0050),
+            (image_blob_0100_name, None)
+        ])
+
+        main.model_bucket = create_mock_bucket([
+            (f'{fault_filter_blob_name}/configuration.json', fault_filter_configuration_json),
+            (f'{object_detector_blob_name}/configuration.json', object_detector_configuration_json),
+            (f'{object_detector_blob_name}/{object_detector_serialised_graph_name}', self.rcnn_serialised_model),
+            (filter_blob_name + '/configuration.json', static_filter_configuration_json)
+        ])
+
+        mock_request = create_mock_request({
+            'image_blob_name': image_blob_0050_name,
+            'model_blob_name': f'{fault_filter_blob_name}_{object_detector_blob_name}_{filter_blob_name}'
+        })
+
+        response_json = main.count_objects(mock_request)
+        response = json.loads(response_json)
+        results = response['results']
+
+        # reference "TfL-images-20200501-0050-00001.08859_filtered.png"
+        self.assertEqual(0, results['person'])  # correct - as faulty
+        self.assertEqual(0, results['car'])  # correct - as faulty
+        self.assertEqual(0, results['truck'])  # correct - as faulty
+        self.assertEqual(0, results['bus'])  # correct - as faulty
+        self.assertEqual(0, results['cyclist'])  # correct - as faulty
+        self.assertEqual(0, results['motorcyclist'])  # correct - as faulty
+        self.assertEqual(0, results['van'])  # correct - as faulty
+        self.assertEqual(False, results['missing'])
+        self.assertEqual(True, results['faulty'])  # As can't static filter, we'd better leave it to imputation

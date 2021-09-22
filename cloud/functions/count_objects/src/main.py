@@ -217,7 +217,7 @@ def count_objects(request):
                             raise ValueError(f'Model post-process stage is unknown: "{model_post_process_name}"')
 
                 if detected_objects is None:
-                    object_results['faulty'] = False
+                    object_results['faulty'] = True
                 else:
                     for detected_object in detected_objects:
                         label = detected_object[0].lower().strip()
