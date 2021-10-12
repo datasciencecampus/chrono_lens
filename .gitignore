@@ -12,12 +12,4 @@ __pycache__
 .couscous
 .hypothesis
 venv
-
-
-# wildcards
-*.log
-models/*.bin
-models/*.vec
-data/*
-.mypy*
-output/*
+/localhost

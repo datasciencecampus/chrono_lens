@@ -1,0 +1,24 @@
+# GCP default versions for Cloud Functions
+# click==7.1.2
+# Flask==1.1.2
+# itsdangerous==1.1.0
+# Jinja2==2.11.3
+# MarkupSafe==1.1.1
+# pip==20.1.1
+requests==2.24.0
+# setuptools==47.3.1
+# Werkzeug==1.0.1
+# over-ride auto installed wheel==0.34.2 with...
+# wheel==0.35.0
+
+numpy==1.19.5  # consistent with count_objects cloud function
+opencv-python-headless==4.3.0.36  # consistent with count_objects cloud function
+opencv-contrib-python==4.3.0.36  # consistent with count_objects cloud function
+tensorflow==2.5.1  # consistent with count_objects cloud function
+scikit-image==0.17.2  # consistent with count_objects cloud function
+
+python-dateutil==2.8.1
+tqdm==4.54.0
+
+pre-commit==2.9.3
+detect-secrets==0.14.3

@@ -68,7 +68,15 @@ stores the counts in a database and (weekly) produces time-series analysis. All 
 are stored in the `cloud` folder; refer to the [Cloud README.md](cloud/README.md) for an overview of the architecture
 and how to install your own instance using our scripts into your GCP project space. The project can be integrated
 into GitHub, enabling auto-deployment and test execution automatically from commits to a local GitHub project; this is
-also documented in the [Cloud README.md](cloud/README.md).
+also documented in the [Cloud README.md](cloud/README.md). Cloud support code is also stored in the
+`chrono_lens.gcloud` module, enabling command line scripts to support GCP, alongside the Cloud Function code
+in the `cloud` folder.
+
+## Local host - Implementation
+
+Stand-alone, single machine ("localhost") code is contained in the `chrono_lens.localhost` module. The process
+follows the same flow as the GCP variant, albeit using a single machine and each python file in `chrono_lens.localhost`
+maps to the Cloud Functions of GCP. Refer to [README-localhost.md](README-localhost.md) for further details.
 
 ## Installation
 
@@ -115,7 +123,7 @@ This will report any existing issues - useful as the hook is otherwise only run 
 
 The project is designed to be used primarily via cloud infrastructure, but there are utility scripts for local access
 and updates to the time series. These scripts are located in the `scripts` folder, with each script now described in
-separate following sections. Further information can be found in [`scripts/README.md`](scripts/README.md),
+separate following sections. Further information can be found in [`scripts/README.md`](scripts/gcloud/README.md),
 and their use by an optional virtual machine is described in [`cloud/README.md`](cloud/README.md).
 
 Note that scripts make use of code in the `chrono_lens` folder as well as that in the `cloud/dsc_lib` folder.
@@ -138,7 +146,7 @@ named cameras to process
 The service account represented by the JSON file will need:
 * `storage/legacyBucketReader` and `storage/legacyObjectReader` on the `sources` bucket
 
-See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/README.md) for further information;
+See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/gcloud/README.md) for further information;
 the Cloud setup scripts will create a service account with these permissions (`backfill-ne@...`).
 
 ### `batch_process_images.py`
@@ -166,7 +174,7 @@ models are listed with `--help`)
 The service account represented by the JSON file will need:
 * `roles/cloudfunctions.invoker`
 
-See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/README.md) for further information;
+See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/gcloud/README.md) for further information;
 the Cloud setup scripts will create a service account with these permissions (`backfill-ne@...`).
 
 
@@ -191,7 +199,7 @@ are flagged as `Faulty` or `Missing` (so `batch_process_images.py` will then re-
 * `storage.legacyObjectReader` and `storage.legacyBucketWriter` permissions on the `data` bucket
 * `storage/legacyBucketReader` and `storage/legacyObjectReader` on the `sources` bucket
 
-See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/README.md) for further information;
+See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/gcloud/README.md) for further information;
 the Cloud setup scripts will create a service account with these permissions (`backfill-ne@...`).
 
 Command line options are:
@@ -227,7 +235,7 @@ The service account represented by the JSON file will need:
 * `storage.legacyObjectReader` and `storage.legacyBucketWriter` permissions on the `data` bucket
 * `storage/legacyBucketReader` and `storage/legacyObjectReader` on the `sources` bucket
 
-See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/README.md) for further information;
+See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/gcloud/README.md) for further information;
 the Cloud setup scripts will create a service account with these permissions (`backfill-ne@...`).
 
 
@@ -278,7 +286,7 @@ function, rather than the current hierarchy of async calls (using two extra func
 
 Newcastle University's [Urban Observatory](https://urbanobservatory.ac.uk/) supplied the
 [pre-trained Faster-RCNNN](https://github.com/TomKomar/uo-object_counting/raw/26c9f29b46ba7afa6294934ab8326fd4d5f3418d/app/fig_frcnn_rebuscov-3.pb)
-which we use (a local copy is stored in [`cloud/dsc_lib_tests/test_data/test_detector_data/fig_frcnn_rebuscov-3.pb`](cloud/dsc_lib_tests/test_data/test_detector_data)).
+which we use (a local copy is stored in [`cloud/dsc_lib_tests/test_data/test_detector_data/fig_frcnn_rebuscov-3.pb`](tests/test_data/test_detector_data)).
 
 
 ## Open Traffic Camera Imagery

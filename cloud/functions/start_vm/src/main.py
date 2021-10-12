@@ -1,12 +1,11 @@
 import json
 import os.path
-
 from pprint import pprint
 
-from googleapiclient import discovery
 import google.auth
+from googleapiclient import discovery
 
-from dsc_lib.error_handling import report_exception
+from chrono_lens.gcloud.error_handling import report_exception
 
 gcloud_region = os.environ.get('FUNCTION_REGION', '')  # Built-in env var
 gcloud_project = os.environ.get('GCP_PROJECT', '')  # Built-in env var

@@ -4,10 +4,10 @@ import os
 
 from opentelemetry import trace
 
-from dsc_lib.call_handling import extract_request_field
-from dsc_lib.error_handling import report_exception
-from dsc_lib.gcloud.async_functions import run_cloud_function_async_with_parameter_list
-from dsc_lib.gcloud.logging import setup_logging_and_trace
+from chrono_lens.gcloud.async_functions import run_cloud_function_async_with_parameter_list
+from chrono_lens.gcloud.call_handling import extract_request_field
+from chrono_lens.gcloud.error_handling import report_exception
+from chrono_lens.gcloud.logging import setup_logging_and_trace
 
 setup_logging_and_trace()
 
