@@ -9,10 +9,10 @@ from unittest.mock import MagicMock
 
 if is_running_on_gcp():
     import google.cloud.storage
+    from chrono_lens.gcloud.image_loader import load_image_from_blob, load_bgr_image_from_blob_as_rgb
 
 from numpy.testing import assert_array_equal
 
-from chrono_lens.gcloud.image_loader import load_image_from_blob, load_bgr_image_from_blob_as_rgb
 from tests.chrono_lens.images.image_reader import read_test_image, read_test_image_as_raw_bytes
 
 
