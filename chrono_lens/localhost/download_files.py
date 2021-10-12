@@ -67,6 +67,7 @@ def download_all_files(config_folder_name, download_folder_name, maximum_number_
 
     images_tuples_to_download = []
     number_of_urls_read = 0
+    number_of_files_read = 0
     for json_filename in glob.glob(os.path.join(sources_folder_name, '*.json')):
         logging.debug(f'=>  Reading URLs from {json_filename}')
         base_json_name = os.path.basename(json_filename)
@@ -75,14 +76,16 @@ def download_all_files(config_folder_name, download_folder_name, maximum_number_
         with open(json_filename, 'r') as json_file:
             image_urls = json.load(json_file)
             number_of_urls_read += len(image_urls)
+            number_of_files_read += 1
 
         for image_url in image_urls:
             images_tuples_to_download.append((base_name, image_url))
 
     logging.info(f'...search in folder {sources_folder_name} for JSON files complete;'
-                  f' read in {number_of_urls_read} image URLs.')
+                 f' read in {number_of_urls_read} image URLs across {number_of_files_read} files.')
 
-    logging.info(f'Downloading images to {os.path.join(download_folder_name, "ImageProvider", date_time_folder)}...')
+    destination_folder_message = os.path.join(download_folder_name, "IMAGE_PROVIDER", date_time_folder, "...")
+    logging.info(f'Downloading images to {destination_folder_message}')
     for image_tuple_to_download in tqdm(images_tuples_to_download, desc='Downloading images', unit='images'):
         base_name = image_tuple_to_download[0]
         image_url = image_tuple_to_download[1]
@@ -96,8 +99,7 @@ def download_all_files(config_folder_name, download_folder_name, maximum_number_
         logging.debug(f'Downloading {image_url} to {target_file_name}')
         download_image_to_disc(image_url, target_file_name, maximum_number_of_download_attempts)
 
-    logging.info(f'...downloaded {len(images_tuples_to_download)} images to'
-                 f' {os.path.join(download_folder_name, "ImageProvider", date_time_folder)}...')
+    logging.info(f'...downloaded {len(images_tuples_to_download)} images to {destination_folder_message}')
 
 
 def get_args(command_line_arguments):
