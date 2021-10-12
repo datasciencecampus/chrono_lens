@@ -13,7 +13,7 @@ install:
   - python -m pip install -U pip
   #  - python -m easy_install -U setuptools
   # command to install dependencies\
-  - pip install --use-feature=2020-resolver -r requirements.txt
+  - pip install --use-feature=2020-resolver -r requirements-localhost.txt
   # includes extra 'test' specific dependencies
   - pip install --use-feature=2020-resolver -r tests/requirements.txt
 
@@ -24,12 +24,13 @@ script:
   - pip freeze
   # command to run tests
   - PYTHONPATH=.:cloud pytest --cov-config .coveragerc --cov=./ tests/
-  - # Now install requirements for dsc_lib
-  - pip install --use-feature=2020-resolver -r cloud/dsc_lib_tests/requirements.txt
-  - pip freeze
-  - cd cloud/dsc_lib
-  # ...and run the tests on dsc_lib
-  - PYTHONPATH=../..:.. pytest --cov-config .coveragerc --cov=./ ../dsc_lib_tests/
+
+#  - # Now install requirements for dsc_lib
+#  - pip install --use-feature=2020-resolver -r cloud/dsc_lib_tests/requirements.txt
+#  - pip freeze
+#  - cd cloud/dsc_lib
+#  # ...and run the tests on dsc_lib
+#  - PYTHONPATH=../..:.. pytest --cov-config .coveragerc --cov=./ ../dsc_lib_tests/
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
