@@ -1,12 +1,14 @@
 import datetime
 import unittest
 
+import pytest
 from mock import patch
 
-import tests.chrono_lens.gcloud.filters
-from chrono_lens.gcloud import process_images
+from tests.chrono_lens.gcloud.filters import is_running_on_gcp
 
-_fake_usage_to_prevent_warning = tests.chrono_lens.gcloud.filters.is_running_on_gcp()
+pytestmark = pytest.mark.skipif(is_running_on_gcp(), reason="Skipping as not running on GCP")
+
+from chrono_lens.gcloud import process_images
 
 
 class TestProcessImages(unittest.TestCase):
