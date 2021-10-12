@@ -7,13 +7,14 @@ from urllib.error import HTTPError
 import pytest
 from mock import MagicMock
 
-from tests.chrono_lens.gcloud.filters import is_not_running_on_gcp
+from tests.chrono_lens.gcloud.filters import is_running_on_gcp, is_not_running_on_gcp
 
 pytestmark = pytest.mark.skipif(is_not_running_on_gcp(), reason="Skipping as not running on GCP")
 
-with mock.patch('google.cloud.storage.Client'):
-    from chrono_lens.gcloud.ingest_bulk_netraveldata import get_views_for_camera, get_camera_address_from_utmc, \
-        round_time_up, get_images_from_archive
+if is_running_on_gcp():
+    with mock.patch('google.cloud.storage.Client'):
+        from chrono_lens.gcloud.ingest_bulk_netraveldata import get_views_for_camera, get_camera_address_from_utmc, \
+            round_time_up, get_images_from_archive
 
 
 @mock.patch("chrono_lens.gcloud.ingest_bulk_netraveldata.urlopen")

@@ -1,13 +1,15 @@
 import pytest
 
-from tests.chrono_lens.gcloud.filters import is_not_running_on_gcp
+from tests.chrono_lens.gcloud.filters import is_running_on_gcp, is_not_running_on_gcp
 
 pytestmark = pytest.mark.skipif(is_not_running_on_gcp(), reason="Skipping as not running on GCP")
 
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-import google.cloud.storage
+if is_running_on_gcp():
+    import google.cloud.storage
+
 from numpy.testing import assert_array_equal
 
 from chrono_lens.gcloud.image_loader import load_image_from_blob, load_bgr_image_from_blob_as_rgb
