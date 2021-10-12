@@ -1,10 +1,16 @@
 import datetime
 import unittest
 
+import pytest
 from mock import patch, MagicMock
 
 from chrono_lens.exceptions import ProcessImagesException
-from scripts import batch_process_images
+from tests.chrono_lens.gcloud.filters import is_running_on_gcp
+
+if is_running_on_gcp():
+    from scripts.gcloud import batch_process_images
+else:
+    pytestmark = pytest.mark.skip(reason="Skipping as not running on GCP")
 
 
 class TestBatchProcessImages(unittest.TestCase):

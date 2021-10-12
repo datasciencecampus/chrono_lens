@@ -123,7 +123,7 @@ This will report any existing issues - useful as the hook is otherwise only run 
 
 The project is designed to be used primarily via cloud infrastructure, but there are utility scripts for local access
 and updates to the time series. These scripts are located in the `scripts` folder, with each script now described in
-separate following sections. Further information can be found in [`scripts/README.md`](scripts/README.md),
+separate following sections. Further information can be found in [`scripts/README.md`](scripts/gcloud/README.md),
 and their use by an optional virtual machine is described in [`cloud/README.md`](cloud/README.md).
 
 Note that scripts make use of code in the `chrono_lens` folder as well as that in the `cloud/dsc_lib` folder.
@@ -146,7 +146,7 @@ named cameras to process
 The service account represented by the JSON file will need:
 * `storage/legacyBucketReader` and `storage/legacyObjectReader` on the `sources` bucket
 
-See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/README.md) for further information;
+See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/gcloud/README.md) for further information;
 the Cloud setup scripts will create a service account with these permissions (`backfill-ne@...`).
 
 ### `batch_process_images.py`
@@ -174,7 +174,7 @@ models are listed with `--help`)
 The service account represented by the JSON file will need:
 * `roles/cloudfunctions.invoker`
 
-See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/README.md) for further information;
+See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/gcloud/README.md) for further information;
 the Cloud setup scripts will create a service account with these permissions (`backfill-ne@...`).
 
 
@@ -199,7 +199,7 @@ are flagged as `Faulty` or `Missing` (so `batch_process_images.py` will then re-
 * `storage.legacyObjectReader` and `storage.legacyBucketWriter` permissions on the `data` bucket
 * `storage/legacyBucketReader` and `storage/legacyObjectReader` on the `sources` bucket
 
-See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/README.md) for further information;
+See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/gcloud/README.md) for further information;
 the Cloud setup scripts will create a service account with these permissions (`backfill-ne@...`).
 
 Command line options are:
@@ -235,7 +235,7 @@ The service account represented by the JSON file will need:
 * `storage.legacyObjectReader` and `storage.legacyBucketWriter` permissions on the `data` bucket
 * `storage/legacyBucketReader` and `storage/legacyObjectReader` on the `sources` bucket
 
-See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/README.md) for further information;
+See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/gcloud/README.md) for further information;
 the Cloud setup scripts will create a service account with these permissions (`backfill-ne@...`).
 
 

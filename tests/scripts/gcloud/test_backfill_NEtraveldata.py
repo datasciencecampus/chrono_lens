@@ -2,15 +2,20 @@ import datetime
 import unittest
 from os import environ
 
+import pytest
 from mock import MagicMock, patch
 
 from chrono_lens.exceptions import ProcessImagesException
+from tests.chrono_lens.gcloud.filters import is_running_on_gcp
 
-PROJECT_ID = 'gcp_project'
-with patch.dict(environ, {
-    'PROJECT_ID': PROJECT_ID,
-}):
-    from scripts import backfill_NEtraveldata
+if is_running_on_gcp():
+    PROJECT_ID = 'gcp_project'
+    with patch.dict(environ, {
+        'PROJECT_ID': PROJECT_ID,
+    }):
+        from scripts.gcloud import backfill_NEtraveldata
+else:
+    pytestmark = pytest.mark.skip(reason="Skipping as not running on GCP")
 
 
 class fake_open:

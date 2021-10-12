@@ -2,13 +2,19 @@ import unittest
 from os import environ
 from unittest.mock import ANY
 
+import pytest
 from mock import patch
 
-PROJECT_ID = 'gcp_project'
-with patch.dict(environ, {
-    'PROJECT_ID': PROJECT_ID,
-}):
-    from scripts import remove_old_images
+from tests.chrono_lens.gcloud.filters import is_running_on_gcp
+
+if is_running_on_gcp():
+    PROJECT_ID = 'gcp_project'
+    with patch.dict(environ, {
+        'PROJECT_ID': PROJECT_ID,
+    }):
+        from scripts.gcloud import remove_old_images
+else:
+    pytestmark = pytest.mark.skip(reason="Skipping as not running on GCP")
 
 
 class TestRemoveOldImages(unittest.TestCase):

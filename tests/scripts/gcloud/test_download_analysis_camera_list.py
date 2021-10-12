@@ -1,8 +1,14 @@
 import unittest
 
+import pytest
 from mock import patch, MagicMock
 
-from scripts import download_analysis_camera_list
+from tests.chrono_lens.gcloud.filters import is_running_on_gcp
+
+if is_running_on_gcp():
+    from scripts.gcloud import download_analysis_camera_list
+else:
+    pytestmark = pytest.mark.skip(reason="Skipping as not running on GCP")
 
 
 @patch('scripts.download_analysis_camera_list.dump')
