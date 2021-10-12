@@ -4,9 +4,9 @@ import unittest
 import pytest
 from mock import patch
 
-from tests.chrono_lens.gcloud.filters import is_running_on_gcp
+from tests.chrono_lens.gcloud.filters import is_not_running_on_gcp
 
-pytestmark = pytest.mark.skipif(is_running_on_gcp(), reason="Skipping as not running on GCP")
+pytestmark = pytest.mark.skipif(is_not_running_on_gcp(), reason="Skipping as not running on GCP")
 
 from chrono_lens.gcloud import process_images
 
