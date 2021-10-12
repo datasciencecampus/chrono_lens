@@ -24,7 +24,7 @@ script:
   - pip freeze
   # command to run tests
   - cd tests
-  - PYTHONPATH=.:cloud pytest --cov-config .coveragerc --cov=../ ./
+  - PYTHONPATH=.. pytest --cov-config ../.coveragerc --cov=../ ./
 
 #  - # Now install requirements for dsc_lib
 #  - pip install --use-feature=2020-resolver -r cloud/dsc_lib_tests/requirements.txt
