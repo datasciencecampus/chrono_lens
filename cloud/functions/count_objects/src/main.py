@@ -5,13 +5,14 @@ import os
 import google.cloud.storage
 from opentelemetry import trace
 
-from dsc_lib.call_handling import extract_request_field, extract_fields_from_image_blob, image_blob_name_from_fields
-from dsc_lib.error_handling import report_exception
-from dsc_lib.gcloud.logging import setup_logging_and_trace
-from dsc_lib.images.fault_detection import FaultyImageDetector
-from dsc_lib.images.loader import load_bgr_image_from_blob_as_rgb
-from dsc_lib.images.newcastle_detector import NewcastleDetector
-from dsc_lib.images.static_filter import StaticObjectFilter
+from chrono_lens.gcloud.call_handling import extract_request_field, extract_fields_from_image_blob, \
+    image_blob_name_from_fields
+from chrono_lens.gcloud.error_handling import report_exception
+from chrono_lens.gcloud.image_loader import load_bgr_image_from_blob_as_rgb
+from chrono_lens.gcloud.logging import setup_logging_and_trace
+from chrono_lens.images.fault_detection import FaultyImageDetector
+from chrono_lens.images.newcastle_detector import NewcastleDetector
+from chrono_lens.images.static_filter import StaticObjectFilter
 
 """
 Example JSON call:

@@ -6,7 +6,7 @@ import google.oauth2.service_account
 from dateutil import rrule
 from tqdm import tqdm
 
-from dsc_lib.gcloud.async_functions import run_cloud_function_async_with_parameter_list
+from chrono_lens.gcloud.async_functions import run_cloud_function_async_with_parameter_list
 
 CAMERA_BATCH_SIZE = 50
 

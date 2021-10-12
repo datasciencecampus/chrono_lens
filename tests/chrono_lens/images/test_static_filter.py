@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from dsc_lib.images.static_filter import StaticObjectFilter
-from dsc_lib_tests.images.image_reader import read_test_image
+from chrono_lens.images.static_filter import StaticObjectFilter
+from tests.chrono_lens.images.image_reader import read_test_image
 
 SCENECUT_THRESHOLD = 0.4
 MINIMUM_MASK_PROPORTION = 0.25

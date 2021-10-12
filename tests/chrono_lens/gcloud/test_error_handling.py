@@ -2,7 +2,7 @@ import json
 from unittest import TestCase
 from urllib.error import URLError
 
-from dsc_lib.error_handling import report_exception
+from chrono_lens.gcloud.error_handling import report_exception
 
 
 class TestReportException(TestCase):

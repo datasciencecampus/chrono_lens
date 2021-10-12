@@ -11,7 +11,7 @@ from google.api_core.exceptions import GoogleAPICallError
 from google.cloud import storage, bigquery
 from tqdm import tqdm
 
-from dsc_lib.images.correction import resize_jpeg_image, IMAGE_MAX_AXIS_THRESHOLD
+from chrono_lens.images.correction import resize_jpeg_image, IMAGE_MAX_AXIS_THRESHOLD
 
 
 def round_time_up(dt, date_delta=datetime.timedelta(minutes=1)):

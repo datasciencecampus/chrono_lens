@@ -6,8 +6,8 @@ import sys
 from datetime import date, datetime, timedelta
 from os import path, environ
 
-from chrono_lens import process_images
 from chrono_lens.exceptions import ProcessImagesException
+from chrono_lens.gcloud import process_images
 
 PROJECT_ID = environ.get('PROJECT_ID', None)
 

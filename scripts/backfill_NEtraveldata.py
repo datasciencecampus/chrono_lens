@@ -7,7 +7,8 @@ from os import environ
 from dateutil import rrule
 
 from chrono_lens.exceptions import ProcessImagesException
-from chrono_lens.ingest_bulk_netraveldata import upload_camera_images, remove_ne_travel_data_faulty_and_missing_entries
+from chrono_lens.gcloud.ingest_bulk_netraveldata import upload_camera_images, \
+    remove_ne_travel_data_faulty_and_missing_entries
 
 PROJECT_ID = environ.get('PROJECT_ID', None)
 

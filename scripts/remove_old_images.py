@@ -5,7 +5,7 @@ from os import environ, path
 
 from google.cloud import storage
 
-from chrono_lens.remove_images import remove_images_older_than_threshold
+from chrono_lens.gcloud.remove_images import remove_images_older_than_threshold
 
 PROJECT_ID = environ.get('PROJECT_ID', None)
 

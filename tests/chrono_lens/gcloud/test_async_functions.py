@@ -4,7 +4,7 @@ from unittest import TestCase, mock
 from aiohttp import ServerDisconnectedError
 from testfixtures import LogCapture
 
-from dsc_lib.gcloud.async_functions import run_cloud_function_async_with_parameter_list, MAXIMUM_NUMBER_OF_ATTEMPTS
+from chrono_lens.gcloud.async_functions import run_cloud_function_async_with_parameter_list, MAXIMUM_NUMBER_OF_ATTEMPTS
 
 
 class MockResponse:

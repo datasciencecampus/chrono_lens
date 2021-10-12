@@ -3,7 +3,7 @@ from unittest import TestCase
 import cv2
 import numpy as np
 
-from dsc_lib.images.correction import resize_jpeg_image
+from chrono_lens.images.correction import resize_jpeg_image
 
 
 class TestCorrection(TestCase):

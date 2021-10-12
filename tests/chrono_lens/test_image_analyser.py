@@ -3,7 +3,7 @@ import unittest
 
 from mock import patch
 
-from chrono_lens import process_images
+from chrono_lens.gcloud import process_images
 
 
 class TestProcessImages(unittest.TestCase):

@@ -7,7 +7,7 @@ from random import uniform
 import aiohttp
 from aiohttp import ClientError
 
-from dsc_lib.gcloud.authentication import create_authenticated_cloud_function_headers
+from chrono_lens.gcloud.authentication import create_authenticated_cloud_function_headers
 
 MAXIMUM_NUMBER_OF_ATTEMPTS = 5
 

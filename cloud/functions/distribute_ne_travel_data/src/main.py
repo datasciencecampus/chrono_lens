@@ -14,9 +14,9 @@ import google.cloud.storage
 import pytz
 from opentelemetry import trace
 
-from dsc_lib.error_handling import report_exception
-from dsc_lib.gcloud.logging import setup_logging_and_trace
-from dsc_lib.images.correction import resize_jpeg_image, IMAGE_MAX_AXIS_THRESHOLD
+from chrono_lens.gcloud.error_handling import report_exception
+from chrono_lens.gcloud.logging import setup_logging_and_trace
+from chrono_lens.images.correction import resize_jpeg_image, IMAGE_MAX_AXIS_THRESHOLD
 
 setup_logging_and_trace()
 

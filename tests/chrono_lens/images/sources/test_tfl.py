@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from dsc_lib.images.sources.tfl import filter_image_urls
+from chrono_lens.images.sources.tfl import filter_image_urls
 
 
 class TestTfL(TestCase):

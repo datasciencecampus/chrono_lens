@@ -3,7 +3,7 @@ import unittest
 
 from mock import patch, MagicMock
 
-from chrono_lens import remove_images
+from chrono_lens.gcloud import remove_images
 
 
 class TestRemoveImages(unittest.TestCase):

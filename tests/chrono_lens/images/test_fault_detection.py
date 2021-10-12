@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from dsc_lib.images.fault_detection import FaultyImageDetector
-from dsc_lib_tests.images.image_reader import read_test_image
+from chrono_lens.images.fault_detection import FaultyImageDetector
+from tests.chrono_lens.images.image_reader import read_test_image
 
 
 class TestFaultyImageDetector(TestCase):
