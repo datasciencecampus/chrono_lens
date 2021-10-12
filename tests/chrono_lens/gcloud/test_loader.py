@@ -1,3 +1,9 @@
+import pytest
+
+from tests.chrono_lens.gcloud.filters import is_running_on_gcp
+
+pytestmark = pytest.mark.skipif(is_running_on_gcp(), reason="Skipping as not running on GCP")
+
 from unittest import TestCase
 from unittest.mock import MagicMock
 

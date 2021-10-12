@@ -8,9 +8,9 @@ from chrono_lens.gcloud import process_images
 
 class TestProcessImages(unittest.TestCase):
 
-    @patch('chrono_lens.process_images.google.oauth2.service_account')
-    @patch('chrono_lens.process_images.google.auth.transport.requests')
-    @patch('chrono_lens.process_images.run_cloud_function_async_with_parameter_list')
+    @patch('chrono_lens.gcloud.process_images.google.oauth2.service_account')
+    @patch('chrono_lens.gcloud.process_images.google.auth.transport.requests')
+    @patch('chrono_lens.gcloud.process_images.run_cloud_function_async_with_parameter_list')
     def test_all_args_correct(self, mock_run_cloud, _mock_requests, _mock_service_account):
         number_of_days = 3
         start_date = datetime.date(year=2020, month=10, day=1)

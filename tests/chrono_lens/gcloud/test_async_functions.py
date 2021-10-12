@@ -43,8 +43,8 @@ class TestRunCloudFunctionAsyncWithParameterList(TestCase):
     def tearDown(self):
         self.log_capture.uninstall()
 
-    @mock.patch('dsc_lib.gcloud.async_functions.aiohttp')
-    @mock.patch('dsc_lib.gcloud.authentication.requests')
+    @mock.patch('chrono_lens.gcloud.async_functions.aiohttp')
+    @mock.patch('chrono_lens.gcloud.authentication.requests')
     def test_requests_triggered_for_every_entry_no_failures(self, _mock_requests, mock_aiohttp):
         expected_end_point = f'https://fake-function.com/test'
         expected_json_key = 'iterated_key'
@@ -89,9 +89,9 @@ class TestRunCloudFunctionAsyncWithParameterList(TestCase):
              f"Completed attempt#0: \"{expected_json_key}\": \"B\"; response=\"{{'STATUS': 'good'}}\"; elapsed time 0.00s")
         )
 
-    @mock.patch('dsc_lib.gcloud.async_functions.aiohttp')
-    @mock.patch('dsc_lib.gcloud.async_functions.asyncio')
-    @mock.patch('dsc_lib.gcloud.authentication.requests')
+    @mock.patch('chrono_lens.gcloud.async_functions.aiohttp')
+    @mock.patch('chrono_lens.gcloud.async_functions.asyncio')
+    @mock.patch('chrono_lens.gcloud.authentication.requests')
     def test_requests_triggered_for_every_entry_maximum_system_failures(self, _mock_requests, mock_asyncio,
                                                                         mock_aiohttp):
         mock_asyncio.run.side_effect = asyncio.run
@@ -141,9 +141,9 @@ class TestRunCloudFunctionAsyncWithParameterList(TestCase):
         # 1st call succeeded, 2nd call had MAXIMUM_NUMBER_OF_RETRIES failures...
         self.assertEqual(1 + MAXIMUM_NUMBER_OF_ATTEMPTS, len(mock_session.calls_made))
 
-    @mock.patch('dsc_lib.gcloud.async_functions.aiohttp')
-    @mock.patch('dsc_lib.gcloud.async_functions.asyncio')
-    @mock.patch('dsc_lib.gcloud.authentication.requests')
+    @mock.patch('chrono_lens.gcloud.async_functions.aiohttp')
+    @mock.patch('chrono_lens.gcloud.async_functions.asyncio')
+    @mock.patch('chrono_lens.gcloud.authentication.requests')
     def test_requests_triggered_for_every_entry_do_not_retry_authorisation_failures(self, _mock_requests, mock_asyncio,
                                                                                     mock_aiohttp):
         mock_asyncio.run.side_effect = asyncio.run
@@ -185,9 +185,9 @@ class TestRunCloudFunctionAsyncWithParameterList(TestCase):
             self.assertEqual(f'Forbidden - not authorised with "{json_value}"', results[index]['Message'])
             self.assertEqual(error_message, results[index]['TextResponse'])
 
-    @mock.patch('dsc_lib.gcloud.async_functions.aiohttp')
-    @mock.patch('dsc_lib.gcloud.async_functions.asyncio')
-    @mock.patch('dsc_lib.gcloud.authentication.requests')
+    @mock.patch('chrono_lens.gcloud.async_functions.aiohttp')
+    @mock.patch('chrono_lens.gcloud.async_functions.asyncio')
+    @mock.patch('chrono_lens.gcloud.authentication.requests')
     def test_requests_triggered_for_every_entry_maximum_soft_errors(self, _mock_requests, mock_asyncio, mock_aiohttp):
         mock_asyncio.run.side_effect = asyncio.run
         mock_asyncio.gather.side_effect = asyncio.gather
@@ -234,9 +234,9 @@ class TestRunCloudFunctionAsyncWithParameterList(TestCase):
         # 1st call succeeded, 2nd call did not retry as error was cleanly reported...
         self.assertEqual(2, len(mock_session.calls_made))
 
-    @mock.patch('dsc_lib.gcloud.async_functions.aiohttp')
-    @mock.patch('dsc_lib.gcloud.async_functions.asyncio')
-    @mock.patch('dsc_lib.gcloud.authentication.requests')
+    @mock.patch('chrono_lens.gcloud.async_functions.aiohttp')
+    @mock.patch('chrono_lens.gcloud.async_functions.asyncio')
+    @mock.patch('chrono_lens.gcloud.authentication.requests')
     def test_requests_triggered_for_every_entry_less_than_maximum_soft_and_system_errors(self, _mock_requests,
                                                                                          mock_asyncio, mock_aiohttp):
         mock_asyncio.run.side_effect = asyncio.run
@@ -293,9 +293,9 @@ class TestRunCloudFunctionAsyncWithParameterList(TestCase):
         # 1st call succeeded, 2nd call had MAXIMUM_NUMBER_OF_RETRIES-1 failures and then finally a success
         self.assertEqual(1 + MAXIMUM_NUMBER_OF_ATTEMPTS, len(mock_session.calls_made))
 
-    @mock.patch('dsc_lib.gcloud.async_functions.aiohttp')
-    @mock.patch('dsc_lib.gcloud.async_functions.asyncio')
-    @mock.patch('dsc_lib.gcloud.authentication.requests')
+    @mock.patch('chrono_lens.gcloud.async_functions.aiohttp')
+    @mock.patch('chrono_lens.gcloud.async_functions.asyncio')
+    @mock.patch('chrono_lens.gcloud.authentication.requests')
     def test_requests_triggered_for_every_entry_less_than_maximum_retries_socket_errors(self, _mock_requests,
                                                                                         mock_asyncio, mock_aiohttp):
         mock_asyncio.run.side_effect = asyncio.run
@@ -352,9 +352,9 @@ class TestRunCloudFunctionAsyncWithParameterList(TestCase):
         # 1st call succeeded, 2nd call had MAXIMUM_NUMBER_OF_RETRIES-1 failures and then finally a success
         self.assertEqual(1 + MAXIMUM_NUMBER_OF_ATTEMPTS, len(mock_session.calls_made))
 
-    @mock.patch('dsc_lib.gcloud.async_functions.aiohttp')
-    @mock.patch('dsc_lib.gcloud.async_functions.asyncio')
-    @mock.patch('dsc_lib.gcloud.authentication.requests')
+    @mock.patch('chrono_lens.gcloud.async_functions.aiohttp')
+    @mock.patch('chrono_lens.gcloud.async_functions.asyncio')
+    @mock.patch('chrono_lens.gcloud.authentication.requests')
     def test_requests_retries_if_request_raised_errors(self, _mock_requests,
                                                        mock_asyncio, mock_aiohttp):
         mock_asyncio.run.side_effect = asyncio.run

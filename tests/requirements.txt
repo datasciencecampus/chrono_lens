@@ -1,3 +1,5 @@
 # Extra dependencies for tests
-pytest
-mock
+pytest==6.2.5
+mock==4.0.3
+aiohttp==3.7.4
+testfixtures==6.17.0

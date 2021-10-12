@@ -11,8 +11,8 @@ with mock.patch('google.cloud.storage.Client'):
         round_time_up, get_images_from_archive
 
 
-@mock.patch("chrono_lens.ingest_bulk_netraveldata.urlopen")
-@mock.patch("chrono_lens.ingest_bulk_netraveldata.logging")
+@mock.patch("chrono_lens.gcloud.ingest_bulk_netraveldata.urlopen")
+@mock.patch("chrono_lens.gcloud.ingest_bulk_netraveldata.logging")
 class TestIngestBulkNETravelData(unittest.TestCase):
     # Add tests if anything breaks - tricky to test as you need to substitute the requests library and pretend
     # data has been received - or that we failed twice and then got a result - did it cope?
@@ -68,7 +68,7 @@ class TestIngestBulkNETravelData(unittest.TestCase):
 
         self.assertListEqual(expected_feeds_views_links, actual_feeds_views_links)
 
-    @mock.patch("chrono_lens.ingest_bulk_netraveldata.sleep")
+    @mock.patch("chrono_lens.gcloud.ingest_bulk_netraveldata.sleep")
     def test_get_views_for_cameras_retries_logs_sleeps_then_parses_minimal_response_and_returns_list(self, mocked_sleep,
                                                                                                      mocked_logging,
                                                                                                      mocked_urlopen):
@@ -176,7 +176,7 @@ class TestIngestBulkNETravelData(unittest.TestCase):
         mocked_logging.warning.assert_not_called()
         self.assertEqual(expected_camera_address, actual_camera_address)
 
-    @mock.patch("chrono_lens.ingest_bulk_netraveldata.sleep")
+    @mock.patch("chrono_lens.gcloud.ingest_bulk_netraveldata.sleep")
     def test_get_camera_address_from_utmc_retries_logs_sleeps_then_given_href_response_returns_url(self, mocked_sleep,
                                                                                                    mocked_logging,
                                                                                                    mocked_urlopen):
@@ -255,7 +255,7 @@ class TestIngestBulkNETravelData(unittest.TestCase):
 
         self.assertListEqual(expected_image_urls, actual_image_urls)
 
-    @mock.patch("chrono_lens.ingest_bulk_netraveldata.sleep")
+    @mock.patch("chrono_lens.gcloud.ingest_bulk_netraveldata.sleep")
     def test_get_images_from_archive_initial_fail_causes_log_sleep_and_retry_returns_urls(self, mocked_sleep,
                                                                                           mocked_logging,
                                                                                           mocked_urlopen):

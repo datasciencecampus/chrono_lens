@@ -14,7 +14,7 @@ chrono_lens.localhost.logging_support.setup_logging()
 
 def process_scheduled(config_path):
     logging.info(f'Updating TfL image sources...')
-    config_path = os.path.join(config_path, 'analyse')
+    config_path = os.path.join(config_path, 'ingest')
     os.makedirs(config_path, exist_ok=True)
 
     # Search folder for .json

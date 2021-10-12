@@ -26,8 +26,8 @@ class TestRemoveImages(unittest.TestCase):
             f'{self.expected_supplier_name}/20200103/': [self.blob_20200103_0740],
         }
 
-    @patch('chrono_lens.remove_images.page_iterator')
-    @patch('chrono_lens.remove_images.datetime')
+    @patch('chrono_lens.gcloud.remove_images.page_iterator')
+    @patch('chrono_lens.gcloud.remove_images.datetime')
     def test_deletes_only_old_blobs(self, mock_datetime, mock_page_iterator):
         maximum_number_of_days = 2
         data_bucket_name = 'dummyBucket'
@@ -58,8 +58,8 @@ class TestRemoveImages(unittest.TestCase):
         self.blob_20200102_0010.delete.assert_not_called()
         self.blob_20200103_0740.delete.assert_not_called()
 
-    @patch('chrono_lens.remove_images.page_iterator')
-    @patch('chrono_lens.remove_images.datetime')
+    @patch('chrono_lens.gcloud.remove_images.page_iterator')
+    @patch('chrono_lens.gcloud.remove_images.datetime')
     def test_deletes_only_old_blobs_extra_date_test(self, mock_datetime, mock_page_iterator):
         maximum_number_of_days = 1
         data_bucket_name = 'dummyBucket'
@@ -90,8 +90,8 @@ class TestRemoveImages(unittest.TestCase):
 
         self.blob_20200103_0740.delete.assert_not_called()
 
-    @patch('chrono_lens.remove_images.page_iterator')
-    @patch('chrono_lens.remove_images.datetime')
+    @patch('chrono_lens.gcloud.remove_images.page_iterator')
+    @patch('chrono_lens.gcloud.remove_images.datetime')
     def test_deletes_only_old_blobs_skips_non_date_folders(self, mock_datetime, mock_page_iterator):
         maximum_number_of_days = 1
         data_bucket_name = 'dummyBucket'
