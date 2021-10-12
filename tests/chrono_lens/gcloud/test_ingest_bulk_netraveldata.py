@@ -6,9 +6,13 @@ from urllib.error import HTTPError
 
 from mock import MagicMock
 
+import tests.chrono_lens.gcloud.filters
+
 with mock.patch('google.cloud.storage.Client'):
     from chrono_lens.gcloud.ingest_bulk_netraveldata import get_views_for_camera, get_camera_address_from_utmc, \
         round_time_up, get_images_from_archive
+
+_fake_usage_to_prevent_warning = tests.chrono_lens.gcloud.filters.is_running_on_gcp()
 
 
 @mock.patch("chrono_lens.gcloud.ingest_bulk_netraveldata.urlopen")

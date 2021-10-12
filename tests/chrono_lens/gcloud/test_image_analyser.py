@@ -3,7 +3,10 @@ import unittest
 
 from mock import patch
 
+import tests.chrono_lens.gcloud.filters
 from chrono_lens.gcloud import process_images
+
+_fake_usage_to_prevent_warning = tests.chrono_lens.gcloud.filters.is_running_on_gcp()
 
 
 class TestProcessImages(unittest.TestCase):

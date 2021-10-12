@@ -6,10 +6,7 @@ import sys
 
 import chrono_lens.images.sources.tfl
 import chrono_lens.localhost
-import chrono_lens.localhost.logging_support
 from chrono_lens.exceptions import ProcessImagesException
-
-chrono_lens.localhost.logging_support.setup_logging()
 
 
 def process_scheduled(config_path):
@@ -36,6 +33,11 @@ def get_args(command_line_arguments):
     parser.add_argument("-cf", "--config-folder", default=chrono_lens.localhost.CONFIG_FOLDER,
                         help="Folder where configuration data will be stored")
 
+    parser.add_argument("-ll", "--log-level",
+                        default=chrono_lens.localhost.DEFAULT_LOG_LEVEL,
+                        choices=['CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'],
+                        help="Level of detail to report in logs")
+
     args = parser.parse_args(command_line_arguments)
 
     return args
@@ -43,6 +45,9 @@ def get_args(command_line_arguments):
 
 def main(command_line_args):
     args = get_args(command_line_args)
+
+    handler = logging.StreamHandler(sys.stdout)
+    logging.basicConfig(handlers=[handler], level=logging.getLevelName(args.log_level))
 
     process_scheduled(args.config_folder)
 

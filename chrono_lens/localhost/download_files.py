@@ -13,11 +13,8 @@ import requests
 from tqdm import tqdm
 
 import chrono_lens.localhost
-import chrono_lens.localhost.logging_support
 from chrono_lens.exceptions import ProcessImagesException
 from chrono_lens.images.correction import resize_jpeg_image, IMAGE_MAX_AXIS_THRESHOLD
-
-chrono_lens.localhost.logging_support.setup_logging()
 
 
 def download_image_to_disc(image_url, target_file_name, maximum_number_of_download_attempts):
@@ -66,7 +63,7 @@ def download_all_files(config_folder_name, download_folder_name, maximum_number_
 
     sources_folder_name = os.path.join(config_folder_name, 'ingest')
 
-    logging.debug(f'Searching folder {sources_folder_name} for JSON files...')
+    logging.info(f'Searching folder {sources_folder_name} for JSON files...')
 
     images_tuples_to_download = []
     number_of_urls_read = 0
@@ -82,10 +79,10 @@ def download_all_files(config_folder_name, download_folder_name, maximum_number_
         for image_url in image_urls:
             images_tuples_to_download.append((base_name, image_url))
 
-    logging.debug(f'...search in folder {sources_folder_name} for JSON files complete;'
+    logging.info(f'...search in folder {sources_folder_name} for JSON files complete;'
                   f' read in {number_of_urls_read} image URLs.')
 
-    logging.debug(f'Downloading images to {download_folder_name} ... {date_time_folder}...')
+    logging.info(f'Downloading images to {os.path.join(download_folder_name, "ImageProvider", date_time_folder)}...')
     for image_tuple_to_download in tqdm(images_tuples_to_download, desc='Downloading images', unit='images'):
         base_name = image_tuple_to_download[0]
         image_url = image_tuple_to_download[1]
@@ -98,6 +95,9 @@ def download_all_files(config_folder_name, download_folder_name, maximum_number_
 
         logging.debug(f'Downloading {image_url} to {target_file_name}')
         download_image_to_disc(image_url, target_file_name, maximum_number_of_download_attempts)
+
+    logging.info(f'...downloaded {len(images_tuples_to_download)} images to'
+                 f' {os.path.join(download_folder_name, "ImageProvider", date_time_folder)}...')
 
 
 def get_args(command_line_arguments):
@@ -115,6 +115,11 @@ def get_args(command_line_arguments):
                         type=int,
                         help="Maximum number of download attempts per image")
 
+    parser.add_argument("-ll", "--log-level",
+                        default=chrono_lens.localhost.DEFAULT_LOG_LEVEL,
+                        choices=['CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'],
+                        help="Level of detail to report in logs")
+
     args = parser.parse_args(command_line_arguments)
 
     return args
@@ -122,6 +127,9 @@ def get_args(command_line_arguments):
 
 def main(command_line_args):
     args = get_args(command_line_args)
+
+    handler = logging.StreamHandler(sys.stdout)
+    logging.basicConfig(handlers=[handler], level=logging.getLevelName(args.log_level))
 
     download_all_files(args.config_folder, args.download_folder, args.maximum_download_attempts)
 

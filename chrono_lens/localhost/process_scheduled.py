@@ -6,10 +6,7 @@ import sys
 
 import chrono_lens.images.sources.tfl
 import chrono_lens.localhost
-import chrono_lens.localhost.logging_support
 from chrono_lens.exceptions import ProcessImagesException
-
-chrono_lens.localhost.logging_support.setup_logging()
 
 
 def refresh_all_sources(config_path):
