@@ -77,17 +77,15 @@ def load_bgr_image_as_rgb_if_not_already_loaded(image_rgb, image_file_name):
 def generate_counts(base_name, sample_date_time, camera_name, download_path,
                     pre_filter_tuples, model_tuple, post_filter_tuples):
     sample_image_file_name = os.path.join(download_path, base_name, f"{sample_date_time:%Y%m%d}",
-                                          f"{sample_date_time:%H%M}",
-                                          f"{camera_name}.jpg")
+                                          f"{sample_date_time:%H%M}", f"{camera_name}.jpg")
 
     previous_date_time = sample_date_time + timedelta(minutes=-10)
     previous_image_file_name = os.path.join(download_path, base_name, f"{previous_date_time:%Y%m%d}",
-                                            f"{previous_date_time:%H%M}",
-                                            f"{camera_name}.jpg")
+                                            f"{previous_date_time:%H%M}", f"{camera_name}.jpg")
 
     next_date_time = sample_date_time + timedelta(minutes=+10)
-    next_image_file_name = os.path.join(download_path, base_name, f"{next_date_time:%Y%m%d}", f"{next_date_time:%H%M}",
-                                        f"{camera_name}.jpg")
+    next_image_file_name = os.path.join(download_path, base_name, f"{next_date_time:%Y%m%d}",
+                                        f"{next_date_time:%H%M}", f"{camera_name}.jpg")
 
     image_rgb = load_bgr_image_as_rgb(sample_image_file_name)
     missing_image = image_rgb is None
@@ -263,6 +261,7 @@ def process_scheduled(config_path, download_path, counts_path):
                                         pre_filter_tuples, model_tuple, post_filter_tuples)
 
         sorted_object_count_keys = sorted(object_counts.keys())
+        column_names = ['date', 'time', 'supplier', 'camera_id'] + sorted_object_count_keys
 
         csv_file_name = os.path.join(counts_path, base_name + '.csv')
         csv_file_exists = pathlib.Path(csv_file_name).is_file()
@@ -271,9 +270,11 @@ def process_scheduled(config_path, download_path, counts_path):
             writer = csv.writer(csv_file)
 
             if not csv_file_exists:
-                writer.writerow(sorted_object_count_keys)
+                writer.writerow(column_names)
 
-            writer.writerow([object_counts[key] for key in sorted_object_count_keys])
+            field_values = [f"{twenty_minutes_ago:%Y%m%d}", f"{twenty_minutes_ago:%H%M}", base_name, camera_name]
+            field_values += [object_counts[key] for key in sorted_object_count_keys]
+            writer.writerow(field_values)
 
     logging.info("...processed images.")
 
