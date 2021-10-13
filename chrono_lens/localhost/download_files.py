@@ -53,7 +53,8 @@ def download_image_to_disc(image_url, target_file_name, maximum_number_of_downlo
         logging.error(f'Failed to decode URL="{image_url}"  - empty bitmap generated')
 
     else:
-        open(target_file_name, 'wb').write(resized_jpeg_image)
+        with open(target_file_name, 'wb') as binary_image_file:
+            binary_image_file.write(resized_jpeg_image)
 
 
 def download_all_files(config_folder_name, download_folder_name, maximum_number_of_download_attempts):
