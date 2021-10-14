@@ -258,7 +258,10 @@ def process_scheduled(config_path, download_path, counts_path):
     sorted_object_count_keys = sorted(object_count_keys)
     column_names = ['date', 'time', 'supplier', 'camera_id'] + sorted_object_count_keys
 
-    csv_file_name = os.path.join(counts_path, f"{twenty_minutes_ago:%Y%m%d}.csv")
+    csv_folder_name = os.path.join(counts_path, model_configuration["model_blob_name"])
+    os.makedirs(csv_folder_name, exist_ok=True)
+
+    csv_file_name = os.path.join(csv_folder_name, f"{twenty_minutes_ago:%Y%m%d}.csv")
     csv_file_exists = pathlib.Path(csv_file_name).is_file()
 
     if not csv_file_exists:
