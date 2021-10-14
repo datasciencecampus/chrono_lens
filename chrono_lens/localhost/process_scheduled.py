@@ -76,6 +76,7 @@ def load_bgr_image_as_rgb_if_not_already_loaded(image_rgb, image_file_name):
 
 def generate_counts(base_name, sample_date_time, camera_name, download_path,
                     pre_filter_tuples, model_tuple, post_filter_tuples):
+
     sample_image_file_name = os.path.join(download_path, base_name, f"{sample_date_time:%Y%m%d}",
                                           f"{sample_date_time:%H%M}", f"{camera_name}.jpg")
 
@@ -252,25 +253,31 @@ def process_scheduled(config_path, download_path, counts_path):
                                                                      config_path)
     logging.info('...loaded models')
 
-    logging.info("Processing images...")
-    for image_tuple_to_download in tqdm(camera_tuples_to_process, desc='Processing images', unit='images'):
-        base_name = image_tuple_to_download[0]
-        camera_name = image_tuple_to_download[1]
+    logging.info('Preparing CSV...')
+    object_count_keys = sorted(model_tuple[1].detected_object_types()) + ['faulty', 'missing']
+    sorted_object_count_keys = sorted(object_count_keys)
+    column_names = ['date', 'time', 'supplier', 'camera_id'] + sorted_object_count_keys
 
-        object_counts = generate_counts(base_name, twenty_minutes_ago, camera_name, download_path,
-                                        pre_filter_tuples, model_tuple, post_filter_tuples)
+    csv_file_name = os.path.join(counts_path, f"{twenty_minutes_ago:%Y%m%d}.csv")
+    csv_file_exists = pathlib.Path(csv_file_name).is_file()
 
-        sorted_object_count_keys = sorted(object_counts.keys())
-        column_names = ['date', 'time', 'supplier', 'camera_id'] + sorted_object_count_keys
-
-        csv_file_name = os.path.join(counts_path, base_name + '.csv')
-        csv_file_exists = pathlib.Path(csv_file_name).is_file()
-
+    if not csv_file_exists:
         with open(csv_file_name, 'a') as csv_file:
             writer = csv.writer(csv_file)
+            writer.writerow(column_names)
 
-            if not csv_file_exists:
-                writer.writerow(column_names)
+    logging.info('...prepared CSV')
+
+    logging.info("Processing images...")
+    with open(csv_file_name, 'a') as csv_file:
+        writer = csv.writer(csv_file)
+
+        for image_tuple_to_download in tqdm(camera_tuples_to_process, desc='Processing images', unit='images'):
+            base_name = image_tuple_to_download[0]
+            camera_name = image_tuple_to_download[1]
+
+            object_counts = generate_counts(base_name, twenty_minutes_ago, camera_name, download_path,
+                                            pre_filter_tuples, model_tuple, post_filter_tuples)
 
             field_values = [f"{twenty_minutes_ago:%Y%m%d}", f"{twenty_minutes_ago:%H%M}", base_name, camera_name]
             field_values += [object_counts[key] for key in sorted_object_count_keys]
