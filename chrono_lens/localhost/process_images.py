@@ -1,82 +1,46 @@
-import argparse
 import csv
 import glob
-import json
 import logging
 import os
 import pathlib
-import sys
+from collections import defaultdict
 from datetime import datetime, timedelta
+from functools import partial
 
-import cv2
-import numpy
+from dateutil import rrule
 from tqdm import tqdm
 
-import chrono_lens.images.sources.tfl
-import chrono_lens.localhost
-from chrono_lens.exceptions import ProcessImagesException
 from chrono_lens.images.fault_detection import FaultyImageDetector
 from chrono_lens.images.newcastle_detector import NewcastleDetector
 from chrono_lens.images.static_filter import StaticObjectFilter
+from chrono_lens.localhost.io import load_from_json, load_from_binary, load_bgr_image_as_rgb, \
+    load_bgr_image_as_rgb_if_not_already_loaded
 
 
-def load_from_json(json_file_name):
-    with open(json_file_name, 'r') as json_file:
-        json_data = json.load(json_file)
-    return json_data
+def discover_cameras(config_path):
+    number_of_cameras_read = 0
+    number_of_files_read = 0
+    camera_tuples_to_process = []
+    analysis_config_folder = os.path.join(config_path, 'analyse')
+    logging.info(f'Searching folder {analysis_config_folder} for JSON files...')
+    for json_filename in glob.glob(os.path.join(analysis_config_folder, '*.json')):
+        logging.debug(f'=>  Reading URLs from {json_filename}')
+        base_json_name = os.path.basename(json_filename)
+        base_name = os.path.splitext(base_json_name)[0]
 
+        camera_names = load_from_json(json_filename)
+        number_of_cameras_read += len(camera_names)
+        number_of_files_read += 1
 
-def load_from_binary(binary_file_name):
-    with open(binary_file_name, 'rb') as binary_file:
-        return binary_file.read()
-
-
-def load_binary_image(image_file_name):
-    try:
-        raw_image = load_from_binary(image_file_name)
-    except FileNotFoundError:
-        return None
-
-    raw_image_bytes = numpy.asarray(bytearray(raw_image), dtype=numpy.uint8)
-    if raw_image_bytes.size == 0:
-        return numpy.zeros((0, 0, 3), numpy.uint8)
-
-    image = cv2.imdecode(raw_image_bytes, 1)  # cv2.CV_LOAD_IMAGE_COLOR)
-    if image is None:
-        return numpy.zeros((0, 0, 3), numpy.uint8)
-
-    return image
-
-
-def load_bgr_image_as_rgb(image_file_name):
-    image_bgr = load_binary_image(image_file_name)
-    if image_bgr is None:
-        return None
-
-    if image_bgr.shape[0] == 0:
-        return image_bgr
-
-    image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
-    return image_rgb
-
-
-def load_bgr_image_as_rgb_if_not_already_loaded(image_rgb, image_file_name):
-    if image_rgb is not None:
-        return image_rgb
-
-    image_rgb = load_bgr_image_as_rgb(image_file_name)
-    if image_rgb is None:
-        return None
-
-    if image_rgb.shape[0] == 0:
-        return None
-
-    return image_rgb
+        for camera_name in camera_names:
+            camera_tuples_to_process.append((base_name, camera_name))
+    logging.info(f'...search in folder {analysis_config_folder} for JSON files complete;'
+                 f' read in {number_of_cameras_read} image URLs across {number_of_files_read} files.')
+    return camera_tuples_to_process
 
 
 def generate_counts(base_name, sample_date_time, camera_name, download_path,
                     pre_filter_tuples, model_tuple, post_filter_tuples):
-
     sample_image_file_name = os.path.join(download_path, base_name, f"{sample_date_time:%Y%m%d}",
                                           f"{sample_date_time:%H%M}", f"{camera_name}.jpg")
 
@@ -220,6 +184,9 @@ def process_scheduled(config_path, download_path, counts_path):
     twenty_minutes_ago = twenty_minutes_ago - timedelta(minutes=twenty_minutes_ago.minute % 10,
                                                         seconds=twenty_minutes_ago.second,
                                                         microseconds=twenty_minutes_ago.microsecond)
+
+    # twenty_minutes_ago = datetime(2021, 10, 13, 18, 00, 00)
+
     date_time_path = os.path.join(f"{twenty_minutes_ago:%Y%m%d}", f"{twenty_minutes_ago:%H%M}")
     logging.info(f'Processing data on {date_time_path}')
 
@@ -228,25 +195,7 @@ def process_scheduled(config_path, download_path, counts_path):
 
     logging.info(f'Model configuration: "{model_configuration["model_blob_name"]}"')
 
-    number_of_cameras_read = 0
-    number_of_files_read = 0
-    camera_tuples_to_process = []
-    analysis_config_folder = os.path.join(config_path, 'analyse')
-    logging.info(f'Searching folder {analysis_config_folder} for JSON files...')
-    for json_filename in glob.glob(os.path.join(analysis_config_folder, '*.json')):
-        logging.debug(f'=>  Reading URLs from {json_filename}')
-        base_json_name = os.path.basename(json_filename)
-        base_name = os.path.splitext(base_json_name)[0]
-
-        camera_names = load_from_json(json_filename)
-        number_of_cameras_read += len(camera_names)
-        number_of_files_read += 1
-
-        for camera_name in camera_names:
-            camera_tuples_to_process.append((base_name, camera_name))
-
-    logging.info(f'...search in folder {analysis_config_folder} for JSON files complete;'
-                 f' read in {number_of_cameras_read} image URLs across {number_of_files_read} files.')
+    camera_tuples_to_process = discover_cameras(config_path)
 
     logging.info('Loading models...')
     pre_filter_tuples, model_tuple, post_filter_tuples = load_models(model_configuration["model_blob_name"],
@@ -289,41 +238,86 @@ def process_scheduled(config_path, download_path, counts_path):
     logging.info("...processed images.")
 
 
-def get_args(command_line_arguments):
-    parser = argparse.ArgumentParser(description="Runs configured model over stored images to generate object counts",
-                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+def batch_process(config_path, download_path, counts_path, start_date, end_date):
+    os.makedirs(counts_path, exist_ok=True)
 
-    parser.add_argument("-cf", "--config-folder", default=chrono_lens.localhost.CONFIG_FOLDER,
-                        help="Folder where configuration data is stored")
+    model_configuration_file_name = os.path.join(config_path, 'analyse-configuration.json')
+    model_configuration = load_from_json(model_configuration_file_name)
 
-    parser.add_argument("-df", "--download-folder", default=chrono_lens.localhost.DOWNLOAD_FOLDER,
-                        help="Folder where image data downloaded")
+    logging.info(f'Model configuration: "{model_configuration["model_blob_name"]}"')
 
-    parser.add_argument("-cp", "--counts-path", default=chrono_lens.localhost.COUNTS_FOLDER,
-                        help="Folder where image counts are stored")
+    camera_tuples_to_process = discover_cameras(config_path)
 
-    parser.add_argument("-ll", "--log-level",
-                        default=chrono_lens.localhost.DEFAULT_LOG_LEVEL,
-                        choices=['CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'],
-                        help="Level of detail to report in logs")
+    logging.info('Loading models...')
+    pre_filter_tuples, model_tuple, post_filter_tuples = load_models(model_configuration["model_blob_name"],
+                                                                     config_path)
+    logging.info('...loaded models')
 
-    args = parser.parse_args(command_line_arguments)
+    dates_to_process = list(rrule.rrule(rrule.DAILY, dtstart=start_date, until=end_date))
+    for image_date in tqdm(dates_to_process, desc='Processing images per day', unit='days'):
 
-    return args
+        logging.debug('Preparing CSV...')
+        object_count_keys = sorted(model_tuple[1].detected_object_types()) + ['faulty', 'missing']
+        sorted_object_count_keys = sorted(object_count_keys)
+        column_names = ['date', 'time', 'supplier', 'camera_id'] + sorted_object_count_keys
 
+        csv_folder_name = os.path.join(counts_path, model_configuration["model_blob_name"])
+        os.makedirs(csv_folder_name, exist_ok=True)
 
-def main(command_line_args):
-    args = get_args(command_line_args)
+        csv_file_name = os.path.join(csv_folder_name, f"{image_date:%Y%m%d}.csv")
+        csv_file_exists = pathlib.Path(csv_file_name).is_file()
 
-    handler = logging.StreamHandler(sys.stdout)
-    logging.basicConfig(handlers=[handler], level=logging.getLevelName(args.log_level))
+        # Generate dict of dict of list: "provider" -> "time" -> "processed cameras"
+        # [matches later nested loop logic for easy check if a camera has already been analysed at a specified time]
+        cameras_per_time_per_provider = defaultdict(partial(defaultdict, list))
+        if csv_file_exists:
+            with open(csv_file_name, 'r') as csv_file:
+                csv_reader = csv.reader(csv_file)
+                imported_column_names = csv_reader.__next__()
+                if imported_column_names != column_names:
+                    raise ValueError(f'Existing CSV file "{csv_file_name}" has different columns to those expected')
 
-    process_scheduled(args.config_folder, args.download_folder, args.counts_path)
+                time_column_index = column_names.index('time')
+                supplier_column_index = column_names.index('supplier')
+                camera_id_column_index = column_names.index('camera_id')
 
+                for csv_row in csv_reader:
+                    time_value = csv_row[time_column_index]
+                    supplier_value = csv_row[supplier_column_index]
+                    camera_id_value = csv_row[camera_id_column_index]
 
-if __name__ == '__main__':
-    try:
-        main(sys.argv[1:])
+                    cameras_per_time_per_provider[supplier_value][time_value].append(camera_id_value)
 
-    except ProcessImagesException as err:
-        print(f"Image processing error: {err.message}")
+        else:
+            # Create CSV file with just column headings ready for use
+            with open(csv_file_name, 'a') as csv_file:
+                writer = csv.writer(csv_file)
+                writer.writerow(column_names)
+
+        logging.debug('...prepared CSV')
+
+        with open(csv_file_name, 'a') as csv_file:
+            writer = csv.writer(csv_file)
+
+            datetimes_to_process = list(rrule.rrule(rrule.MINUTELY, interval=10, dtstart=image_date,
+                                                    until=image_date + timedelta(hours=23, minutes=50)))
+
+            for image_datetime in datetimes_to_process:
+
+                for image_tuple_to_download in tqdm(camera_tuples_to_process,
+                                                    f'Processing images for {image_datetime:%Y%m%d %H%M}',
+                                                    unit='images', leave=False):
+
+                    base_name = image_tuple_to_download[0]
+                    camera_name = image_tuple_to_download[1]
+
+                    if camera_name in cameras_per_time_per_provider[base_name][f'{image_datetime:%H%M}']:
+                        # Already present, so skip - don't reprocess & create a duplicate
+                        continue
+
+                    object_counts = generate_counts(base_name, image_datetime, camera_name, download_path,
+                                                    pre_filter_tuples, model_tuple, post_filter_tuples)
+
+                    field_values = [f"{image_datetime:%Y%m%d}", f"{image_datetime:%H%M}", base_name, camera_name]
+                    field_values += [object_counts[key] for key in sorted_object_count_keys]
+                    writer.writerow(field_values)
