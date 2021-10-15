@@ -138,16 +138,16 @@ Version | Date | Notes
 -|-|-
 1.0.0 | 2021-06-08 | First release of public repository
 1.0.1 | 2021-09-21 | Bug fix for isolated images, tensorflow version bump
-1.1.0 | ? | Support for stand-alone single machine added
+1.1.0 | ? | Added limited support for stand-alone single machine
 
 ## Future Work
 
 Areas of potential future work are presented here; these changes may not be investigated, but are here
 to make people aware of potential improvements we have considered.
 
-### Infrastructure as Code
+### GCP: Infrastructure as Code
 
-At present, bash shell scripts are used to create the infrastructure; an improvement would be to use IaC,
+At present, bash shell scripts are used to create the GCP infrastructure; an improvement would be to use IaC,
 such as Terraform. This simplifies the changing of (e.g.) Cloud Function configurations
 without having to manually remove the Cloud Build Trigger and re-creating it when
 the runtime environment or memory limits are changed.
@@ -160,13 +160,13 @@ analysed. To save ingestion costs, the ingest code should cross-check against
 the analysis JSON files and only download those files; an alert should be raised
 when any of these sources are no longer available, or if new sources become available.
 
-### Removal of 10-Minute Interval NETravelData Download
+### GCP: Removal of 10-Minute Interval NETravelData Download
 
 The nightly back-fill of images for NETravelData appears to refresh around 40% of NETravelData images;
 the advantage of a regular refresh is diminished if the numbers are only required daily,
 and hence the Cloud Function `distribute_ne_travel_data` may be removed.
 
-### Move Away from `http async` to PubSub
+### GCP: Move Away from `http async` to PubSub
 
 The initial design uses manually operated scripts when testing new models - namely, `batch_process_images.py`.
 This reports the success (or not) and numbers of images processed. To do this,

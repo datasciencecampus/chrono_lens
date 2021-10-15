@@ -12,6 +12,7 @@ This document describes how to host the project on a single machine.
 
 ## Limitations
 
+* NE Travel Data ingestion is not supported
 * For simplicity, database support is not provided - instead CSV files are generated one per day (akin to database
 sharding), which can be imported into a database as required.
 * Time series analysis has not been ported to `localhost`; the R code is available in
@@ -176,7 +177,7 @@ changing over time will impact results. The current lists of selected cameras ar
 
 # Adding cameras to be processed after images have been downloaded
 
-The p[ython script `scripts/localhost/update_sources.py` populates the folder
+The python script `scripts/localhost/update_sources.py` populates the folder
 `localhost/config/ingest`, creating one JSON file per camera image supplier. However, images are not analysed unless
 they are specified in `localhost/config/analyse` JSON files
 

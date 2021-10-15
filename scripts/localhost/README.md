@@ -25,6 +25,9 @@ is created.
 # Limitations
 
 At present, the NE Travel Data is not supported with a stand-alone machine (just the GCP implementation).
+Also, database integration is not supported (CSV files are output per day which can then be ingested
+into a database as required). Finally, time series analysis in R is not supported either (this code is
+still linked to GCP BigQuery, refer to `cloud/vm` for R source code).
 
 
 # Using `batch_process_images.py`

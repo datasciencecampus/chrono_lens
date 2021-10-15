@@ -185,8 +185,6 @@ def process_scheduled(config_path, download_path, counts_path):
                                                         seconds=twenty_minutes_ago.second,
                                                         microseconds=twenty_minutes_ago.microsecond)
 
-    # twenty_minutes_ago = datetime(2021, 10, 13, 18, 00, 00)
-
     date_time_path = os.path.join(f"{twenty_minutes_ago:%Y%m%d}", f"{twenty_minutes_ago:%H%M}")
     logging.info(f'Processing data on {date_time_path}')
 
