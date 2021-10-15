@@ -26,7 +26,12 @@ def remove_images_older_than_threshold(maximum_number_of_days, download_folder_n
 
         for image_folder in tqdm(image_folders, desc=f'Scanning {image_supplier_folder}', unit='folders', leave=False):
             folder_base_name = os.path.basename(image_folder)
-            folder_date = datetime.datetime.strptime(folder_base_name, '%Y%m%d').date()
+            try:
+                folder_date = datetime.datetime.strptime(folder_base_name, '%Y%m%d').date()
+            except ValueError:
+                # Not a date folder
+                logging.debug(f'Skipping folder "{image_folder}" as not in date format')
+                continue
 
             folder_age_in_days = (today - folder_date).days
 
