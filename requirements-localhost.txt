@@ -23,4 +23,4 @@ tqdm==4.54.0
 pre-commit==2.9.3
 detect-secrets==0.14.3
 
-pyfakesfs==4.5.1
+pyfakesfs==4.5.0
