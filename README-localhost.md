@@ -8,8 +8,14 @@ to enable models to be trained, and to support late data arrival.
 Once processed, the camera data no longer needs to be stored unless alternative models are required to be
 trialled later.
 
-This document describes how to host the project on a single machine, consisting of:
-1. [Discovering available image sources](#Discovering available image sources)
+This document describes how to host the project on a single machine.
+
+## Limitations
+
+* For simplicity, database support is not provided - instead CSV files are generated one per day (akin to database
+sharding), which can be imported into a database as required.
+* Time series analysis has not been ported to `localhost`; the R code is available in
+`cloud/vm`, but assumes the data is hosted in BigQuery.
 
 # Design and architecture of solution to object identification
 The object identification is experimental, and hence needs to be re-evaluated
@@ -50,6 +56,7 @@ once a day to update the list of camera images we should
 download. This is the `scripts/localhost/update_sources.py` script,
 which generates a JSON file describing each available camera
 and its image URL where it can be downloaded.
+Detailed usage instructions are presented in [`scripts/localhost/README.md`](scripts/localhost/README.md).
 
 This script needs to be called daily (or as often as you wish to updated of available imagery);
 we recommend daily at 3am.
@@ -85,6 +92,7 @@ UN*X [crontab](https://man7.org/linux/man-pages/man5/crontab.5.html) (_also suit
 URL doesn't return a 200 (success code) or 404 (not found) - e.g. if a 504
 "Gateway timeout" error code is returned, then the client should try again.
 A random delay is triggered before retrying.
+Detailed usage instructions are presented in [`scripts/localhost/README.md`](scripts/localhost/README.md).
 
 ## Run a specified model over historical data
 The storage of the data in a local folder enables us to re-process data with different
@@ -111,6 +119,9 @@ underscores (`_`) with folder separators (which depend on your local system; Win
 For example, `localhost_config_models_FaultyImageFilterV0_configuration.json` should be copied to a UN*X folder
 of `localhost/config/models/FaultyImageFilterV0/configuration.json`. Note that the RCNN weights must be supplied
 as an additional file - see next section.
+
+The script to use is `scripts/locahost/process_scheduled.py`;
+detailed usage instructions are presented in [`scripts/localhost/README.md`](scripts/localhost/README.md).
 
 ### Newcastle model
 This model is detected by its name starting with `Newcastle` - underneath it is an RCNN
@@ -154,6 +165,7 @@ Once images have been processed, they do not need to be retained, unless they ne
 re-processed (e.g. if model experimentation is being carried out). The script `scripts/localhost/remove_old_images.py`
 deletes images older than 28 days (4 weeks), as this is deemed a sufficient window to detect
 recent issues and sufficient historical images to correct the time series.
+Detailed usage instructions are presented in [`scripts/localhost/README.md`](scripts/localhost/README.md).
 
 # Differing results to ONS Faster Indicators
 
