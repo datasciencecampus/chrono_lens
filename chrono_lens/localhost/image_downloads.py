@@ -11,7 +11,7 @@ from tqdm import tqdm
 
 import chrono_lens.localhost
 from chrono_lens.images.correction import resize_jpeg_image, IMAGE_MAX_AXIS_THRESHOLD
-from chrono_lens.localhost.io import load_from_json
+from chrono_lens.localhost.file_io import load_from_json
 
 
 def download_image_to_disc(image_url, target_file_name, maximum_number_of_download_attempts):

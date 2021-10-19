@@ -13,7 +13,7 @@ from tqdm import tqdm
 from chrono_lens.images.fault_detection import FaultyImageDetector
 from chrono_lens.images.newcastle_detector import NewcastleDetector
 from chrono_lens.images.static_filter import StaticObjectFilter
-from chrono_lens.localhost.io import load_from_json, load_from_binary, load_bgr_image_as_rgb, \
+from chrono_lens.localhost.file_io import load_from_json, load_from_binary, load_bgr_image_as_rgb, \
     load_bgr_image_as_rgb_if_not_already_loaded
 
 
