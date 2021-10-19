@@ -7,10 +7,7 @@ from pyfakefs.fake_filesystem_unittest import TestCase
 from chrono_lens.localhost.image_downloads import download_all_images
 
 
-# def download_all_images(config_folder_name, download_folder_name, maximum_number_of_download_attempts):
-
-
-class TestRemoveImages(TestCase):
+class TestDownloadAllImages(TestCase):
 
     def setUp(self):
         self.setUpPyfakefs()
