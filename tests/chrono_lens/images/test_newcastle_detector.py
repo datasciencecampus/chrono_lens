@@ -10,18 +10,18 @@ class TestNewcastleDetector(TestCase):
     @classmethod
     def setUpClass(cls):
         small_sample_image_filename = 'TfL_20200315_1300_00001.01251.jpg'
-        sample_image_path = os.path.join('test_data', 'test_detector_data',
+        sample_image_path = os.path.join('tests', 'test_data', 'test_detector_data',
                                          small_sample_image_filename)
         raw_small_sample_image_bgr = cv2.imread(sample_image_path)
         cls.raw_small_sample_image_rgb = cv2.cvtColor(raw_small_sample_image_bgr.copy(), cv2.COLOR_BGR2RGB)
 
         large_sample_image_filename = 'NETravelData-images_20200508_1110_NT_A191E1.jpg'
-        raw_large_sample_image_bgr = cv2.imread(os.path.join('test_data', 'time_series',
+        raw_large_sample_image_bgr = cv2.imread(os.path.join('tests', 'test_data', 'time_series',
                                                              large_sample_image_filename))
         cls.raw_large_sample_image_rgb = cv2.cvtColor(raw_large_sample_image_bgr.copy(), cv2.COLOR_BGR2RGB)
 
         rcnn_serialised_model_filename = 'fig_frcnn_rebuscov-3.pb'
-        with open(os.path.join('test_data', 'test_detector_data',
+        with open(os.path.join('tests', 'test_data', 'test_detector_data',
                                rcnn_serialised_model_filename), 'rb') as fp:
             cls.rcnn_serialised_model = fp.read()
 
