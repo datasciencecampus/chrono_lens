@@ -1,5 +1,4 @@
 import glob
-import json
 import logging
 import os
 from datetime import datetime, timedelta
@@ -12,6 +11,7 @@ from tqdm import tqdm
 
 import chrono_lens.localhost
 from chrono_lens.images.correction import resize_jpeg_image, IMAGE_MAX_AXIS_THRESHOLD
+from chrono_lens.localhost.io import load_from_json
 
 
 def download_image_to_disc(image_url, target_file_name, maximum_number_of_download_attempts):
@@ -71,10 +71,9 @@ def download_all_images(config_folder_name, download_folder_name, maximum_number
         base_json_name = os.path.basename(json_filename)
         base_name = os.path.splitext(base_json_name)[0]
 
-        with open(json_filename, 'r') as json_file:
-            image_urls = json.load(json_file)
-            number_of_urls_read += len(image_urls)
-            number_of_files_read += 1
+        image_urls = load_from_json(json_filename)
+        number_of_urls_read += len(image_urls)
+        number_of_files_read += 1
 
         for image_url in image_urls:
             images_tuples_to_download.append((base_name, image_url))
