@@ -90,9 +90,10 @@ def download_all_images(config_folder_name, download_folder_name, maximum_number
 
         parsed_file_url = urlparse(image_url)
         base_file_name = os.path.basename(parsed_file_url.path[1:])
+        base_file_name_no_extension = os.path.splitext(base_file_name)[0]
         target_folder_name = os.path.join(download_folder_name, base_name, date_time_folder)
         os.makedirs(target_folder_name, exist_ok=True)
-        target_file_name = os.path.join(target_folder_name, base_file_name)
+        target_file_name = os.path.join(target_folder_name, base_file_name_no_extension + '.jpg')
 
         logging.debug(f'Downloading {image_url} to {target_file_name}')
         download_image_to_disc(image_url, target_file_name, maximum_number_of_download_attempts)
