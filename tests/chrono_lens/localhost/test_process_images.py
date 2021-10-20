@@ -132,3 +132,64 @@ class TestProcessImages(TestCase):
             f'{expected_twenty_minutes_ago:%Y%m%d},{expected_twenty_minutes_ago:%H%M},'
             f'IMAGE_SUPPLIER,test-camera,0,0,0,True,False,0,0,0,0\n',
             other_lines[0])
+
+    @patch('chrono_lens.localhost.process_images.datetime')
+    def test_image_triplet_analysed_filters_static_objects(self, mock_datetime):
+        expected_now = datetime.datetime(2000, 1, 2, 12, 30, 00)
+        expected_ten_minutes_ago = datetime.datetime(2000, 1, 2, 12, 20, 00)
+        expected_twenty_minutes_ago = datetime.datetime(2000, 1, 2, 12, 10, 00)
+        expected_thirty_minutes_ago = datetime.datetime(2000, 1, 2, 12, 00, 00)
+        image_supplier = 'IMAGE_SUPPLIER'
+        camera_name = 'test-camera'
+
+        # add image
+        time_series_folder = os.path.join('tests', 'test_data', 'time_series')
+
+        image_0040_filename = 'TfL-images-20200501-0040-00001.08859.jpg'
+        image_0050_filename = 'TfL-images-20200501-0050-00001.08859.jpg'
+        image_0100_filename = 'TfL-images-20200501-0100-00001.08859.jpg'
+
+        image_0040_target_path = os.path.join(self.download_path, image_supplier,
+                                              f'{expected_thirty_minutes_ago:%Y%m%d}',
+                                              f'{expected_thirty_minutes_ago:%H%M}',
+                                              camera_name + '.jpg')
+        self.fs.add_real_file(source_path=os.path.join(time_series_folder, image_0040_filename),
+                              target_path=image_0040_target_path)
+
+        image_0050_target_path = os.path.join(self.download_path, image_supplier,
+                                              f'{expected_twenty_minutes_ago:%Y%m%d}',
+                                              f'{expected_twenty_minutes_ago:%H%M}',
+                                              camera_name + '.jpg')
+        self.fs.add_real_file(source_path=os.path.join(time_series_folder, image_0050_filename),
+                              target_path=image_0050_target_path)
+
+        image_0100_target_path = os.path.join(self.download_path, image_supplier,
+                                              f'{expected_ten_minutes_ago:%Y%m%d}',
+                                              f'{expected_ten_minutes_ago:%H%M}',
+                                              camera_name + '.jpg')
+        self.fs.add_real_file(source_path=os.path.join(time_series_folder, image_0100_filename),
+                              target_path=image_0100_target_path)
+
+        # Set up fake camera list
+        self.fs.create_file(os.path.join(self.config_path, 'analyse', image_supplier + '.json'),
+                            contents=f'["{camera_name}"]')
+
+        mock_datetime.now.return_value = expected_now
+
+        process_scheduled(self.config_path, self.download_path, self.counts_path)
+
+        expected_filename = os.path.join(self.counts_path, self.model_name, f'{expected_now:%Y%m%d}.csv')
+        with open(expected_filename, 'r') as camera_results_file:
+            first_line = camera_results_file.readline()
+            other_lines = camera_results_file.readlines()
+
+        self.assertEqual(
+            first_line,
+            'date,time,supplier,camera_id,bus,car,cyclist,faulty,missing,motorcyclist,person,truck,van\n')
+
+        # Single result expected (image missing at appropriate time and date)
+        self.assertEqual(1, len(other_lines))
+        self.assertEqual(
+            f'{expected_twenty_minutes_ago:%Y%m%d},{expected_twenty_minutes_ago:%H%M},'
+            f'IMAGE_SUPPLIER,test-camera,0,0,0,False,False,0,1,0,0\n',
+            other_lines[0])
