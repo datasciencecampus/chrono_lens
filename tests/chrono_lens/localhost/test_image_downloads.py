@@ -49,7 +49,7 @@ class TestDownloadAllImages(TestCase):
         with open(expected_filename, 'rb') as actual_image_data:
             actual_small_image_raw_jpeg = actual_image_data.read()
 
-        self.assertEquals(small_image_raw_jpeg, actual_small_image_raw_jpeg)
+        self.assertEqual(small_image_raw_jpeg, actual_small_image_raw_jpeg)
 
     @patch('chrono_lens.localhost.image_downloads.datetime')
     @patch('chrono_lens.localhost.image_downloads.requests')
@@ -85,7 +85,7 @@ class TestDownloadAllImages(TestCase):
         with open(expected_filename, 'rb') as actual_image_data:
             actual_small_image_raw_jpeg = actual_image_data.read()
 
-        self.assertEquals(small_image_raw_jpeg, actual_small_image_raw_jpeg)
+        self.assertEqual(small_image_raw_jpeg, actual_small_image_raw_jpeg)
 
     @patch('chrono_lens.localhost.image_downloads.datetime')
     @patch('chrono_lens.localhost.image_downloads.requests')
@@ -122,4 +122,4 @@ class TestDownloadAllImages(TestCase):
         with open(expected_filename, 'rb') as actual_image_data:
             actual_small_image_raw_jpeg = actual_image_data.read()
 
-        self.assertEquals(small_image_raw_jpeg, actual_small_image_raw_jpeg)
+        self.assertEqual(small_image_raw_jpeg, actual_small_image_raw_jpeg)

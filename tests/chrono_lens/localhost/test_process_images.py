@@ -56,7 +56,7 @@ class TestProcessImages(TestCase):
             first_line = camera_results_file.readline()
             other_lines = camera_results_file.readlines()
 
-        self.assertEquals(
+        self.assertEqual(
             first_line, 'date,time,supplier,camera_id,bus,car,cyclist,faulty,missing,motorcyclist,person,truck,van\n')
         self.assertEqual([], other_lines)
 
@@ -80,13 +80,13 @@ class TestProcessImages(TestCase):
             first_line = camera_results_file.readline()
             other_lines = camera_results_file.readlines()
 
-        self.assertEquals(
+        self.assertEqual(
             first_line,
             'date,time,supplier,camera_id,bus,car,cyclist,faulty,missing,motorcyclist,person,truck,van\n')
 
         # Single result expected (image missing at appropriate time and date)
-        self.assertEquals(1, len(other_lines))
-        self.assertEquals(
+        self.assertEqual(1, len(other_lines))
+        self.assertEqual(
             f'{expected_twenty_minutes_ago:%Y%m%d},{expected_twenty_minutes_ago:%H%M},'
             f'IMAGE_SUPPLIER,test-camera,0,0,0,False,True,0,0,0,0\n',
             other_lines[0])
@@ -122,13 +122,13 @@ class TestProcessImages(TestCase):
             first_line = camera_results_file.readline()
             other_lines = camera_results_file.readlines()
 
-        self.assertEquals(
+        self.assertEqual(
             first_line,
             'date,time,supplier,camera_id,bus,car,cyclist,faulty,missing,motorcyclist,person,truck,van\n')
 
         # Single result expected (image missing at appropriate time and date)
-        self.assertEquals(1, len(other_lines))
-        self.assertEquals(
+        self.assertEqual(1, len(other_lines))
+        self.assertEqual(
             f'{expected_twenty_minutes_ago:%Y%m%d},{expected_twenty_minutes_ago:%H%M},'
             f'IMAGE_SUPPLIER,test-camera,0,0,0,True,False,0,0,0,0\n',
             other_lines[0])
