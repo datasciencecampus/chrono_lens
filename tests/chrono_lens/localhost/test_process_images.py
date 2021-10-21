@@ -1,140 +1,100 @@
 import datetime
 import os
 
+import pytest
 from mock import patch
-from pyfakefs.fake_filesystem_unittest import TestCase
+from pyfakefs.fake_filesystem_unittest import Patcher
 
 from chrono_lens.localhost.process_images import process_scheduled
 
 
-class TestProcessImages(TestCase):
+@patch('chrono_lens.localhost.process_images.datetime')
+def test_no_cameras_no_entries(mock_datetime):
+    with Patcher() as patcher:
+        # access the fake_filesystem object via patcher.fs
 
-    def setUp(self):
-        self.setUpPyfakefs()
+        config_path = 'test-config'
+        download_path = 'test-downloads'
+        counts_path = 'test-counts'
 
-        self.supplier_name = 'IMAGE_PROVIDER'
+        model_name = 'FaultyImageFilterV0_NewcastleV0_StaticObjectFilterV0'
 
-        self.config_path = 'test-config'
-        self.download_path = 'test-downloads'
-        self.counts_path = 'test-counts'
+        set_up_models_in_fake_fs(config_path, model_name, patcher.fs)
 
-        # Set up fake model config
-        self.model_name = 'FaultyImageFilterV0_NewcastleV0_StaticObjectFilterV0'
-        self.fs.create_file(os.path.join(self.config_path, 'analyse-configuration.json'),
-                            contents=f'{{"model_blob_name": "{self.model_name}"}}')
-
-        self.fs.create_file(os.path.join(self.config_path, 'models', 'FaultyImageFilterV0', 'configuration.json'),
-                            contents=r'{"identical_area_proportion_threshold": 0.33,"row_similarity_threshold": 0.8,'
-                                     r'"consecutive_matching_rows_threshold": 0.2}')
-
-        pb_filename = "test.pb"
-        self.fs.create_file(os.path.join(self.config_path, 'models', 'NewcastleV0', 'configuration.json'),
-                            contents=f'{{"serialized_graph_name": "{pb_filename}", "minimum_confidence": 0.33}}')
-
-        self.fs.add_real_file(
-            os.path.join('tests', 'test_data', 'test_detector_data', 'fig_frcnn_rebuscov-3.pb'),
-            target_path=os.path.join(self.config_path, 'models', 'NewcastleV0', pb_filename)
-        )
-
-        self.fs.create_file(os.path.join(self.config_path, 'models', 'StaticObjectFilterV0', 'configuration.json'),
-                            contents=r'{"scenecut_threshold": 0.4, "minimum_mask_proportion": 0.25, '
-                                     r'"minimum_mask_proportion_person": 0.10, "confidence_person": 0.80, '
-                                     r'"contour_area_threshold": 50}')
-
-    @patch('chrono_lens.localhost.process_images.datetime')
-    def test_no_cameras_no_entries(self, mock_datetime):
         expected_now = datetime.datetime(2000, 1, 2, 12, 30, 00)
 
         # No cameras listed
 
         mock_datetime.now.return_value = expected_now
 
-        process_scheduled(self.config_path, self.download_path, self.counts_path)
+        process_scheduled(config_path, download_path, counts_path)
 
-        expected_filename = os.path.join(self.counts_path, self.model_name, f'{expected_now:%Y%m%d}.csv')
+        expected_filename = os.path.join(counts_path, model_name, f'{expected_now:%Y%m%d}.csv')
         with open(expected_filename, 'r') as camera_results_file:
             first_line = camera_results_file.readline()
             other_lines = camera_results_file.readlines()
 
-        self.assertEqual(
-            first_line, 'date,time,supplier,camera_id,bus,car,cyclist,faulty,missing,motorcyclist,person,truck,van\n')
-        self.assertEqual([], other_lines)
+        assert first_line == 'date,time,supplier,camera_id,bus,car,' \
+                             'cyclist,faulty,missing,motorcyclist,person,truck,van\n'
+        assert [] == other_lines
 
-    @patch('chrono_lens.localhost.process_images.datetime')
-    def test_reports_missing_images(self, mock_datetime):
-        expected_now = datetime.datetime(2000, 1, 2, 12, 30, 00)
-        expected_twenty_minutes_ago = datetime.datetime(2000, 1, 2, 12, 10, 00)
-        image_supplier = 'IMAGE_SUPPLIER'
-        camera_name = 'test-camera'
 
-        # Set up fake camera list
-        self.fs.create_file(os.path.join(self.config_path, 'analyse', image_supplier + '.json'),
-                            contents=f'["{camera_name}"]')
+@pytest.mark.parametrize('_comment, model_name, image1_file_name, image2_file_name, image3_file_name, partial_results',
+                         [
+                             # results_tuple is bus,car,cyclist,faulty,missing,motorcyclist,person,truck,van
+                             # Note that tuple is automatically prefixed with date,time,supplier,camera_id
 
-        mock_datetime.now.return_value = expected_now
+                             # Missing image
+                             ('Missing image', 'FaultyImageFilterV0_NewcastleV0_StaticObjectFilterV0', None, None, None,
+                              '0,0,0,False,True,0,0,0,0'),
 
-        process_scheduled(self.config_path, self.download_path, self.counts_path)
+                             # Isolated image = faulty
+                             ('Isolated image = faulty', 'FaultyImageFilterV0_NewcastleV0_StaticObjectFilterV0', None,
+                              'TfL-images-20200501-0050-00001.08859.jpg', None,
+                              '0,0,0,True,False,0,0,0,0'),
 
-        expected_filename = os.path.join(self.counts_path, self.model_name, f'{expected_now:%Y%m%d}.csv')
-        with open(expected_filename, 'r') as camera_results_file:
-            first_line = camera_results_file.readline()
-            other_lines = camera_results_file.readlines()
+                             # Valid triplet, static objects removed
+                             ('Valid triplet, static objects removed',
+                              'FaultyImageFilterV0_NewcastleV0_StaticObjectFilterV0',
+                              'TfL-images-20200501-0040-00001.08859.jpg', 'TfL-images-20200501-0050-00001.08859.jpg',
+                              'TfL-images-20200501-0100-00001.08859.jpg', '0,0,0,False,False,0,1,0,0'),
 
-        self.assertEqual(
-            first_line,
-            'date,time,supplier,camera_id,bus,car,cyclist,faulty,missing,motorcyclist,person,truck,van\n')
+                             # Next missing, static objects removed
+                             ('Next missing, static objects removed',
+                              'FaultyImageFilterV0_NewcastleV0_StaticObjectFilterV0',
+                              'TfL-images-20200501-0040-00001.08859.jpg', 'TfL-images-20200501-0050-00001.08859.jpg',
+                              None, '0,0,0,False,False,0,1,0,0'),
 
-        # Single result expected (image missing at appropriate time and date)
-        self.assertEqual(1, len(other_lines))
-        self.assertEqual(
-            f'{expected_twenty_minutes_ago:%Y%m%d},{expected_twenty_minutes_ago:%H%M},'
-            f'IMAGE_SUPPLIER,test-camera,0,0,0,False,True,0,0,0,0\n',
-            other_lines[0])
+                             # Previous missing, static objects removed
+                             ('Previous missing, static objects removed',
+                              'FaultyImageFilterV0_NewcastleV0_StaticObjectFilterV0',
+                              None, 'TfL-images-20200501-0050-00001.08859.jpg',
+                              'TfL-images-20200501-0100-00001.08859.jpg', '0,0,0,False,False,0,1,0,0'),
 
-    @patch('chrono_lens.localhost.process_images.datetime')
-    def test_isolated_image_reports_faulty(self, mock_datetime):
-        expected_now = datetime.datetime(2000, 1, 2, 12, 30, 00)
-        expected_twenty_minutes_ago = datetime.datetime(2000, 1, 2, 12, 10, 00)
-        image_supplier = 'IMAGE_SUPPLIER'
-        camera_name = 'test-camera'
+                             # All images the same, flagged as faulty
+                             ('Previous missing, static objects removed',
+                              'FaultyImageFilterV0_NewcastleV0_StaticObjectFilterV0',
+                              'TfL-images-20200501-0050-00001.08859.jpg', 'TfL-images-20200501-0050-00001.08859.jpg',
+                              'TfL-images-20200501-0050-00001.08859.jpg', '0,0,0,True,False,0,0,0,0'),
 
-        # add image
-        time_series_folder = os.path.join('tests', 'test_data', 'time_series')
+                             # Previous and current images the same, flagged as faulty
+                             ('Previous missing, static objects removed',
+                              'FaultyImageFilterV0_NewcastleV0_StaticObjectFilterV0',
+                              'TfL-images-20200501-0050-00001.08859.jpg', 'TfL-images-20200501-0050-00001.08859.jpg',
+                              'TfL-images-20200501-0100-00001.08859.jpg', '0,0,0,True,False,0,0,0,0'),
+                         ])
+@patch('chrono_lens.localhost.process_images.datetime')
+def test_image_edge_cases(mock_datetime, _comment, model_name, image1_file_name, image2_file_name, image3_file_name,
+                          partial_results):
+    with Patcher() as patcher:
+        # access the fake_filesystem object via patcher.fs
 
-        image_0040_filename = 'TfL-images-20200501-0040-00001.08859.jpg'
-        image_0040_target_path = os.path.join(self.download_path, image_supplier,
-                                              f'{expected_twenty_minutes_ago:%Y%m%d}',
-                                              f'{expected_twenty_minutes_ago:%H%M}',
-                                              camera_name + '.jpg')
-        self.fs.add_real_file(source_path=os.path.join(time_series_folder, image_0040_filename),
-                              target_path=image_0040_target_path)
+        config_path = 'test-config'
+        download_path = 'test-downloads'
+        counts_path = 'test-counts'
 
-        # Set up fake camera list
-        self.fs.create_file(os.path.join(self.config_path, 'analyse', image_supplier + '.json'),
-                            contents=f'["{camera_name}"]')
+        set_up_models_in_fake_fs(config_path, model_name, patcher.fs)
 
-        mock_datetime.now.return_value = expected_now
-
-        process_scheduled(self.config_path, self.download_path, self.counts_path)
-
-        expected_filename = os.path.join(self.counts_path, self.model_name, f'{expected_now:%Y%m%d}.csv')
-        with open(expected_filename, 'r') as camera_results_file:
-            first_line = camera_results_file.readline()
-            other_lines = camera_results_file.readlines()
-
-        self.assertEqual(
-            first_line,
-            'date,time,supplier,camera_id,bus,car,cyclist,faulty,missing,motorcyclist,person,truck,van\n')
-
-        # Single result expected (image missing at appropriate time and date)
-        self.assertEqual(1, len(other_lines))
-        self.assertEqual(
-            f'{expected_twenty_minutes_ago:%Y%m%d},{expected_twenty_minutes_ago:%H%M},'
-            f'IMAGE_SUPPLIER,test-camera,0,0,0,True,False,0,0,0,0\n',
-            other_lines[0])
-
-    @patch('chrono_lens.localhost.process_images.datetime')
-    def test_image_triplet_analysed_filters_static_objects(self, mock_datetime):
         expected_now = datetime.datetime(2000, 1, 2, 12, 30, 00)
         expected_ten_minutes_ago = datetime.datetime(2000, 1, 2, 12, 20, 00)
         expected_twenty_minutes_ago = datetime.datetime(2000, 1, 2, 12, 10, 00)
@@ -145,51 +105,66 @@ class TestProcessImages(TestCase):
         # add image
         time_series_folder = os.path.join('tests', 'test_data', 'time_series')
 
-        image_0040_filename = 'TfL-images-20200501-0040-00001.08859.jpg'
-        image_0050_filename = 'TfL-images-20200501-0050-00001.08859.jpg'
-        image_0100_filename = 'TfL-images-20200501-0100-00001.08859.jpg'
+        image_thirty_minutes_ago_target_path = os.path.join(download_path, image_supplier,
+                                                            f'{expected_thirty_minutes_ago:%Y%m%d}',
+                                                            f'{expected_thirty_minutes_ago:%H%M}',
+                                                            camera_name + '.jpg')
+        if image1_file_name is not None:
+            patcher.fs.add_real_file(source_path=os.path.join(time_series_folder, image1_file_name),
+                                     target_path=image_thirty_minutes_ago_target_path)
 
-        image_0040_target_path = os.path.join(self.download_path, image_supplier,
-                                              f'{expected_thirty_minutes_ago:%Y%m%d}',
-                                              f'{expected_thirty_minutes_ago:%H%M}',
-                                              camera_name + '.jpg')
-        self.fs.add_real_file(source_path=os.path.join(time_series_folder, image_0040_filename),
-                              target_path=image_0040_target_path)
+        image_twenty_minutes_ago_target_path = os.path.join(download_path, image_supplier,
+                                                            f'{expected_twenty_minutes_ago:%Y%m%d}',
+                                                            f'{expected_twenty_minutes_ago:%H%M}',
+                                                            camera_name + '.jpg')
+        if image2_file_name is not None:
+            patcher.fs.add_real_file(source_path=os.path.join(time_series_folder, image2_file_name),
+                                     target_path=image_twenty_minutes_ago_target_path)
 
-        image_0050_target_path = os.path.join(self.download_path, image_supplier,
-                                              f'{expected_twenty_minutes_ago:%Y%m%d}',
-                                              f'{expected_twenty_minutes_ago:%H%M}',
-                                              camera_name + '.jpg')
-        self.fs.add_real_file(source_path=os.path.join(time_series_folder, image_0050_filename),
-                              target_path=image_0050_target_path)
-
-        image_0100_target_path = os.path.join(self.download_path, image_supplier,
-                                              f'{expected_ten_minutes_ago:%Y%m%d}',
-                                              f'{expected_ten_minutes_ago:%H%M}',
-                                              camera_name + '.jpg')
-        self.fs.add_real_file(source_path=os.path.join(time_series_folder, image_0100_filename),
-                              target_path=image_0100_target_path)
+        image_ten_minutes_ago_target_path = os.path.join(download_path, image_supplier,
+                                                         f'{expected_ten_minutes_ago:%Y%m%d}',
+                                                         f'{expected_ten_minutes_ago:%H%M}',
+                                                         camera_name + '.jpg')
+        if image3_file_name is not None:
+            patcher.fs.add_real_file(source_path=os.path.join(time_series_folder, image3_file_name),
+                                     target_path=image_ten_minutes_ago_target_path)
 
         # Set up fake camera list
-        self.fs.create_file(os.path.join(self.config_path, 'analyse', image_supplier + '.json'),
-                            contents=f'["{camera_name}"]')
+        patcher.fs.create_file(os.path.join(config_path, 'analyse', image_supplier + '.json'),
+                               contents=f'["{camera_name}"]')
 
         mock_datetime.now.return_value = expected_now
 
-        process_scheduled(self.config_path, self.download_path, self.counts_path)
+        process_scheduled(config_path, download_path, counts_path)
 
-        expected_filename = os.path.join(self.counts_path, self.model_name, f'{expected_now:%Y%m%d}.csv')
+        expected_filename = os.path.join(counts_path, model_name, f'{expected_now:%Y%m%d}.csv')
         with open(expected_filename, 'r') as camera_results_file:
             first_line = camera_results_file.readline()
             other_lines = camera_results_file.readlines()
 
-        self.assertEqual(
-            first_line,
-            'date,time,supplier,camera_id,bus,car,cyclist,faulty,missing,motorcyclist,person,truck,van\n')
+    assert first_line == 'date,time,supplier,camera_id,bus,car,cyclist,faulty,missing,motorcyclist,person,truck,van\n'
 
-        # Single result expected (image missing at appropriate time and date)
-        self.assertEqual(1, len(other_lines))
-        self.assertEqual(
-            f'{expected_twenty_minutes_ago:%Y%m%d},{expected_twenty_minutes_ago:%H%M},'
-            f'IMAGE_SUPPLIER,test-camera,0,0,0,False,False,0,1,0,0\n',
-            other_lines[0])
+    # Single result expected (image missing at appropriate time and date)
+    assert 1 == len(other_lines)
+    assert f'{expected_twenty_minutes_ago:%Y%m%d},{expected_twenty_minutes_ago:%H%M},' \
+               f'IMAGE_SUPPLIER,test-camera,{partial_results}\n' == other_lines[0]
+
+
+def set_up_models_in_fake_fs(config_path, model_name, fs):
+    # Set up fake model config
+    fs.create_file(os.path.join(config_path, 'analyse-configuration.json'),
+                   contents=f'{{"model_blob_name": "{model_name}"}}')
+    fs.create_file(os.path.join(config_path, 'models', 'FaultyImageFilterV0', 'configuration.json'),
+                   contents=r'{"identical_area_proportion_threshold": 0.33,"row_similarity_threshold": 0.8,'
+                            r'"consecutive_matching_rows_threshold": 0.2}')
+    pb_filename = "test.pb"
+    fs.create_file(os.path.join(config_path, 'models', 'NewcastleV0', 'configuration.json'),
+                   contents=f'{{"serialized_graph_name": "{pb_filename}", "minimum_confidence": 0.33}}')
+    fs.add_real_file(
+        os.path.join('tests', 'test_data', 'test_detector_data', 'fig_frcnn_rebuscov-3.pb'),
+        target_path=os.path.join(config_path, 'models', 'NewcastleV0', pb_filename)
+    )
+    fs.create_file(os.path.join(config_path, 'models', 'StaticObjectFilterV0', 'configuration.json'),
+                   contents=r'{"scenecut_threshold": 0.4, "minimum_mask_proportion": 0.25, '
+                            r'"minimum_mask_proportion_person": 0.10, "confidence_person": 0.80, '
+                            r'"contour_area_threshold": 50}')
