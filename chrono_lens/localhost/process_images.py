@@ -7,6 +7,7 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 from functools import partial
 
+import cv2
 from dateutil import rrule
 from tqdm import tqdm
 
@@ -139,6 +140,26 @@ def load_models(model_blob_name, config_path):
 
     object_detector_model_stage_name = model_stages[object_detector_model_stage_index]
 
+    model_tuple = load_detection_model(config_path, object_detector_model_stage_name)
+
+    for model_post_process_name in model_stages[object_detector_model_stage_index + 1:]:
+        if model_post_process_name.startswith('StaticObjectFilter'):
+            model_post_process_configuration_file_name = os.path.join(config_path, "models", model_post_process_name,
+                                                                      "configuration.json")
+
+            model_post_process_configuration = load_from_json(model_post_process_configuration_file_name)
+
+            static_object_filter = StaticObjectFilter.from_configuration(model_post_process_configuration)
+
+            post_filter_tuples.append((model_post_process_name, static_object_filter))
+
+        else:
+            raise ValueError(f'Model post-process stage is unknown: "{model_post_process_name}"')
+
+    return pre_filter_tuples, model_tuple, post_filter_tuples
+
+
+def load_detection_model(config_path, object_detector_model_stage_name):
     if object_detector_model_stage_name.startswith('Newcastle'):
 
         model_configuration_file_name = os.path.join(config_path, "models", object_detector_model_stage_name,
@@ -159,22 +180,7 @@ def load_models(model_blob_name, config_path):
     else:
         raise ValueError(
             f'Model object detector stage is unknown: "{object_detector_model_stage_name}"')
-
-    for model_post_process_name in model_stages[object_detector_model_stage_index + 1:]:
-        if model_post_process_name.startswith('StaticObjectFilter'):
-            model_post_process_configuration_file_name = os.path.join(config_path, "models", model_post_process_name,
-                                                                      "configuration.json")
-
-            model_post_process_configuration = load_from_json(model_post_process_configuration_file_name)
-
-            static_object_filter = StaticObjectFilter.from_configuration(model_post_process_configuration)
-
-            post_filter_tuples.append((model_post_process_name, static_object_filter))
-
-        else:
-            raise ValueError(f'Model post-process stage is unknown: "{model_post_process_name}"')
-
-    return pre_filter_tuples, model_tuple, post_filter_tuples
+    return model_tuple
 
 
 def process_scheduled(config_path, download_path, counts_path):
@@ -319,3 +325,29 @@ def batch_process(config_path, download_path, counts_path, start_date, end_date)
                     field_values = [f"{image_datetime:%Y%m%d}", f"{image_datetime:%H%M}", base_name, camera_name]
                     field_values += [object_counts[key] for key in sorted_object_count_keys]
                     writer.writerow(field_values)
+
+
+def markup_image_with_detected_objects(image_filename, model_name, config_folder_path, output_folder):
+    image_rgb = load_bgr_image_as_rgb(image_filename)
+
+    _, object_detector = load_detection_model(config_folder_path, model_name)
+
+    detected_objects = object_detector.detect(image_rgb)
+
+    annotated_image_rgb = image_rgb.copy()
+    color = (0, 255, 0)
+
+    for detected_object in detected_objects:
+        label = detected_object[0]
+        y0, x0, y1, x1, score = detected_object[1]
+        annotated_image_rgb = cv2.rectangle(image_rgb, (x0, y0), (x1, y1), color, 1)
+
+        cv2.putText(annotated_image_rgb, f'{label}-{score:.2f}', (x0, y0), cv2.FONT_HERSHEY_SIMPLEX, 0.4, color, 1)
+
+    annotated_image_path = pathlib.PurePath(image_filename)
+    annotated_image_filename = os.path.join(output_folder,
+                                            annotated_image_path.stem + '-annotated' + annotated_image_path.suffix)
+
+    annotated_image_bgr = cv2.cvtColor(annotated_image_rgb, cv2.COLOR_RGB2BGR)
+
+    cv2.imwrite(annotated_image_filename, annotated_image_bgr)
