@@ -19,7 +19,7 @@ if [[ ${#PROJECT_ID} -gt 30 ]]; then
     exit
 fi
 
-# Check FOLDER_ID is defined
+# Check GCP_FOLDER_NAME is defined
 if [[ -z ${GCP_FOLDER_NAME} ]]; then
     echo
     echo "*** ERROR ***"
@@ -51,6 +51,20 @@ EXPORTS_BUCKET_NAME="exports-${PROJECT_ID}"
 ORGANIZATION_ID=`gcloud organizations list --format="value(ID)"`
 BILLING_ACCOUNT_ID=`gcloud beta billing accounts list --format="value(ACCOUNT_ID)"`
 FOLDER_ID=`gcloud resource-manager folders list --organization ${ORGANIZATION_ID} --filter="DISPLAY_NAME=${GCP_FOLDER_NAME}" --format="value(ID)"`
+
+# Check FOLDER_ID is defined
+if [[ -z ${FOLDER_ID} ]]; then
+    echo
+    echo "*** ERROR ***"
+    echo "FOLDER_ID was not set by script"
+    echo
+    echo "Usually an indication that GCP_FOLDER_NAME was not correctly defined in the environment or the"
+    echo "ORGANIZATION_ID failed to be set from 'gcloud organisations list' a few lines earlier in the script."
+    echo
+    echo "Exiting..."
+    echo
+    exit
+fi
 
 
 echo "*** INFO 1/12: Requesting for Authentication ***"

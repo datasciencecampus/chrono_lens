@@ -11,8 +11,6 @@ fi
 PROJECT_ID=$1-$2
 BRANCH_PATTERN="^$2$" # branch name we will match against to launch triggers
 
-DEPLOY_CONFIG_FILE="cloud/clouddeploy.yaml"
-
 
 # Cloud Functions are all defined within the "functions" folder
 cd functions
@@ -26,7 +24,7 @@ do
     if [[ "${3}" == "${FUNCTION_NAME}" ]] || [[ "${3}" == "all" ]]
     then
         echo
-        echo "*** INFO Deploying cloud function $FUNCTION_NAME ***"
+        echo "*** INFO Deploying cloud function ${FUNCTION_NAME} ***"
         echo
 
         # Read variables from variables.txt
@@ -36,7 +34,7 @@ do
         TIMEOUT=`cat ${FUNCTION_NAME}/variables.txt | tr ' ' '\n' | grep timeout`
 
         # Copy in dsc_lib so it appears as local to the src directory; we'll remove it after installing
-        cp -r ../dsc_lib ${FUNCTION_NAME}/src/
+        cp -r ../../chrono_lens ${FUNCTION_NAME}/src/
 
         # --quiet used to stop query "Allow unauthenticated invocations of new function [func name]? (y/N)?
         # so instead will use default response of "N" (cannot specify "do not permit", only "do permit" with
@@ -59,7 +57,7 @@ do
             --quiet
 
         # Remove temporary dsc_lib copy after installation
-        rm -rf ${FUNCTION_NAME}/src/dsc_lib
+        rm -rf ${FUNCTION_NAME}/src/chrono_lens
     else
         echo
         echo "*** INFO ...skipping deploy of cloud function ${FUNCTION_NAME}... ***"
