@@ -1,3 +1,5 @@
+# todo: refactor to use parameterised testing approach from tests/chrono_lens/localhost/test_process_images.py
+
 import csv
 import glob
 import logging
@@ -104,12 +106,12 @@ def generate_counts(base_name, sample_date_time, camera_name, download_path,
                 detected_objects, previous_image_rgb, image_rgb, next_image_rgb,
                 previous_comparable, next_comparable)
 
-            if detected_objects is None:
-                object_results['faulty'] = True
-            else:
-                for detected_object in detected_objects:
-                    label = detected_object[0].lower().strip()
-                    object_results[label] += 1
+        if detected_objects is None:
+            object_results['faulty'] = True
+        else:
+            for detected_object in detected_objects:
+                label = detected_object[0].lower().strip()
+                object_results[label] += 1
 
     return object_results
 
@@ -180,6 +182,7 @@ def load_detection_model(config_path, object_detector_model_stage_name):
     else:
         raise ValueError(
             f'Model object detector stage is unknown: "{object_detector_model_stage_name}"')
+
     return model_tuple
 
 
@@ -207,7 +210,7 @@ def process_scheduled(config_path, download_path, counts_path):
     logging.info('...loaded models')
 
     logging.info('Preparing CSV...')
-    object_count_keys = sorted(model_tuple[1].detected_object_types()) + ['faulty', 'missing']
+    object_count_keys = model_tuple[1].detected_object_types() + ['faulty', 'missing']
     sorted_object_count_keys = sorted(object_count_keys)
     column_names = ['date', 'time', 'supplier', 'camera_id'] + sorted_object_count_keys
 

@@ -59,10 +59,20 @@ def test_no_cameras_no_entries(mock_datetime):
          'TfL-images-20200501-0040-00001.08859.jpg', 'TfL-images-20200501-0050-00001.08859.jpg',
          'TfL-images-20200501-0100-00001.08859.jpg', '0,0,0,False,False,0,1,0,0'),
 
+        ('Next faulty, static objects removed',
+         'FaultyImageFilterV0_NewcastleV0_StaticObjectFilterV0',
+         'TfL-images-20200501-0040-00001.08859.jpg', 'TfL-images-20200501-0050-00001.08859.jpg',
+         os.path.join('..', 'failing_images', 'this_isnt_an_image.jpeg'), '0,0,0,False,False,0,1,0,0'),
+
         ('Next missing, static objects removed',
          'FaultyImageFilterV0_NewcastleV0_StaticObjectFilterV0',
          'TfL-images-20200501-0040-00001.08859.jpg', 'TfL-images-20200501-0050-00001.08859.jpg',
          None, '0,0,0,False,False,0,1,0,0'),
+
+        ('Previous faulty, static objects removed',
+         'FaultyImageFilterV0_NewcastleV0_StaticObjectFilterV0',
+         os.path.join('..', 'failing_images', 'this_isnt_an_image.jpeg'), 'TfL-images-20200501-0050-00001.08859.jpg',
+         'TfL-images-20200501-0100-00001.08859.jpg', '0,0,0,False,False,0,1,0,0'),
 
         ('Previous missing, static objects removed',
          'FaultyImageFilterV0_NewcastleV0_StaticObjectFilterV0',
@@ -84,13 +94,35 @@ def test_no_cameras_no_entries(mock_datetime):
          'TfL-images-20200501-0040-00001.08859.jpg', 'TfL-images-20200501-0050-00001.08859.jpg',
          'TfL-images-20200501-0050-00001.08859.jpg', '0,0,0,False,False,0,1,0,0'),
 
-        # TODO pull more tests from cloud/functions/count_objects/tests/test_count_objects.py for consistency
-        # TODO share expectations between gcloud & localhost - make the list shared...
+        ('Next faulty, faulty image test skipped; static filter not requested',
+         'FaultyImageFilterV0_NewcastleV0',
+         'TfL-images-20200501-0040-00001.08859.jpg', 'TfL-images-20200501-0050-00001.08859.jpg',
+         os.path.join('..', 'failing_images', 'this_isnt_an_image.jpeg'), '0,2,0,False,False,0,1,0,3'),
 
-        # Identifies items in small image (352x288), no pre or post processing
-        # Distant items are blurry, but it does miss 1 cyclist otherwise looks ok.
-        # Possibly 18 cars if you include far distance
-        # ('NewcastleV0', None, 'TfL-images-20200501-1340-00001.04542.jpg', None, '(0,12,0,False,False,0,2,0,1'),
+        ('Previous faulty, faulty image test skipped; static filter not requested',
+         'FaultyImageFilterV0_NewcastleV0',
+         os.path.join('..', 'failing_images', 'this_isnt_an_image.jpeg'), 'TfL-images-20200501-0040-00001.08859.jpg',
+         'TfL-images-20200501-0050-00001.08859.jpg', '0,3,0,False,False,0,0,0,3'),
+
+        ('All images the same, no static filter, flagged as faulty',
+         'FaultyImageFilterV0_NewcastleV0',
+         'TfL-images-20200501-0050-00001.08859.jpg', 'TfL-images-20200501-0050-00001.08859.jpg',
+         'TfL-images-20200501-0050-00001.08859.jpg', '0,0,0,True,False,0,0,0,0'),
+
+        ('Single zero length image, no pre or post process, flagged as faulty',
+         'NewcastleV0',
+         None, os.path.join('..', 'failing_images', 'zero_length_image.jpeg'),
+         None, '0,0,0,True,False,0,0,0,0'),
+
+        ('Missing image, no pre or post process, flagged as missing',
+         'NewcastleV0',
+         None, None,
+         None, '0,0,0,False,True,0,0,0,0'),
+
+        ('Identifies items in small image (352x288), no pre or post processing',
+         # Distant items are blurry, but it does miss 1 cyclist otherwise looks ok.
+         # Possibly 18 cars if you include far distance
+         'NewcastleV0', None, 'TfL-images-20200501-1340-00001.04542.jpg', None, '0,12,0,False,False,0,2,0,1'),
     ])
 @patch('chrono_lens.localhost.process_images.datetime')
 def test_image_edge_cases(mock_datetime, _comment, model_name, image1_file_name, image2_file_name, image3_file_name,
