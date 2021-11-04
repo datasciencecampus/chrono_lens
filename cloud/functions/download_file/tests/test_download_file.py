@@ -11,8 +11,8 @@ with mock.patch('chrono_lens.gcloud.logging.setup_logging_and_trace'):
 
 mocked_requests_get_call_count = 0
 
-test_detector_folder = os.path.join('..', '..', '..', 'tests', 'test_data', 'test_detector_data')
-time_series_folder = os.path.join('..', '..', '..', 'tests', 'test_data', 'time_series')
+test_detector_folder = os.path.join('..', '..', '..', '..', 'tests', 'test_data', 'test_detector_data')
+time_series_folder = os.path.join('..', '..', '..', '..', 'tests', 'test_data', 'time_series')
 
 valid_url = 'http://site.com/some/file.ext'
 valid_url_content_filename = 'TfL-images-20200501-0040-00001.08859.jpg'

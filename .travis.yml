@@ -20,11 +20,11 @@ script:
   - source localhost-venv/bin/activate
 
   # command to install dependencies
-  #  - pip install --use-feature=2020-resolver -r requirements-localhost.txt
+  #  - pip install --use-feature=2020-resolver --quiet --r requirements-localhost.txt
   # includes extra 'test' specific dependencies
-  - pip3 install --use-feature=2020-resolver -r tests/requirements.txt
+  - pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt
   # for codecov support
-  - pip3 install pytest==4.3.1 pytest-cov==2.9.0
+  - pip3 install --use-feature=2020-resolver --quiet pytest==4.3.1 pytest-cov==2.9.0
   # to report installed packages
   - pip3 freeze
   # command to run tests
@@ -47,10 +47,10 @@ script:
   - pip3 -V
 
   # command to install dependencies
-  - pip3 install --use-feature=2020-resolver -r requirements-gcloud.txt
+  - pip3 install --use-feature=2020-resolver --quiet -r requirements-gcloud.txt
   # includes extra 'test' specific dependencies
-  - pip3 install --use-feature=2020-resolver -r tests/requirements.txt
-  - pip3 install --use-feature=2020-resolver -r tests/chrono_lens/gcloud/requirements.txt
+  - pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt
+  - pip3 install --use-feature=2020-resolver --quiet -r tests/chrono_lens/gcloud/requirements.txt
   # for codecov support
   - pip3 install pytest==4.3.1 pytest-cov==2.9.0
   # to report installed packages
@@ -84,9 +84,9 @@ script:
       cd ${FUNCTION_NAME}
       echo "Copying root 'chrono_lens' folder as subdir to 'src' to enable local reuse of shared folder"
       cp -r ../../../chrono_lens src/
-      pip3 install --use-feature=2020-resolver pytest
-      pip3 install --use-feature=2020-resolver -r src/requirements.txt
-      if [ -f "tests/requirements.txt" ]; then pip3 install --use-feature=2020-resolver -r tests/requirements.txt; fi
+      pip3 install --use-feature=2020-resolver --quiet -pytest
+      pip3 install --use-feature=2020-resolver --quiet --r src/requirements.txt
+      if [ -f "tests/requirements.txt" ]; then pip3 install --use-feature=2020-resolver --quiet --r tests/requirements.txt; fi
       cd src
       echo "GCP_PROJECT='Travis' BUILD_ID='Travis' python -m pytest -v ../tests"
       GCP_PROJECT="Travis" BUILD_ID="Travis" python -m pytest -v ../tests

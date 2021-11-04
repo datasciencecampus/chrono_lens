@@ -11,8 +11,8 @@ else:
     pytestmark = pytest.mark.skip(reason="Skipping as not running on GCP")
 
 
-@patch('scripts.download_analysis_camera_list.dump')
-@patch('scripts.download_analysis_camera_list.storage')
+@patch('scripts.gcloud.download_analysis_camera_list.dump')
+@patch('scripts.gcloud.download_analysis_camera_list.storage')
 class TestDownloadAnalysisCameraList(unittest.TestCase):
     def test_pulls_blobs_and_extracts_camera_name(self, mock_storage, mock_json_dump):
         mock_client = MagicMock()

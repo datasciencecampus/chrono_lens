@@ -51,8 +51,8 @@ class TestCountObjects(TestCase):
     """
     @classmethod
     def setUpClass(cls):
-        test_detector_folder = os.path.join('..', '..', '..', 'tests', 'test_data', 'test_detector_data')
-        time_series_folder = os.path.join('..', '..', '..', 'tests', 'test_data', 'time_series')
+        test_detector_folder = os.path.join('..', '..', '..', '..', 'tests', 'test_data', 'test_detector_data')
+        time_series_folder = os.path.join('..', '..', '..', '..', 'tests', 'test_data', 'time_series')
 
         static_object_test_image_0040_filename = 'TfL-images-20200501-0040-00001.08859.jpg'
         with open(os.path.join(time_series_folder, static_object_test_image_0040_filename), 'rb') as fp:
