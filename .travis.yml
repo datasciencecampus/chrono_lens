@@ -36,6 +36,7 @@ script:
   # command to run tests
   - PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
   - echo -en "travis_fold:end:testing_localhost_chrono_lens\\r"
+  - echo "done"
 
 
   #
@@ -67,6 +68,7 @@ script:
   # Pretend we're running on GCP
   - GCP_PROJECT="Travis" BUILD_ID="Travis" PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
   - echo -en "travis_fold:end:testing_gcloud_chrono_lens\\r"
+  - echo "done"
 
 
   #
@@ -96,7 +98,7 @@ script:
       GCP_PROJECT="Travis" BUILD_ID="Travis" python -m pytest -v ../tests
       cd ../..
       echo -en "travis_fold:end:testing_${FUNCTION_NAME}\\r"
-      echo
+      echo "done"
     done
 
 after_success:
