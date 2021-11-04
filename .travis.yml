@@ -29,7 +29,7 @@ script:
   - pip3 freeze
   # command to run tests
   #  - PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
-  - deactivate
+  #  - deactivate
 
 
   #
@@ -37,8 +37,8 @@ script:
   #
   # pip removed when venv exited?
   #  - python3 -m pip install -U pip
-  - sudo apt-get install python3-pip
-  - sudo apt-get install python3-venv
+  #  - sudo apt-get install python3-pip
+  #  - sudo apt-get install python3-venv
   - python3 -m venv gcloud-venv
   - source gcloud-venv/bin/activate
 
@@ -63,7 +63,7 @@ script:
   #  - PYTHONPATH=.. pytest --cov-config ../.coveragerc --cov=../ ./
   #  - cd ..
   - PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
-  - deactivate
+  #  - deactivate
 
 
   #
