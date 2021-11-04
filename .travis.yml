@@ -46,10 +46,6 @@ script:
   - which pip3
   - pip3 -V
 
-  # Pretend we're running on GCP
-  - GCP_PROJECT="Travis"
-  - BUILD_ID="Travis"
-
   # command to install dependencies
   - pip3 install --use-feature=2020-resolver -r requirements-gcloud.txt
   # includes extra 'test' specific dependencies
@@ -62,7 +58,8 @@ script:
   #  - cd tests
   #  - PYTHONPATH=.. pytest --cov-config ../.coveragerc --cov=../ ./
   #  - cd ..
-  - PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
+  # Pretend we're running on GCP
+  - GCP_PROJECT="Travis" BUILD_ID="Travis" PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
   #  - deactivate
 
 
@@ -83,8 +80,6 @@ script:
     #      sudo apt-get install python3-venv
       python3 -m venv ${FUNCTION_NAME}-venv
       source ${FUNCTION_NAME}-venv/bin/activate
-      GCP_PROJECT="Travis"
-      BUILD_ID="Travis"
       cd ${FUNCTION_NAME}
       echo "Copying root 'chrono_lens' folder as subdir to 'src' to enable local reuse of shared folder"
       cp -r ../../../chrono_lens src/
@@ -92,8 +87,8 @@ script:
       pip3 install -r src/requirements.txt
       if [ -f "tests/requirements.txt" ]; then pip3 install -r tests/requirements.txt; fi
       cd src
-      echo "GCP_PROJECT=$PROJECT_ID python -m pytest -v ../tests"
-      GCP_PROJECT=$PROJECT_ID python -m pytest -v ../tests
+      echo "GCP_PROJECT='Travis' BUILD_ID='Travis' python -m pytest -v ../tests"
+      GCP_PROJECT="Travis" BUILD_ID="Travis" python -m pytest -v ../tests
       deactivate
     done
 
