@@ -57,8 +57,6 @@ script:
   - pip3 install --use-feature=2020-resolver --quiet pytest==4.3.1 pytest-cov==2.9.0
   # to report installed packages
   - pip3 freeze
-  # command to run tests
-  - PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
   # Pretend we're running on GCP
   - GCP_PROJECT="Travis" BUILD_ID="Travis" PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
   - echo -en 'travis_fold:end:testing_gcloud_chrono_lens\\r'
