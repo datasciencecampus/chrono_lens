@@ -80,9 +80,11 @@ script:
       echo
       echo "*** INFO Testing cloud function <${FUNCTION_NAME}> locally ***"
       echo
-      sudo apt-get install python3-venv
+    #      sudo apt-get install python3-venv
       python3 -m venv ${FUNCTION_NAME}-venv
       source ${FUNCTION_NAME}-venv/bin/activate
+      GCP_PROJECT="Travis"
+      BUILD_ID="Travis"
       cd ${FUNCTION_NAME}
       echo "Copying root 'chrono_lens' folder as subdir to 'src' to enable local reuse of shared folder"
       cp -r ../../../chrono_lens src/
