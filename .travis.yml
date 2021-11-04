@@ -16,13 +16,13 @@ script:
   # NOTE
   # venv doesn't quite work - neewd to keep "activating" the next venv rather than deactivate first...
 
-  - echo "travis_fold:start:worker_info"
-  - echo "[0K[33;1mWorker information[0m"
-  - echo "hostname: 915d7fad-01e7-4776-9e95-71df9b84809b@1.worker-com-54588667bc-f6g8x.gce-production-1"
-  - echo "version: 6.2.22 https://github.com/travis-ci/worker/tree/858cb91994a513269f2fe9782c15fc113e966231"
-  - echo "instance: travis-job-29368171-7b39-4b20-b3b2-25a8bf6e04c1 travis-ci-sardonyx-xenial-1593004276-4d46c6b3 (via amqp)"
-  - echo "startup: 6.269815392s"
-  - echo "travis_fold:end:worker_info"
+  - echo "travis_fold:start:worker_info
+    [0K[33;1mWorker information[0m
+    hostname: 915d7fad-01e7-4776-9e95-71df9b84809b@1.worker-com-54588667bc-f6g8x.gce-production-1
+    version: 6.2.22 https://github.com/travis-ci/worker/tree/858cb91994a513269f2fe9782c15fc113e966231
+    instance: travis-job-29368171-7b39-4b20-b3b2-25a8bf6e04c1 travis-ci-sardonyx-xenial-1593004276-4d46c6b3 (via amqp)
+    startup: 6.269815392s
+    travis_fold:end:worker_info"
   #
   # --------------- localhost tests ---------------
   #
