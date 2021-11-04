@@ -43,6 +43,7 @@ script:
 
   - which python3
   - which pip3
+  - pip3 -V
 
   # Pretend we're running on GCP
   - GCP_PROJECT="Travis"
@@ -78,8 +79,18 @@ script:
       echo
       echo "*** INFO Testing cloud function ${FUNCTION_NAME} locally ***"
       echo
+      sudo apt-get install python3-venv
       python3 -m venv ${FUNCTION_NAME}-venv
       source ${FUNCTION_NAME}-venv/bin/activate
+      cd ${FUNCTION_NAME}
+      echo "Copying root 'chrono_lens' folder as subdir to 'src' to enable local reuse of shared folder"
+      cp -r ../../../chrono_lens src/
+      pip3 install pytest
+      pip3 install -r src/requirements.txt
+      if [ -f "tests/requirements.txt" ]; then pip3 install -r tests/requirements.txt; fi
+      cd src
+      echo "GCP_PROJECT=$PROJECT_ID python -m pytest -v ../tests"
+      GCP_PROJECT=$PROJECT_ID python -m pytest -v ../tests
       deactivate
     done
 
