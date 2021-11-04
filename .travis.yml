@@ -52,7 +52,7 @@ script:
   - pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt
   - pip3 install --use-feature=2020-resolver --quiet -r tests/chrono_lens/gcloud/requirements.txt
   # for codecov support
-  - pip3 install pytest==4.3.1 pytest-cov==2.9.0
+  - pip3 install --use-feature=2020-resolver --quiet pytest==4.3.1 pytest-cov==2.9.0
   # to report installed packages
   - pip3 freeze
   # command to run tests
@@ -84,7 +84,7 @@ script:
       cd ${FUNCTION_NAME}
       echo "Copying root 'chrono_lens' folder as subdir to 'src' to enable local reuse of shared folder"
       cp -r ../../../chrono_lens src/
-      pip3 install --use-feature=2020-resolver --quiet -pytest
+      pip3 install --use-feature=2020-resolver --quiet pytest
       pip3 install --use-feature=2020-resolver --quiet --r src/requirements.txt
       if [ -f "tests/requirements.txt" ]; then pip3 install --use-feature=2020-resolver --quiet --r tests/requirements.txt; fi
       cd src
