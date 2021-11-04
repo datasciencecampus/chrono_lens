@@ -35,7 +35,7 @@ def download_file(request):
     """Downloads the given file, downsamples it and stores it in the named data bucket; assumes JPEG format image
 
     Enforces images downsampling at source, by downloading full resolution image, downsampling it if larger than
-    threshold size defined in dsc_lib.images.correction.IMAGE_MAX_AXIS_THRESHOLD
+    threshold size defined in chrono_lens.images.correction.IMAGE_MAX_AXIS_THRESHOLD
 
     Args:
         request (flask.Request): HTTP request object.

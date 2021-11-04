@@ -11,7 +11,7 @@ gcloud_project = os.environ.get('GCP_PROJECT', '')  # Built-in env var
 if gcloud_project == '':
     assert False, "GCP_PROJECT environment variable is not set"
 
-with mock.patch('dsc_lib.gcloud.logging.setup_logging_and_trace'):
+with mock.patch('chrono_lens.gcloud.logging.setup_logging_and_trace'):
     from main import bigquery_write, DATASET_NAME
 
 """

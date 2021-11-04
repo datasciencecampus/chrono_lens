@@ -458,7 +458,7 @@ by the PubSub `scheduled-daily-3am`. Every day the VM refreshes the previous day
 
 Carried out with the `sh gcp-setup-vm.sh <Name of your project> <Name of your branch>` (for example:
  `sh gcp-setup.sh mycameraproject main`).
-The installation script will copy `chrono_lens` and `cloud/dsc_lib` folders to the VM, along with the contents of the
+The installation script will copy `chrono_lens` folder to the VM, along with the contents of the
 `cloud/vm` folder. The script will also create JSON authentication files for service accounts `backfill-ne` and
 `bigquery-r`.
 A user account called `runner` is created on the VM, where all the source code is uploaded for local execution from
@@ -566,8 +566,8 @@ Where as `variables.txt` are read  and set as cloud function Substitution variab
 More generally, if all changes made are local to `clouddeploy.yaml` and the directories and files it handles:
 * `./src/*`
 * `./tests/*`
-* `../../dsc_lib/*`
-* `../../dsc_lib_tests/*`
+* `../../../chrono_lens/*`
+* `../../../tests/*`
 
 Where `./ = cloud/functions/a_function`.
 Then you don't have to delete triggers and recreate them with `gcp-github-triggers.sh`.
@@ -588,8 +588,8 @@ Then you don't have to delete triggers and recreate them with `gcp-github-trigge
 # Adding new Cloud Functions
 
 The folder structure and naming convention in `cloud` directory is used to deploy functions to GCP. We wanted to share code
-between cloud functions so all cloud functions sit within `cloud/functions` folder. `dsc_lib` is where you can store
-code which can be shared by the cloud functions. `dsc_lib` is on the same level as `functions`. A breakdown of the
+between cloud functions so all cloud functions sit within `cloud/functions` folder. `chrono_lens` is where you can store
+code which can be shared by the cloud functions, this folder is in the root of the project. A breakdown of the
 structure is shown below, follow the steps below to add the function:
 
 ## 1. Set up folder structure
@@ -607,10 +607,6 @@ structure is shown below, follow the steps below to add the function:
 │   │   │   │   └── test_main.py
 │   │   │   └── AcceptanceTests.md
 │   │   │   └── variables.txt
-│   ├── dsc_lib
-│   │   ├── __init__.py
-│   │   ├── error_handling.py
-│   ├── dsc_lib_tests
 ```
 `distribute_json_sources`: top level folder for function code, also name of the function in GCP.
 `variables.txt`: this should include the following:

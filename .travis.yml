@@ -50,6 +50,7 @@ script:
   - pip3 install --use-feature=2020-resolver -r requirements-gcloud.txt
   # includes extra 'test' specific dependencies
   - pip3 install --use-feature=2020-resolver -r tests/requirements.txt
+  - pip3 install --use-feature=2020-resolver -r tests/chrono_lens/gcloud/requirements.txt
   # for codecov support
   - pip3 install pytest==4.3.1 pytest-cov==2.9.0
   # to report installed packages
@@ -91,15 +92,6 @@ script:
       GCP_PROJECT="Travis" BUILD_ID="Travis" python -m pytest -v ../tests
       deactivate
     done
-
-
-
-#  - # Now install requirements for dsc_lib
-#  - pip install --use-feature=2020-resolver -r cloud/dsc_lib_tests/requirements.txt
-#  - pip freeze
-#  - cd cloud/dsc_lib
-#  # ...and run the tests on dsc_lib
-#  - PYTHONPATH=../..:.. pytest --cov-config .coveragerc --cov=./ ../dsc_lib_tests/
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

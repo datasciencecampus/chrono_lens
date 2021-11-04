@@ -12,7 +12,7 @@ with mock.patch.dict(os.environ, {
     'MODELS_BUCKET_NAME': models_bucket_name
 }):
     with mock.patch('google.cloud.storage.Client'):
-        with mock.patch('dsc_lib.gcloud.logging.setup_logging_and_trace'):
+        with mock.patch('chrono_lens.gcloud.logging.setup_logging_and_trace'):
             import main
 
 

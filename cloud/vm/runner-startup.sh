@@ -20,7 +20,7 @@ PROJECT_ID="PROJECT_ID_PLACEHOLDER"
 # Note that script will be run via "sudo" so may not be starting in the home folder...
 cd ~runner
 
-export PYTHONPATH=chrono_lens:dsc_lib
+export PYTHONPATH=chrono_lens
 
 echo "================================================================================" >> $1
 echo >> $1

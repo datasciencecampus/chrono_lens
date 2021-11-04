@@ -8,7 +8,7 @@ import google.cloud.storage
 
 function_region = 'region'
 gcp_project = 'project'
-with mock.patch('dsc_lib.gcloud.logging.setup_logging_and_trace'):
+with mock.patch('chrono_lens.gcloud.logging.setup_logging_and_trace'):
     with mock.patch.dict(os.environ, {'FUNCTION_REGION': function_region, 'GCP_PROJECT': gcp_project}):
         import main
 
