@@ -13,11 +13,13 @@ install:
   - python -m pip install -U pip
 
 script:
-  # *** localhost tests ***
+  #
+  # --------------- localhost tests ---------------
+  #
   - python3 -m venv localhost-venv
   - source localhost-venv/bin/activate
 
-  # command to install dependencies\
+  # command to install dependencies
   - pip install --use-feature=2020-resolver -r requirements-localhost.txt
   # includes extra 'test' specific dependencies
   - pip install --use-feature=2020-resolver -r tests/requirements.txt
@@ -32,6 +34,53 @@ script:
   - PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
   - deactivate
 
+
+  #
+  # --------------- gcloud chrono_lens tests ---------------
+  #
+  - python3 -m venv gcloud-venv
+  - source gcloud-venv/bin/activate
+
+  # Pretend we're running on GCP
+  - GCP_PROJECT="Travis"
+  - BUILD_ID="Travis"
+
+  # command to install dependencies
+  - pip install --use-feature=2020-resolver -r requirements-gcloud.txt
+  # includes extra 'test' specific dependencies
+  - pip install --use-feature=2020-resolver -r tests/requirements.txt
+  # for codecov support
+  - pip install pytest==4.3.1 pytest-cov==2.9.0
+  # to report installed packages
+  - pip freeze
+  # command to run tests
+  #  - cd tests
+  #  - PYTHONPATH=.. pytest --cov-config ../.coveragerc --cov=../ ./
+  #  - cd ..
+  - PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
+  - deactivate
+
+
+  #
+  # --------------- gcloud cloud function tests ---------------
+  #
+
+  - cd cloud/functions
+
+  # Find all subfolders with src, as these are the folders with GCP function code and create ci/cd triggers
+  - for repo_dir in **/src/
+  - do
+  - FUNCTION_NAME=${repo_dir%/*/} # get only base dir name e.g. distribute_json_sources/src/ -> distribute_json_sources
+  - echo
+  - echo "*** INFO Testing cloud function ${FUNCTION_NAME} locally ***"
+  - echo
+
+  - python3 -m venv ${FUNCTION_NAME}-venv
+  - source ${FUNCTION_NAME}-venv/bin/activate
+
+  - deactivate
+
+  - done
 
 
 
