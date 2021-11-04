@@ -38,6 +38,8 @@ script:
   #
   # --------------- gcloud chrono_lens tests ---------------
   #
+  # pip removed when venv exited?
+  - python3 -m pip install -U pip
   - python3 -m venv gcloud-venv
   - source gcloud-venv/bin/activate
 
