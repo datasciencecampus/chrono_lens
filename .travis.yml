@@ -58,9 +58,7 @@ script:
   # to report installed packages
   - pip3 freeze
   # command to run tests
-  - cd tests
-  - PYTHONPATH=.. pytest --cov-config ../.coveragerc --cov=../ ./
-  - cd ..
+  - PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
   # Pretend we're running on GCP
   - GCP_PROJECT="Travis" BUILD_ID="Travis" PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
   - echo -en 'travis_fold:end:testing_gcloud_chrono_lens\\r'
