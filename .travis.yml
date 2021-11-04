@@ -11,13 +11,16 @@ matrix:
 install:
   - python --version
   - python -m pip install -U pip
-  #  - python -m easy_install -U setuptools
+
+script:
+  # *** localhost tests ***
+  - python3 -m venv localhost-venv
+  - source localhost-venv/bin/activate
+
   # command to install dependencies\
   - pip install --use-feature=2020-resolver -r requirements-localhost.txt
   # includes extra 'test' specific dependencies
   - pip install --use-feature=2020-resolver -r tests/requirements.txt
-
-script:
   # for codecov support
   - pip install pytest==4.3.1 pytest-cov==2.9.0
   # to report installed packages
@@ -27,6 +30,9 @@ script:
   #  - PYTHONPATH=.. pytest --cov-config ../.coveragerc --cov=../ ./
   #  - cd ..
   - PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
+  - deactivate
+
+
 
 
 #  - # Now install requirements for dsc_lib
