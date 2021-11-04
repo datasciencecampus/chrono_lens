@@ -73,7 +73,7 @@ script:
     for repo_dir in **/src/
     do
       FUNCTION_NAME=${repo_dir%/*/} # get only base dir name e.g. distribute_json_sources/src/ -> distribute_json_sources
-      echo "Testing cloud function <${FUNCTION_NAME}> locally" && echo -en "travis_fold:start:testing_${FUNCTION_NAME}\\\r"
+      echo "Testing cloud function <${FUNCTION_NAME}> locally" && echo -en "travis_fold:start:testing_${FUNCTION_NAME}\\\\r"
       echo "Testing cloud function <${FUNCTION_NAME}> locally"
       python3 -m venv ${FUNCTION_NAME}-venv
       source ${FUNCTION_NAME}-venv/bin/activate
@@ -87,7 +87,7 @@ script:
       echo "GCP_PROJECT='Travis' BUILD_ID='Travis' python -m pytest -v ../tests"
       GCP_PROJECT="Travis" BUILD_ID="Travis" python -m pytest -v ../tests
       cd ../..
-      echo -en "travis_fold:end:testing_${FUNCTION_NAME}\\\r"
+      echo -en "travis_fold:end:testing_${FUNCTION_NAME}\\\\r"
     done
 
 after_success:
