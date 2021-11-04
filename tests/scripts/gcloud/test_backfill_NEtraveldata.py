@@ -32,7 +32,7 @@ class fake_open:
         self.text += text
 
 
-@patch('scripts.backfill_NEtraveldata.json')
+@patch('scripts.gcloud.backfill_NEtraveldata.json')
 class TestBackFillNETravelData(unittest.TestCase):
     default_json_files = {
         'cameras-to-analyse.json': {
@@ -186,8 +186,8 @@ class TestBackFillNETravelData(unittest.TestCase):
                                               f'"{ne_travel_json_file_name}"',
                                               command_line_args, mock_json, json_files)
 
-    @patch('scripts.backfill_NEtraveldata.upload_camera_images')
-    @patch('scripts.backfill_NEtraveldata.remove_ne_travel_data_faulty_and_missing_entries')
+    @patch('scripts.gcloud.backfill_NEtraveldata.upload_camera_images')
+    @patch('scripts.gcloud.backfill_NEtraveldata.remove_ne_travel_data_faulty_and_missing_entries')
     def test_all_args_correct(self, mock_remove_ne_travel_data_faulty_and_missing_entries,
                               mock_upload_camera_images, mock_json):
         command_line_args = [
@@ -210,9 +210,9 @@ class TestBackFillNETravelData(unittest.TestCase):
 
         mock_remove_ne_travel_data_faulty_and_missing_entries.assert_called_once()
 
-    @patch('scripts.backfill_NEtraveldata.upload_camera_images')
-    @patch('scripts.backfill_NEtraveldata.remove_ne_travel_data_faulty_and_missing_entries')
-    @patch('scripts.backfill_NEtraveldata.date')
+    @patch('scripts.gcloud.backfill_NEtraveldata.upload_camera_images')
+    @patch('scripts.gcloud.backfill_NEtraveldata.remove_ne_travel_data_faulty_and_missing_entries')
+    @patch('scripts.gcloud.backfill_NEtraveldata.date')
     def test_no_start_or_end_date_assumes_yesterday(self, mock_date,
                                                     mock_remove_ne_travel_data_faulty_and_missing_entries,
                                                     mock_upload_camera_images, mock_json):

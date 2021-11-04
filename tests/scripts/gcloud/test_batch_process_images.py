@@ -115,9 +115,9 @@ class TestBatchProcessImages(unittest.TestCase):
                                    f'Failed to read camera IDs from JSON file "{json_file_name}"',
                                    batch_process_images.main, command_line_args)
 
-    @patch('scripts.batch_process_images.json')
-    @patch('scripts.batch_process_images.process_images')
-    @patch('scripts.batch_process_images.logging')
+    @patch('scripts.gcloud.batch_process_images.json')
+    @patch('scripts.gcloud.batch_process_images.process_images')
+    @patch('scripts.gcloud.batch_process_images.logging')
     def test_all_args_correct(self, _mock_logging, mock_process_images, mock_json):
         json_file_name = 'testfile.json'
         cameras_to_analyse = {
@@ -175,10 +175,10 @@ class TestBatchProcessImages(unittest.TestCase):
             gcp_project=expected_gcp_project
         )
 
-    @patch('scripts.batch_process_images.json')
-    @patch('scripts.batch_process_images.process_images')
-    @patch('scripts.batch_process_images.date')
-    @patch('scripts.batch_process_images.logging')
+    @patch('scripts.gcloud.batch_process_images.json')
+    @patch('scripts.gcloud.batch_process_images.process_images')
+    @patch('scripts.gcloud.batch_process_images.date')
+    @patch('scripts.gcloud.batch_process_images.logging')
     def test_no_start_or_end_date_assumes_yesterday(self, _mock_logging, mock_date, mock_process_images, mock_json):
         json_file_name = 'testfile.json'
         cameras_to_analyse = {
@@ -237,9 +237,9 @@ class TestBatchProcessImages(unittest.TestCase):
             gcp_project=expected_gcp_project
         )
 
-    @patch('scripts.batch_process_images.json')
-    @patch('scripts.batch_process_images.process_images')
-    @patch('scripts.batch_process_images.date')
+    @patch('scripts.gcloud.batch_process_images.json')
+    @patch('scripts.gcloud.batch_process_images.process_images')
+    @patch('scripts.gcloud.batch_process_images.date')
     def test_no_start_or_end_date_assumes_yesterday(self, mock_date, mock_process_images, mock_json):
         json_file_name = 'testfile.json'
         cameras_to_analyse = {
