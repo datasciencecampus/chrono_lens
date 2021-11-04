@@ -22,10 +22,10 @@ steps:
         && echo "" \
         && echo "PROJECT_ID=$PROJECT_ID" \
         && echo "" \
-        && echo "Copying 'dsc_lib' folder as subdir to 'src' to enable local reuse of shared folder" \
-        && cp -r ../../dsc_lib src/ \
-        && echo "Copying 'dsc_lib_tests' folder as subdir to 'tests' to enable local reuse of shared folder" \
-        && cp -r ../../dsc_lib_tests . \
+        && echo "Copying root 'chrono_lens' folder as subdir to 'src' to enable local reuse of shared folder" \
+        && cp -r ../../../chrono_lens src/ \
+        && echo "Copying root 'tests' folder as 'chrono_lens_tests' to enable local reuse of shared folder" \
+        && cp -r ../../../tests chrono_lens_tests \
         && echo "" \
         && echo "Base folder:" \
         && ls  \
@@ -39,12 +39,12 @@ steps:
         && pip install pytest \
         && pip install -r src/requirements.txt \
         && if [ -f "tests/requirements.txt" ]; then pip install -r tests/requirements.txt; fi \
-        && pip install -r dsc_lib_tests/requirements.txt \
+        && pip install -r chrono_lens_tests/requirements.txt \
         && cd src \
         && echo "GCP_PROJECT=$PROJECT_ID python -m pytest -v ../tests" \
         && GCP_PROJECT=$PROJECT_ID python -m pytest -v ../tests \
-        && echo "GCP_PROJECT=$PROJECT_ID python -m pytest -v ../dsc_lib_tests" \
-        && GCP_PROJECT=$PROJECT_ID python -m pytest -v ../dsc_lib_tests
+        && echo "GCP_PROJECT=$PROJECT_ID python -m pytest -v ../chrono_lens_tests" \
+        && GCP_PROJECT=$PROJECT_ID python -m pytest -v ../chrono_lens_tests
 
   - id: 'Deploy Function'
     name: 'gcr.io/cloud-builders/gcloud'

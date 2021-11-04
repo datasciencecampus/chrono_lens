@@ -122,137 +122,32 @@ This will report any existing issues - useful as the hook is otherwise only run 
 ## Support Scripts
 
 The project is designed to be used primarily via cloud infrastructure, but there are utility scripts for local access
-and updates to the time series. These scripts are located in the `scripts` folder, with each script now described in
-separate following sections. Further information can be found in [`scripts/README.md`](scripts/gcloud/README.md),
+and updates to the time series in the cloud. These scripts are located in the `scripts/gcloud` folder, with each script now described in
+separate following sections. Further information can be found in [`scripts/gcloud/README.md`](scripts/gcloud/README.md),
 and their use by an optional virtual machine is described in [`cloud/README.md`](cloud/README.md).
 
-Note that scripts make use of code in the `chrono_lens` folder as well as that in the `cloud/dsc_lib` folder.
+Non-cloud use is supported by the scripts in the `scripts/localhost` folder, and detail of how to use the `chrono_lens`
+system on a stand-alone machine is described in [`README-localhost.md`](README-localhost.md). Further information
+ on using the scripts can be found in [`scripts/localhost/README.md`](scripts/localhost/README.md).
 
-### `download_analysis_camera_list.py`
-
-This script downloads the list of camera IDs to be analysed, from the GCP project, and the list
-can then be used by `batch_process_images.py`. It accesses the bucket `sources-${PROJECT_ID}`,
-looking in the `analyse` folder for JSON files listing cameras to be processed.
-
-Command line options are:
-* `--cameras-to-analyse-file` filename of a JSON file to write camera IDs and image sources into
-* `--model-config-file` filename of a test file where to store the name of the model in use to analyse the images
-* `--JSON-private-key` JSON key from GCP with permission to invoke cloud functions in the named GCP project
-named cameras to process
-* `--gcp-region` Google Compute Platform region where your project is hosted (e.g. `europe-west2`)
-* `--gcp-project` name of your Google Compute Platform project
-* `--help` detailed help on each option, with default arguments listed
-
-The service account represented by the JSON file will need:
-* `storage/legacyBucketReader` and `storage/legacyObjectReader` on the `sources` bucket
-
-See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/gcloud/README.md) for further information;
-the Cloud setup scripts will create a service account with these permissions (`backfill-ne@...`).
-
-### `batch_process_images.py`
-
-This script is useful in running the time series on pre-existing data - for example, if you have started image
-acquisition before readying the model, or if you wish to re-process imagery with an alternative model or
-alternative settings.
-
-The script calls the cloud function `process_day` which runs a named model on a particular date for a given
-list of cameras. `process_day` in turn calls `run_model_on_image` in the same way the scheduled every 10 minute
-call is processed, with results placed in BigQuery.
-
-Command line options are:
-* `--JSON-private-key` JSON key from GCP with permission to invoke cloud functions in the named GCP project
-* `--cameras-json` filename of a JSON file containing a dictionary of image suppliers, each key linked to a list of
-named cameras to process
-* `--start-date` starting date for when images will be processed
-* `--end-date` end date for when images will be processed
-* `--model-name` name of the machine learning model with optional pre- and post-processing filters (available
-models are listed with `--help`)
-* `--gcp-region` Google Compute Platform region where your project is hosted (e.g. `europe-west2`)
-* `--gcp-project` name of your Google Compute Platform project
-* `--help` detailed help on each option, with default arguments listed
-
-The service account represented by the JSON file will need:
-* `roles/cloudfunctions.invoker`
-
-See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/gcloud/README.md) for further information;
-the Cloud setup scripts will create a service account with these permissions (`backfill-ne@...`).
-
-
-### `backfill_NEtraveldata.py`
-
-The system pulls images every 10 minutes, but the NE Travel Data hosted c/o Newcastle University's
-[Urban Observatory](https://urbanobservatory.ac.uk/) may arrive several hours later in batches. Hence this script
-(and a variation used in the GCP virtual machine) back-fills any late arriving data; once data has been filled,
-then deletes any rows from NETravelData marked as `missing` or `faulty`, and then re-process the affected
-date range using the cloud function `process_day`.
-
-The script takes a JSON file as reported by Newcastle's server which lists available cameras; these cameras are then
-requested and uploaded to the Google storage bucket for later processing; BiqQuery table entries
-for this date range will also have any NE Travel Data processed image records removed if they
-are flagged as `Faulty` or `Missing` (so `batch_process_images.py` will then re-process the gaps).
-
-**Note** that a service account is needed to execute this script, with the following permissions:
-* `roles/bigquery.dataViewer`
-* `roles/bigquery.jobUser`
-* `roles/bigquery.dataEditor`
-* `roles/cloudfunctions.invoker`
-* `storage.legacyObjectReader` and `storage.legacyBucketWriter` permissions on the `data` bucket
-* `storage/legacyBucketReader` and `storage/legacyObjectReader` on the `sources` bucket
-
-See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/gcloud/README.md) for further information;
-the Cloud setup scripts will create a service account with these permissions (`backfill-ne@...`).
-
-Command line options are:
-* `--JSON-private-key` JSON key for GCP service account with appropriate permissions (see above)
-* `--ne-travel-sources-json` JSON file containing NE Travel Data sources as downloaded from Urban Observatory
-(example provided in `NEtraveldata_cctv.json`)
-* `--start-date` starting date for when images will be processed
-* `--end-date` end date for when images will be processed
-* `--model-name` name of the machine learning model with optional pre- and post-processing filters (available
-models are listed with `--help`)
-* `--gcp-region` Google Compute Platform region where your project is hosted (e.g. `europe-west2`)
-* `--gcp-project` name of your Google Compute Platform project
-* `--help` detailed help on each option, with default arguments listed
-
-
-### `remove_old_images.py`
-
-Once images are analysed, they do not need to be retained (unless you are modifying the model or filtering)
-and can be removed. In case of system issues, the images can be retained on a rolling deletion basis - this
-script is used in the optional virtual machine (see [`cloud/README.md`](cloud/README.md)) to remove images
-older than 28 days (4 weeks).
-
-Command line options are:
-* `--maximum-number-of-days` maximum number of days an image is retained before it is deleted (date folder is
-used to determine when it was created - so if an image was downloaded today but the folder indicated 60 days ago,
-running the script with less than 60 days specified will remove the image)
-* `--JSON-private-key` JSON key from GCP with permission to invoke cloud functions in the named GCP project
-* `--gcp-region` Google Compute Platform region where your project is hosted (e.g. `europe-west2`)
-* `--gcp-project` name of your Google Compute Platform project
-* `--help` detailed help on each option, with default arguments listed
-
-The service account represented by the JSON file will need:
-* `storage.legacyObjectReader` and `storage.legacyBucketWriter` permissions on the `data` bucket
-* `storage/legacyBucketReader` and `storage/legacyObjectReader` on the `sources` bucket
-
-See the [Cloud README.md](cloud/README.md) and [scripts README.md](scripts/gcloud/README.md) for further information;
-the Cloud setup scripts will create a service account with these permissions (`backfill-ne@...`).
-
+Note that scripts make use of code in the `chrono_lens` folder.
 
 ## Release
 
 Version | Date | Notes
 -|-|-
 1.0.0 | 2021-06-08 | First release of public repository
+1.0.1 | 2021-09-21 | Bug fix for isolated images, tensorflow version bump
+1.1.0 | ? | Added limited support for stand-alone single machine
 
 ## Future Work
 
 Areas of potential future work are presented here; these changes may not be investigated, but are here
 to make people aware of potential improvements we have considered.
 
-### Infrastructure as Code
+### GCP: Infrastructure as Code
 
-At present, bash shell scripts are used to create the infrastructure; an improvement would be to use IaC,
+At present, bash shell scripts are used to create the GCP infrastructure; an improvement would be to use IaC,
 such as Terraform. This simplifies the changing of (e.g.) Cloud Function configurations
 without having to manually remove the Cloud Build Trigger and re-creating it when
 the runtime environment or memory limits are changed.
@@ -265,13 +160,13 @@ analysed. To save ingestion costs, the ingest code should cross-check against
 the analysis JSON files and only download those files; an alert should be raised
 when any of these sources are no longer available, or if new sources become available.
 
-### Removal of 10-Minute Interval NETravelData Download
+### GCP: Removal of 10-Minute Interval NETravelData Download
 
 The nightly back-fill of images for NETravelData appears to refresh around 40% of NETravelData images;
 the advantage of a regular refresh is diminished if the numbers are only required daily,
 and hence the Cloud Function `distribute_ne_travel_data` may be removed.
 
-### Move Away from `http async` to PubSub
+### GCP: Move Away from `http async` to PubSub
 
 The initial design uses manually operated scripts when testing new models - namely, `batch_process_images.py`.
 This reports the success (or not) and numbers of images processed. To do this,

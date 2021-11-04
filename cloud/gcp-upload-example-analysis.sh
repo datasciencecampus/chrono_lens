@@ -15,7 +15,7 @@ echo "Populating models in GCP bucket 'gs://models-$1-$2/'"
 gsutil cp functions/count_objects/example_faulty_image_detector_configuration.json gs://models-$1-$2/FaultyImageFilterV0/configuration.json
 gsutil cp functions/count_objects/example_newcastle_model_configuration.json gs://models-$1-$2/NewcastleV0/configuration.json
 #gsutil cp functions/count_objects/example-fig_frcnn_rebuscov-3.pb gs://models-$1-$2/NewcastleV0/fig_frcnn_rebuscov-3.pb
-gsutil cp dsc_lib_tests/test_data/test_detector_data/fig_frcnn_rebuscov-3.pb gs://models-$1-$2/NewcastleV0/fig_frcnn_rebuscov-3.pb
+gsutil cp ../tests/test_data/test_detector_data/fig_frcnn_rebuscov-3.pb gs://models-$1-$2/NewcastleV0/fig_frcnn_rebuscov-3.pb
 gsutil cp functions/count_objects/example_static_model_configuration.json gs://models-$1-$2/StaticObjectFilterV0/configuration.json
 
 echo "Populating analysis configuration in GCP bucket 'gs://sources-$1-$2'"

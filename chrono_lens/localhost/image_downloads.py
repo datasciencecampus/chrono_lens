@@ -1,9 +1,6 @@
-import argparse
 import glob
-import json
 import logging
 import os
-import sys
 from datetime import datetime, timedelta
 from random import uniform
 from time import sleep
@@ -13,8 +10,8 @@ import requests
 from tqdm import tqdm
 
 import chrono_lens.localhost
-from chrono_lens.exceptions import ProcessImagesException
 from chrono_lens.images.correction import resize_jpeg_image, IMAGE_MAX_AXIS_THRESHOLD
+from chrono_lens.localhost.file_io import load_from_json
 
 
 def download_image_to_disc(image_url, target_file_name, maximum_number_of_download_attempts):
@@ -53,10 +50,11 @@ def download_image_to_disc(image_url, target_file_name, maximum_number_of_downlo
         logging.error(f'Failed to decode URL="{image_url}"  - empty bitmap generated')
 
     else:
-        open(target_file_name, 'wb').write(resized_jpeg_image)
+        with open(target_file_name, 'wb') as binary_image_file:
+            binary_image_file.write(resized_jpeg_image)
 
 
-def download_all_files(config_folder_name, download_folder_name, maximum_number_of_download_attempts):
+def download_all_images(config_folder_name, download_folder_name, maximum_number_of_download_attempts):
     now = datetime.now()
     now = now - timedelta(minutes=now.minute % 10, seconds=now.second, microseconds=now.microsecond)
     date_time_folder = os.path.join(f'{now:%Y%m%d}', f'{now:%H%M}')
@@ -73,10 +71,9 @@ def download_all_files(config_folder_name, download_folder_name, maximum_number_
         base_json_name = os.path.basename(json_filename)
         base_name = os.path.splitext(base_json_name)[0]
 
-        with open(json_filename, 'r') as json_file:
-            image_urls = json.load(json_file)
-            number_of_urls_read += len(image_urls)
-            number_of_files_read += 1
+        image_urls = load_from_json(json_filename)
+        number_of_urls_read += len(image_urls)
+        number_of_files_read += 1
 
         for image_url in image_urls:
             images_tuples_to_download.append((base_name, image_url))
@@ -92,53 +89,12 @@ def download_all_files(config_folder_name, download_folder_name, maximum_number_
 
         parsed_file_url = urlparse(image_url)
         base_file_name = os.path.basename(parsed_file_url.path[1:])
+        base_file_name_no_extension = os.path.splitext(base_file_name)[0]
         target_folder_name = os.path.join(download_folder_name, base_name, date_time_folder)
         os.makedirs(target_folder_name, exist_ok=True)
-        target_file_name = os.path.join(target_folder_name, base_file_name)
+        target_file_name = os.path.join(target_folder_name, base_file_name_no_extension + '.jpg')
 
         logging.debug(f'Downloading {image_url} to {target_file_name}')
         download_image_to_disc(image_url, target_file_name, maximum_number_of_download_attempts)
 
     logging.info(f'...downloaded {len(images_tuples_to_download)} images to {destination_folder_message}')
-
-
-def get_args(command_line_arguments):
-    parser = argparse.ArgumentParser(description="Download available cameras to disc",
-                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-
-    parser.add_argument("-cf", "--config-folder", default=chrono_lens.localhost.CONFIG_FOLDER,
-                        help="Folder where configuration data is stored")
-
-    parser.add_argument("-df", "--download-folder", default=chrono_lens.localhost.DOWNLOAD_FOLDER,
-                        help="Folder where image data downloaded")
-
-    parser.add_argument("-mda", "--maximum-download-attempts",
-                        default=chrono_lens.localhost.MAXIMUM_NUMBER_OF_DOWNLOAD_ATTEMPTS,
-                        type=int,
-                        help="Maximum number of download attempts per image")
-
-    parser.add_argument("-ll", "--log-level",
-                        default=chrono_lens.localhost.DEFAULT_LOG_LEVEL,
-                        choices=['CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'],
-                        help="Level of detail to report in logs")
-
-    args = parser.parse_args(command_line_arguments)
-
-    return args
-
-
-def main(command_line_args):
-    args = get_args(command_line_args)
-
-    handler = logging.StreamHandler(sys.stdout)
-    logging.basicConfig(handlers=[handler], level=logging.getLevelName(args.log_level))
-
-    download_all_files(args.config_folder, args.download_folder, args.maximum_download_attempts)
-
-
-if __name__ == '__main__':
-    try:
-        main(sys.argv[1:])
-
-    except ProcessImagesException as err:
-        print(f"Image processing error: {err.message}")
