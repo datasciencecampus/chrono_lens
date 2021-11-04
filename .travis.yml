@@ -20,7 +20,7 @@ script:
   - source localhost-venv/bin/activate
 
   # command to install dependencies
-  - pip install --use-feature=2020-resolver -r requirements-localhost.txt
+  #  - pip install --use-feature=2020-resolver -r requirements-localhost.txt
   # includes extra 'test' specific dependencies
   - pip install --use-feature=2020-resolver -r tests/requirements.txt
   # for codecov support
@@ -28,10 +28,7 @@ script:
   # to report installed packages
   - pip freeze
   # command to run tests
-  #  - cd tests
-  #  - PYTHONPATH=.. pytest --cov-config ../.coveragerc --cov=../ ./
-  #  - cd ..
-  - PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
+  #  - PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
   - deactivate
 
 
@@ -39,7 +36,8 @@ script:
   # --------------- gcloud chrono_lens tests ---------------
   #
   # pip removed when venv exited?
-  - python3 -m pip install -U pip
+  #  - python3 -m pip install -U pip
+  - apt-get install python3-venv
   - python3 -m venv gcloud-venv
   - source gcloud-venv/bin/activate
 
