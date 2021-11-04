@@ -84,13 +84,14 @@ script:
       cd ${FUNCTION_NAME}
       echo "Copying root 'chrono_lens' folder as subdir to 'src' to enable local reuse of shared folder"
       cp -r ../../../chrono_lens src/
-      pip3 install pytest
-      pip3 install -r src/requirements.txt
-      if [ -f "tests/requirements.txt" ]; then pip3 install -r tests/requirements.txt; fi
+      pip3 install --use-feature=2020-resolver pytest
+      pip3 install --use-feature=2020-resolver -r src/requirements.txt
+      if [ -f "tests/requirements.txt" ]; then pip3 install --use-feature=2020-resolver -r tests/requirements.txt; fi
       cd src
       echo "GCP_PROJECT='Travis' BUILD_ID='Travis' python -m pytest -v ../tests"
       GCP_PROJECT="Travis" BUILD_ID="Travis" python -m pytest -v ../tests
-      deactivate
+      cd ../..
+    #      deactivate
     done
 
 after_success:
