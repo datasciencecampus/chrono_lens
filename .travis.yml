@@ -16,11 +16,12 @@ script:
   #
   # --------------- localhost tests ---------------
   #
+  - echo -en "travis_fold:start:testing=localhost-chrono_lens"
   - python3 -m venv localhost-venv
   - source localhost-venv/bin/activate
 
   # command to install dependencies
-  #  - pip install --use-feature=2020-resolver --quiet --r requirements-localhost.txt
+  #  - pip install --use-feature=2020-resolver --quiet -r requirements-localhost.txt
   # includes extra 'test' specific dependencies
   - pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt
   # for codecov support
@@ -30,11 +31,13 @@ script:
   # command to run tests
   #  - PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
   #  - deactivate
+  - echo -en "travis_fold:end:testing=localhost-chrono_lens"
 
 
   #
   # --------------- gcloud chrono_lens tests ---------------
   #
+  - echo -en "travis_fold:start:testing=gcloud-chrono_lens"
   # pip removed when venv exited?
   #  - python3 -m pip install -U pip
   #  - sudo apt-get install python3-pip
@@ -62,6 +65,7 @@ script:
   # Pretend we're running on GCP
   - GCP_PROJECT="Travis" BUILD_ID="Travis" PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
   #  - deactivate
+  - echo -en "travis_fold:end:testing=gcloud-chrono_lens"
 
 
   #
@@ -75,6 +79,7 @@ script:
     for repo_dir in **/src/
     do
       FUNCTION_NAME=${repo_dir%/*/} # get only base dir name e.g. distribute_json_sources/src/ -> distribute_json_sources
+      echo -en "travis_fold:start:testing=${FUNCTION_NAME}"
       echo
       echo "*** INFO Testing cloud function <${FUNCTION_NAME}> locally ***"
       echo
@@ -85,13 +90,14 @@ script:
       echo "Copying root 'chrono_lens' folder as subdir to 'src' to enable local reuse of shared folder"
       cp -r ../../../chrono_lens src/
       pip3 install --use-feature=2020-resolver --quiet pytest
-      pip3 install --use-feature=2020-resolver --quiet --r src/requirements.txt
-      if [ -f "tests/requirements.txt" ]; then pip3 install --use-feature=2020-resolver --quiet --r tests/requirements.txt; fi
+      pip3 install --use-feature=2020-resolver --quiet -r src/requirements.txt
+      if [ -f "tests/requirements.txt" ]; then pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt; fi
       cd src
       echo "GCP_PROJECT='Travis' BUILD_ID='Travis' python -m pytest -v ../tests"
       GCP_PROJECT="Travis" BUILD_ID="Travis" python -m pytest -v ../tests
       cd ../..
     #      deactivate
+      echo -en "travis_fold:end:testing=${FUNCTION_NAME}"
     done
 
 after_success:
