@@ -22,7 +22,7 @@ with mock.patch.dict(os.environ, {
             mock_storage_client = MagicMock()
             mock_storage_client_constructor.return_value = mock_storage_client
 
-            with mock.patch('dsc_lib.gcloud.logging.setup_logging_and_trace'):
+            with mock.patch('chrono_lens.gcloud.logging.setup_logging_and_trace'):
                 from main import process_day
 
 
@@ -122,8 +122,8 @@ class TestProcessDay(TestCase):
         self.assertEqual('ValueError: "date_to_process" incorrect format (received "24032020", expected "YYYYMMDD")',
                          response['Message'])
 
-    @mock.patch('dsc_lib.gcloud.async_functions.aiohttp')
-    @mock.patch('dsc_lib.gcloud.authentication.requests')
+    @mock.patch('chrono_lens.gcloud.async_functions.aiohttp')
+    @mock.patch('chrono_lens.gcloud.authentication.requests')
     def test_requests_process_for_every_10_mins_with_unknown_data_root_returns_error(
             self, _mock_requests, mock_aiohttp):
         expected_data_root = "a-source"
@@ -148,8 +148,8 @@ class TestProcessDay(TestCase):
         self.assertEqual(f'ValueError: "{expected_data_root}" does not exist within bucket "{data_bucket_name}"',
                          response['Message'])
 
-    @mock.patch('dsc_lib.gcloud.async_functions.aiohttp')
-    @mock.patch('dsc_lib.gcloud.authentication.requests')
+    @mock.patch('chrono_lens.gcloud.async_functions.aiohttp')
+    @mock.patch('chrono_lens.gcloud.authentication.requests')
     def test_requests_process_for_every_10_mins_with_known_data_root_but_missing_date_returns_error(
             self, _mock_requests, mock_aiohttp):
         expected_data_root = "a-source"
@@ -177,8 +177,8 @@ class TestProcessDay(TestCase):
         self.assertEqual(f'ValueError: "{expected_data_root}" does not have "{date_to_process_raw}" present within bucket "{data_bucket_name}"',
             response['Message'])
 
-    @mock.patch('dsc_lib.gcloud.async_functions.aiohttp')
-    @mock.patch('dsc_lib.gcloud.authentication.requests')
+    @mock.patch('chrono_lens.gcloud.async_functions.aiohttp')
+    @mock.patch('chrono_lens.gcloud.authentication.requests')
     def test_requests_process_for_every_10_mins_with_one_already_processed_with_duplicates(
             self, _mock_requests, mock_aiohttp):
         # @todo test can realistically be reduced to mocking run_cloud_function_async_with_parameter_list
@@ -286,8 +286,8 @@ class TestProcessDay(TestCase):
         self.assertEqual(0, len(times_to_request))
 
     @mock.patch('main.run_cloud_function_async_with_parameter_list')
-    @mock.patch('dsc_lib.gcloud.async_functions.aiohttp')
-    @mock.patch('dsc_lib.gcloud.authentication.requests')
+    @mock.patch('chrono_lens.gcloud.async_functions.aiohttp')
+    @mock.patch('chrono_lens.gcloud.authentication.requests')
     @mock.patch('main.logging')
     def test_logs_all_failing_calls(
             self, mock_logging, _mock_requests, mock_aiohttp, mock_run_async):

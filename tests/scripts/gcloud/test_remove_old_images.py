@@ -27,8 +27,8 @@ class TestRemoveOldImages(unittest.TestCase):
         self.assertRaisesRegex(ValueError, '--maximum-number-of-days must be 1 or higher',
                                remove_old_images.main, command_line_args)
 
-    @patch("scripts.remove_old_images.storage")
-    @patch("scripts.remove_old_images.remove_images_older_than_threshold")
+    @patch("scripts.gcloud.remove_old_images.storage")
+    @patch("scripts.gcloud.remove_old_images.remove_images_older_than_threshold")
     def test_all_params_ok_assumes_NETravelData(self, mock_remove_images_older_than_threshold, _mock_storage):
         command_line_args = [
             '--JSON-private-key=somefile.json',

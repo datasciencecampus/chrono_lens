@@ -142,7 +142,6 @@ sudo cp *.R ~runner
 
 sudo cp backfill-ne-auth-token.json ~runner
 sudo cp -r chrono_lens ~runner
-sudo cp -r dsc_lib ~runner
 sudo cp *.py ~runner
 sudo cp NEtraveldata_cctv.json ~runner
 

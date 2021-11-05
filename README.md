@@ -107,7 +107,7 @@ Installing requirements.txt will install the pre-commit tool, which now needs to
 
 **NOTE** the `check-added-large-files` pre-commit test has its maximum kB size in
 `.pre-commit-config.yaml` is temporarily increased to 60Mb when adding the RCNN model file
-`cloud/dsc_lib_tests/test_data/test_detector_data/fig_frcnn_rebuscov-3.pb`.
+`/tests/test_data/test_detector_data/fig_frcnn_rebuscov-3.pb`.
 The limit is then reverted to 5Mb as a sensible "normal" upper limit.
 
 #### Pre-Commit First Use
@@ -181,7 +181,7 @@ function, rather than the current hierarchy of async calls (using two extra func
 
 Newcastle University's [Urban Observatory](https://urbanobservatory.ac.uk/) supplied the
 [pre-trained Faster-RCNNN](https://github.com/TomKomar/uo-object_counting/raw/26c9f29b46ba7afa6294934ab8326fd4d5f3418d/app/fig_frcnn_rebuscov-3.pb)
-which we use (a local copy is stored in [`cloud/dsc_lib_tests/test_data/test_detector_data/fig_frcnn_rebuscov-3.pb`](tests/test_data/test_detector_data)).
+which we use (a local copy is stored in [`/tests/test_data/test_detector_data/fig_frcnn_rebuscov-3.pb`](tests/test_data/test_detector_data)).
 
 
 ## Open Traffic Camera Imagery

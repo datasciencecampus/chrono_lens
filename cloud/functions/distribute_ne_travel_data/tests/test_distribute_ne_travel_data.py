@@ -13,7 +13,7 @@ with mock.patch.dict(environ, {
     'DATA_BUCKET_NAME': bogus_data_bucket_name,
 }):
     with mock.patch('google.cloud.storage.Client'):
-        with mock.patch('dsc_lib.gcloud.logging.setup_logging_and_trace'):
+        with mock.patch('chrono_lens.gcloud.logging.setup_logging_and_trace'):
             from main import sift_newcastle_cameras_latest_newer_than_datetime, distribute_ne_travel_data
 
 

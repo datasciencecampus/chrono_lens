@@ -7,7 +7,7 @@ gcp_region = 'somewhere-safe'
 gcp_project = 'our-project'
 
 with mock.patch('google.cloud.storage.blob') as mocked_storage_blob:
-    with mock.patch('dsc_lib.gcloud.logging.setup_logging_and_trace'):
+    with mock.patch('chrono_lens.gcloud.logging.setup_logging_and_trace'):
         with mock.patch.dict(os.environ, {
             'FUNCTION_REGION': gcp_region,
             'GCP_PROJECT': gcp_project

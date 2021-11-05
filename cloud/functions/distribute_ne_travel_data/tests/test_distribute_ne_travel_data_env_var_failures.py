@@ -7,7 +7,7 @@ from unittest.mock import MagicMock
 import google
 
 with mock.patch('google.cloud.storage.Client'):
-    with mock.patch('dsc_lib.gcloud.logging.setup_logging_and_trace'):
+    with mock.patch('chrono_lens.gcloud.logging.setup_logging_and_trace'):
         import main  # Note this a bootstrap - we will force reload each test, after mocking environment variables
 
 
@@ -43,7 +43,7 @@ class TestNETravelDataEnvironmentVariableFailures(TestCase):
 
         with mock.patch.dict(os.environ, {}):
             with mock.patch('google.cloud.storage.Client') as mocked_client:
-                with mock.patch('dsc_lib.gcloud.logging.setup_logging_and_trace'):
+                with mock.patch('chrono_lens.gcloud.logging.setup_logging_and_trace'):
                     mocked_client.return_value = mock_client_instance
                     reload(main)
 
@@ -66,7 +66,7 @@ class TestNETravelDataEnvironmentVariableFailures(TestCase):
             'DATA_BUCKET_NAME': bogus_data_bucket_name,
         }):
             with mock.patch('google.cloud.storage.Client') as mocked_client:
-                with mock.patch('dsc_lib.gcloud.logging.setup_logging_and_trace'):
+                with mock.patch('chrono_lens.gcloud.logging.setup_logging_and_trace'):
                     mocked_client.return_value = mock_client_instance
                     reload(main)
 

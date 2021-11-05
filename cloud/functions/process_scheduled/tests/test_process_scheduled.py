@@ -6,7 +6,7 @@ from unittest.mock import MagicMock
 
 import google.cloud.storage
 
-with mock.patch('dsc_lib.gcloud.logging.setup_logging_and_trace'):
+with mock.patch('chrono_lens.gcloud.logging.setup_logging_and_trace'):
     import main
 
 
