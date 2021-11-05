@@ -90,7 +90,7 @@ script:
       echo "GCP_PROJECT='Travis' BUILD_ID='Travis' python -m pytest -v ../tests"
       GCP_PROJECT="Travis" BUILD_ID="Travis" python -m pytest -v ../tests
       cd ../..
-      echo -en "S{FOLD_SPECIAL_WORD}:end:testing_${FUNCTION_NAME}\\\\r"
+      echo -en "${FOLD_SPECIAL_WORD}:end:testing_${FUNCTION_NAME}\\\\r"
       echo
     done
 
