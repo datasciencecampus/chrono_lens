@@ -71,9 +71,9 @@ script:
   # Find all subfolders with src, as these are the folders with GCP function code and create ci/cd triggers
   # Hiding fold keyword in variable to prevent erroneous fold when showing bash code before execution
   - |
-    FOLD_SPECIAL_WORD="travis_fold"
     for repo_dir in **/src/
     do
+      FOLD_SPECIAL_WORD="travis_fold"
       FUNCTION_NAME=${repo_dir%/*/} # get only base dir name e.g. distribute_json_sources/src/ -> distribute_json_sources
       echo -en "${FOLD_SPECIAL_WORD}:start:testing_${FUNCTION_NAME}\\\\r"
       echo
