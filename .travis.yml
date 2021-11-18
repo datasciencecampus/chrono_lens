@@ -58,7 +58,7 @@ script:
   # to report installed packages
   - pip3 freeze
   # Pretend we're running on GCP
-  - GCP_PROJECT="Travis" BUILD_ID="Travis" PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
+  - GCP_PROJECT="Travis" BUILD_ID="Travis" PYTHONPATH=. pytest --cov-append --cov-config .coveragerc --cov=./ tests/
   - echo -en 'travis_fold:end:testing_gcloud_chrono_lens\\r'
 
 
@@ -95,7 +95,7 @@ script:
       cd ../../..
       pwd
       echo "GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src pytest cloud/functions/${FUNCTION_NAME}/tests/"
-      GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src pytest cloud/functions/${FUNCTION_NAME}/tests/
+      GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src pytest --cov-append cloud/functions/${FUNCTION_NAME}/tests/
     #      cd ../..
       cd cloud/functions
       pwd
