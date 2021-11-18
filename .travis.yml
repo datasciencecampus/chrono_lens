@@ -85,6 +85,8 @@ script:
       python3 -m venv ${FUNCTION_NAME}-venv
       source ${FUNCTION_NAME}-venv/bin/activate
     #      cd ${FUNCTION_NAME}
+      # includes extra 'test' specific dependencies
+      pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt
       cd cloud/functions/${FUNCTION_NAME}
       pwd
     #      echo "Copying root 'chrono_lens' folder as subdir to 'src' to enable local reuse of shared folder"
