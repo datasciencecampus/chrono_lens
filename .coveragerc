@@ -1,6 +1,10 @@
 [run]
-omit = *test*
+omit =
+    *test*
+    cloud/functions/*/src/chrono_lens/*
+
 source =
     chrono_lens/*
     scripts/*
     cloud/functions/*/src/*
+    cloud/functions/bigquery_write/src/*

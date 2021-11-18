@@ -93,6 +93,7 @@ script:
       if [ -f "tests/requirements.txt" ]; then pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt; fi
     #      cd src
       cd ../../..
+      pwd
       echo "GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src pytest cloud/functions/${FUNCTION_NAME}/tests/"
       GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src pytest cloud/functions/${FUNCTION_NAME}/tests/
     #      cd ../..
