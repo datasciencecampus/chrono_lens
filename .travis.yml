@@ -90,8 +90,8 @@ script:
       if [ -f "tests/requirements.txt" ]; then pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt; fi
     #      cd src
       cd
-      echo "GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/function/${FUNCTION_NAME}/src pytest --cov-config .coveragerc --cov=./ cloud/function/${FUNCTION_NAME}/tests/"
-      GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/function/${FUNCTION_NAME}/src pytest --cov-config .coveragerc --cov=./ cloud/function/${FUNCTION_NAME}/tests/
+      echo "GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/function/${FUNCTION_NAME}/src pytest --cov-config .coveragerc --cov=cloud/function/${FUNCTION_NAME}/src/ cloud/function/${FUNCTION_NAME}/tests/"
+      GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/function/${FUNCTION_NAME}/src pytest --cov-config .coveragerc --cov=cloud/function/${FUNCTION_NAME}/src/ cloud/function/${FUNCTION_NAME}/tests/
     #      cd ../..
       echo -en "${FOLD_SPECIAL_WORD}:end:testing_${FUNCTION_NAME}\\\\r"
       echo
