@@ -75,6 +75,7 @@ script:
     for repo_dir in **/src/
     do
       cd ../..
+      pwd
       FOLD_SPECIAL_WORD="travis_fold"
       FUNCTION_NAME=${repo_dir%/*/} # get only base dir name e.g. distribute_json_sources/src/ -> distribute_json_sources
       echo -en "${FOLD_SPECIAL_WORD}:start:testing_${FUNCTION_NAME}\\\\r"
@@ -86,16 +87,17 @@ script:
       cd cloud/functions/${FUNCTION_NAME}
       pwd
       echo "Copying root 'chrono_lens' folder as subdir to 'src' to enable local reuse of shared folder"
-      cp -r ../../chrono_lens src/
+      cp -r ../../../chrono_lens src/
       pip3 install --use-feature=2020-resolver --quiet pytest==4.3.1 pytest-cov==2.9.0
       pip3 install --use-feature=2020-resolver --quiet -r src/requirements.txt
       if [ -f "tests/requirements.txt" ]; then pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt; fi
     #      cd src
       cd ../../..
-      echo "GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/function/${FUNCTION_NAME}/src pytest --cov-config .coveragerc --cov=cloud/function/${FUNCTION_NAME}/src/ cloud/function/${FUNCTION_NAME}/tests/"
-      GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/function/${FUNCTION_NAME}/src pytest cloud/function/${FUNCTION_NAME}/tests/
+      echo "GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src pytest cloud/functions/${FUNCTION_NAME}/tests/"
+      GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src pytest cloud/functions/${FUNCTION_NAME}/tests/
     #      cd ../..
       cd cloud/functions
+      pwd
       echo -en "${FOLD_SPECIAL_WORD}:end:testing_${FUNCTION_NAME}\\\\r"
       echo
     done
