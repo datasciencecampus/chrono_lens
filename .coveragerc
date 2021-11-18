@@ -1,2 +1,6 @@
 [run]
 omit = *test*
+source =
+    chrono_lens/*
+    scripts/*
+    cloud/functions/*/src/*
