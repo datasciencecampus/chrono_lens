@@ -98,7 +98,7 @@ script:
       cd ../../..
       pwd
       echo "GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src pytest cloud/functions/${FUNCTION_NAME}/tests/"
-      GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src:. coverage run --append --source=loud/functions/${FUNCTION_NAME}/src -m pytest cloud/functions/${FUNCTION_NAME}/tests/
+      GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src:. coverage run --append --source=cloud/functions/${FUNCTION_NAME}/src -m pytest cloud/functions/${FUNCTION_NAME}/tests/
     #      cd ../..
       cd cloud/functions
       pwd
