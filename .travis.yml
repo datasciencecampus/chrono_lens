@@ -75,36 +75,33 @@ script:
   - |
     for repo_dir in **/src/
     do
-      cd ../..
-      pwd
-      FOLD_SPECIAL_WORD="travis_fold"
-      FUNCTION_NAME=${repo_dir%/*/} # get only base dir name e.g. distribute_json_sources/src/ -> distribute_json_sources
-      echo -en "${FOLD_SPECIAL_WORD}:start:testing_${FUNCTION_NAME}\\\\r"
-      echo
-      echo "Testing cloud function <${FUNCTION_NAME}> locally"
-      python3 -m venv ${FUNCTION_NAME}-venv
-      source ${FUNCTION_NAME}-venv/bin/activate
-    #      cd ${FUNCTION_NAME}
-      # includes extra 'test' specific dependencies
-      pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt
-      cd cloud/functions/${FUNCTION_NAME}
-      pwd
-    #      echo "Copying root 'chrono_lens' folder as subdir to 'src' to enable local reuse of shared folder"
-    #      cp -r ../../../chrono_lens src/
-      pip3 install --use-feature=2020-resolver --quiet coverage==6.1.2
-      pip3 install --use-feature=2020-resolver --quiet -r src/requirements.txt
-      if [ -f "tests/requirements.txt" ]; then pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt; fi
-    #      cd src
-      cd ../../..
-      pwd
-      echo "GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src pytest cloud/functions/${FUNCTION_NAME}/tests/"
-      GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src:. coverage run --append --source=cloud/functions/${FUNCTION_NAME}/src -m pytest cloud/functions/${FUNCTION_NAME}/tests/
-    #      cd ../..
-      cd cloud/functions
-      pwd
-      echo -en "${FOLD_SPECIAL_WORD}:end:testing_${FUNCTION_NAME}\\\\r"
-      echo
-    done
+      cd ../.. &&
+      pwd &&
+      FOLD_SPECIAL_WORD="travis_fold" &&
+      FUNCTION_NAME=${repo_dir%/*/} &&
+      echo -en "${FOLD_SPECIAL_WORD}:start:testing_${FUNCTION_NAME}\\\\r" &&
+      echo &&
+      echo "Testing cloud function <${FUNCTION_NAME}> locally" &&
+      python3 -m venv ${FUNCTION_NAME}-venv &&
+      source ${FUNCTION_NAME}-venv/bin/activate &&
+
+      pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt &&
+      cd cloud/functions/${FUNCTION_NAME} &&
+      pwd &&
+      pip3 install --use-feature=2020-resolver --quiet coverage==6.1.2 &&
+      pip3 install --use-feature=2020-resolver --quiet -r src/requirements.txt &&
+      if [ -f "tests/requirements.txt" ]; then pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt; fi &&
+
+      cd ../../.. &&
+      pwd &&
+      echo "GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src:. coverage run --append --source=cloud/functions/${FUNCTION_NAME}/src -m pytest cloud/functions/${FUNCTION_NAME}/tests/" &&
+      GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src:. coverage run --append --source=cloud/functions/${FUNCTION_NAME}/src -m pytest cloud/functions/${FUNCTION_NAME}/tests/ &&
+
+      cd cloud/functions &&
+      pwd &&
+      echo -en "${FOLD_SPECIAL_WORD}:end:testing_${FUNCTION_NAME}\\\\r" &&
+      echo &&
+    done || exit 1
 
 after_success:
   #  look for coverage files
