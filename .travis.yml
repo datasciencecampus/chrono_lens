@@ -97,15 +97,14 @@ script:
       pwd
       echo "GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src:. coverage run --append --source=cloud/functions/${FUNCTION_NAME}/src -m pytest cloud/functions/${FUNCTION_NAME}/tests/"
       GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src:. coverage run --append --source=cloud/functions/${FUNCTION_NAME}/src -m pytest cloud/functions/${FUNCTION_NAME}/tests/
-      if [[ $? -ne 0 ]]
+      these_tests_failed=$?
+      if [[ ${these_tests_failed} -ne 0 ]]
       then
-        overall_test_code=$?
-        these_tests_failed=$?
+        overall_test_code=${these_tests_failed}
         echo
         echo "ERROR - detected tests failed"
         echo
       else
-        these_tests_failed=0
         echo
         echo "Detected tests passed"
         echo
