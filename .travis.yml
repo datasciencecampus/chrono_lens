@@ -124,12 +124,6 @@ script:
         echo "ERROR - detected tests failed, code=${these_tests_failed}"
         echo
       fi
-      if [[ ${overall_test_code} -ne 0 ]]
-      then
-        echo
-        echo "ERROR - detected overall tests failed, code=${overall_test_code}"
-        echo
-      fi
     done
 
     if [[ ${overall_test_code} -ne 0 ]]
