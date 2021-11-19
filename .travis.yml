@@ -100,7 +100,7 @@ script:
       cd cloud/functions &&
       pwd &&
       echo -en "${FOLD_SPECIAL_WORD}:end:testing_${FUNCTION_NAME}\\\\r" &&
-      echo &&
+      echo
     done || exit 1
 
 after_success:
