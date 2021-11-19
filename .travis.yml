@@ -99,7 +99,7 @@ script:
       GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src:. coverage run --append --source=cloud/functions/${FUNCTION_NAME}/src -m pytest cloud/functions/${FUNCTION_NAME}/tests/
       if [[ $? -ne 0 ]]
       then
-        overall_test_code=1
+        overall_test_code=$?
         echo
         echo "ERROR - detected tests failed"
         echo
@@ -119,11 +119,10 @@ script:
       echo
     done
 
-    if [[ $? -ne 0 ]]
+    if [[ ${overall_test_code} -ne 0 ]]
     then
-      overall_test_code = $?
       echo
-      echo "ERROR - detected tests failed, exiting script with failure"
+      echo "ERROR - detected tests failed with code ${overall_test_code}, exiting script with failure"
       echo
       exit ${overall_test_code}
     else
