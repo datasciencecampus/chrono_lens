@@ -100,10 +100,12 @@ script:
       if [[ $? -ne 0 ]]
       then
         overall_test_code=$?
+        these_tests_failed=$?
         echo
         echo "ERROR - detected tests failed"
         echo
       else
+        these_tests_failed=0
         echo
         echo "Detected tests passed"
         echo
@@ -115,8 +117,20 @@ script:
       cd cloud/functions
       pwd
       echo -en "${FOLD_SPECIAL_WORD}:end:testing_${FUNCTION_NAME}\\\\r"
-
       echo
+
+      if [[ ${these_tests_failed} -ne 0 ]]
+      then
+        echo
+        echo "ERROR - detected tests failed, code=${these_tests_failed}"
+        echo
+      fi
+      if [[ ${overall_test_code} -ne 0 ]]
+      then
+        echo
+        echo "ERROR - detected overall tests failed, code=${overall_test_code}"
+        echo
+      fi
     done
 
     if [[ ${overall_test_code} -ne 0 ]]
