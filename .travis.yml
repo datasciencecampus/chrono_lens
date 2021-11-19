@@ -97,7 +97,13 @@ script:
       pwd
       echo "GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src:. coverage run --append --source=cloud/functions/${FUNCTION_NAME}/src -m pytest cloud/functions/${FUNCTION_NAME}/tests/"
       GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src:. coverage run --append --source=cloud/functions/${FUNCTION_NAME}/src -m pytest cloud/functions/${FUNCTION_NAME}/tests/
-      if [[ $? -ne 0 ]]; then overall_test_code = $?; fi
+      if [[ $? -ne 0 ]]
+      then
+        overall_test_code = $?
+        echo
+        echo "ERROR - detected tests failed"
+        echo
+      fi
 
       cd cloud/functions
       pwd
@@ -105,7 +111,14 @@ script:
 
       echo
     done
-    exit ${overall_test_code}
+      if [[ $? -ne 0 ]]
+      then
+        overall_test_code = $?
+        echo
+        echo "ERROR - detected tests failed, exiting script with failure"
+        echo
+        exit ${overall_test_code}
+      fi
 
 after_success:
   #  look for coverage files
