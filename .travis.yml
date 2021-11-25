@@ -129,12 +129,12 @@ script:
     if [[ ${overall_test_code} -ne 0 ]]
     then
       echo
-      echo "ERROR - detected tests failed with code ${overall_test_code}, exiting script with failure"
+      echo "ERROR - detected Cloud Function tests failed with code ${overall_test_code}, exiting script with failure"
       echo
       exit ${overall_test_code}
     else
       echo
-      echo "All tests passed"
+      echo "All Cloud Function tests passed"
       echo
     fi
 
