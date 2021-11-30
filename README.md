@@ -29,7 +29,7 @@ assess traffic flow in different parts of the country via the internet. The imag
 available, low resolution, and do not permit people or vehicles to be individually identified. They differ from CCTV
 used for public safety and law enforcement for Automatic Number Plate Recognition (ANPR) or for monitoring traffic speed.
 
-## Machine Learning Pipeline
+## Data Processing Pipeline
 
 ![](readme_images/machine_learning_pipeline.png)
 
@@ -53,7 +53,7 @@ directly from Newcastle University's [Urban Observatory](https://urbanobservator
 ### Faulty Object Detection
 
 Cameras may be unavailable for various reasons (system fault, feed disabled by local operator, etc.) and these
-could cause the model to generate spuious object counts (e.g. a small blob may look like a distant bus). An example of
+could cause the model to generate spurious object counts (e.g. a small blob may look like a distant bus). An example of
 such an image is:
 ![](tests/test_data/failing_images/TfL-images_20200501_0520_00001.06592.jpg)
 
@@ -68,6 +68,11 @@ Here, the camrera feed has stalled and the last "live" row has been repeated; we
 if the bottom row of image matches the row above (within threshold). If so, then the next row above is checked
 for a match and so on until rows no longer match or we run out of rows. If the number of matching rows is above a
 threshold, then the image is unlikely to generate useful data and hence is flagged as faulty.
+
+**Note** different image providers use different ways of showing that a camera is unavailable; our detection
+technique relies on few colours being used - i.e. a purely synthetic image. If a more natural image is used, our
+technique may not work. An alternative is to keep a "library" of failing images and look for similarity, which may
+work better with more natural images.
 
 ### Object Detection
 
