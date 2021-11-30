@@ -29,7 +29,89 @@ assess traffic flow in different parts of the country via the internet. The imag
 available, low resolution, and do not permit people or vehicles to be individually identified. They differ from CCTV
 used for public safety and law enforcement for Automatic Number Plate Recognition (ANPR) or for monitoring traffic speed.
 
-## Architecture
+## Data Processing Pipeline
+
+![](readme_images/machine_learning_pipeline.png)
+
+The main stages of the pipeline, as outlined in the image, are:
+* Image ingestion
+* Faulty image detection
+* Object detection
+* Static object detection
+* Storage of resulting counts
+
+The counts can then be further processed (seasonal adjustment, missing value imputation) and transformed into
+reports as required. We will briefly review the main pipeline stages.
+
+### Image Ingestion
+
+A set of camera sources (web hosted JPEG images) is selected by the user, and provided as a list of URLs to the user.
+Example code is provided to obtain public images from [Transport for London](https://tfl.gov.uk/),
+and specialist code to pull NE Traffic Data
+directly from Newcastle University's [Urban Observatory](https://urbanobservatory.ac.uk/).
+
+### Faulty Object Detection
+
+Cameras may be unavailable for various reasons (system fault, feed disabled by local operator, etc.) and these
+could cause the model to generate spurious object counts (e.g. a small blob may look like a distant bus). An example of
+such an image is:
+![](tests/test_data/failing_images/TfL-images_20200501_0520_00001.06592.jpg)
+
+These images have so far all followed a pattern of a very synthetic image, consisting of a flat background colour and
+text overlaid (compared to an image of a natural scene). These images are currently detected by reducing the colour
+depth (snapping similar colours together) and then looking at the highest fraction of the image
+occupied by a single colour. Once this is over a threshold, we determine the image is synthetic and mark it
+as faulty. Other faults may occur due to encoding, such as:
+![](tests/test_data/failing_images/TfL-images_20200504_0240_00001.08859.jpg)
+
+Here, the camrera feed has stalled and the last "live" row has been repeated; we detect this by checking
+if the bottom row of image matches the row above (within threshold). If so, then the next row above is checked
+for a match and so on until rows no longer match or we run out of rows. If the number of matching rows is above a
+threshold, then the image is unlikely to generate useful data and hence is flagged as faulty.
+
+**Note** different image providers use different ways of showing that a camera is unavailable; our detection
+technique relies on few colours being used - i.e. a purely synthetic image. If a more natural image is used, our
+technique may not work. An alternative is to keep a "library" of failing images and look for similarity, which may
+work better with more natural images.
+
+### Object Detection
+
+The object detection process identifies both static and moving objects, using a
+[pre-trained Faster-RCNN](https://github.com/TomKomar/uo-object_counting/blob/26c9f29b46ba7afa6294934ab8326fd4d5f3418d/app/fig_frcnn_rebuscov-3.pb)
+provided by Newcastle University's [Urban Observatory](https://urbanobservatory.ac.uk/).
+The model has been trained on 10,000 traffic camera images from
+North East England, and further validated by the ONS Data Science Campus to confirm the model was usable with camera
+imagery from other areas of the UK. It detects the following object types: car, van, truck, bus,
+pedestrian, cyclist, motorcyclist.
+
+### Static Object Detection
+
+As we are aiming to detect activity, it is
+important to filter out static objects using temporal information. The images are sampled at 10-minute intervals, so
+traditional methods for background detection in video, such as mixture of Gaussians, are not suitable.
+
+Any pedestrians and vehicles classified during object detection will be set as static and removed from the final counts
+if they also appear in the background. The below image shows example results of the static mask, where the parked cars
+in image (a)
+are identified as static and removed. An extra benefit is that the static mask can help remove false alarms. For example,
+in image (b), the rubbish bin is misidentified as a pedestrian in the object detection but filtered out as static
+background.
+
+![](readme_images/object_detection.png)
+
+### Storage of Resulting Counts
+
+The results are simply stored as a table, the schema recording camera id, date, time, related counts per object type
+(car, van, pedestrian, etc.), if an image is faulty or if an image is missing.
+
+## Implementations
+
+Initially, the system was designed to be cloud native, to enable scalability; however, this introduces a barrier
+to entry - you need to have an account with a cloud provider, know how to secure the infrastructure, etc. With this in
+mind, we have also back-ported the code to work on a stand-alone machine (or "local host") to enable an interested
+user to simply run the system on their own laptop. Both implementations are now described below.
+
+### Implementation on Google Compute Platform
 
 ![](readme_images/High-level_architecture_of_the_system.png)
 
@@ -43,25 +125,9 @@ schedule. GCP cloud functions are registered against the topic and are started w
 
 Processing the images to detect vehicles and pedestrians results in counts of objects being written into a database for
 later analysis as a time series. The database is used to share data between the data collection and time series
-analysis, reducing coupling. We use BigQuery as our database given its wide support in other GCP products, such as
-Data Studio for data visualisation.
-
-## Object Detection
-
-The object detection process identifies both static and moving objects. As we are aiming to detect activity, it is
-important to filter out static objects using temporal information. The images are sampled at 10-minute intervals, so
-traditional methods for background detection in video, such as mixture of Gaussians, are not suitable.
-
-Any pedestrians and vehicles classified during object detection will be set as static and removed from the final counts
-if they also appear in the background. The below image shows example results of the static mask, where the parked cars
-in image (a)
-are identified as static and removed. An extra benefit is that the static mask can help remove false alarms. For example,
-in image (b), the rubbish bin is misidentified as a pedestrian in the object detection but filtered out as static
-background.
-
-![](readme_images/object_detection.png)
-
-## Google Compute Platform - Implementation
+analysis, reducing coupling. We use BigQuery within GCP as our database given its wide support in other GCP products, such as
+Data Studio for data visualisation; the local host implementation stores daily CSVs by comparison, to remove any
+dependence on a particular database or other infrastructure.
 
 The GCP related source code is stored in the `cloud` folder; this downloads the imagery, processes it to count objects,
 stores the counts in a database and (weekly) produces time-series analysis. All documentation and source code
@@ -72,13 +138,16 @@ also documented in the [Cloud README.md](cloud/README.md). Cloud support code is
 `chrono_lens.gcloud` module, enabling command line scripts to support GCP, alongside the Cloud Function code
 in the `cloud` folder.
 
-## Local host - Implementation
+### Implementation on Local Host
 
 Stand-alone, single machine ("localhost") code is contained in the `chrono_lens.localhost` module. The process
 follows the same flow as the GCP variant, albeit using a single machine and each python file in `chrono_lens.localhost`
 maps to the Cloud Functions of GCP. Refer to [README-localhost.md](README-localhost.md) for further details.
 
 ## Installation
+
+We now describe the various steps and pre-requisites to install the system, given that both GCP & local hos
+implementations require at lesat some local installation.
 
 ### Virtual Environments
 
