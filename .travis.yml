@@ -135,6 +135,4 @@ script:
     fi
 
 after_success:
-  #  look for coverage files
-  #  - find . -name \*.xml -print
   - bash <(curl -s https://codecov.io/bash)
