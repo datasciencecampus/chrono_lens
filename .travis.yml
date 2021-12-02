@@ -77,7 +77,6 @@ script:
     for repo_dir in **/src/
     do
       cd ../..
-      pwd
       FOLD_SPECIAL_WORD="travis_fold"
       FUNCTION_NAME=${repo_dir%/*/}
       echo -en "${FOLD_SPECIAL_WORD}:start:testing_${FUNCTION_NAME}\\\\r"
