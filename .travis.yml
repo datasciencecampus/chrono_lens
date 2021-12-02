@@ -68,7 +68,6 @@ script:
   #
 
   - cd cloud/functions
-  - pwd
 
   # Find all subfolders with src, as these are the folders with GCP function code and create ci/cd triggers
   # Hiding fold keyword in variable to prevent erroneous fold when showing bash code before execution
