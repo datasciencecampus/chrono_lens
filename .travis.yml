@@ -86,7 +86,6 @@ script:
 
       pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt
       cd cloud/functions/${FUNCTION_NAME}
-      pwd
       pip3 install --use-feature=2020-resolver --quiet coverage==6.1.2
       pip3 install --use-feature=2020-resolver --quiet -r src/requirements.txt
       if [ -f "tests/requirements.txt" ]; then pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt; fi
