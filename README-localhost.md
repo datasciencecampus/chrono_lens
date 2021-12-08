@@ -18,7 +18,7 @@ sharding), which can be imported into a database as required.
 * Time series analysis has not been ported to `localhost`; the R code is available in
 `cloud/vm`, but assumes the data is hosted in BigQuery.
 
-# Design and architecture of solution to object identification
+# Design and Architecture of the Solution to Object Identification
 The object identification is experimental, and hence needs to be re-evaluated
 multiple times across the same dataset. With this in mind, rather than
 streaming data through a model to generate results, we instead collect the
@@ -36,7 +36,7 @@ Once imagery is downloaded, we can then process. There are two scenarios:
 
 Finally, images can be deleted once no longer required.
 
-## Discovering available image sources
+## Discovering Available Image Sources
 This is initiated by manually looking for public sources of data,
 as we are focused on a publicly available and reusable solution.
 If you are using your own data, this step is simply to determine
@@ -49,7 +49,7 @@ which is stored in a `localhost/config/ingest` folder. For instance, TfL cameras
 sources would be stored in `localhost/config/ingest/TfL-images.json`, which is a list
 of image URLs.
 
-## Updating image sources
+## Updating Image Sources
 
 Given suppliers of publicly available cameras often provide API
 endpoints on the web, we have a python tool that calls these
@@ -60,12 +60,15 @@ and its image URL where it can be downloaded.
 Detailed usage instructions are presented in [`scripts/localhost/README.md`](scripts/localhost/README.md).
 
 This script needs to be called daily (or as often as you wish to updated of available imagery);
-we recommend daily at 3am.
-
-Other suppliers may not provide such an endpoint, in which case
+we recommend daily at 3am. Other suppliers may not provide such an endpoint, in which case
 this function is not needed.
 
-## Download all images at regular intervals
+**Note** you may wish to reduce the number of images the system ingests - in which case, run this utility once to
+populate the `JSON` files, then remove unnecessary cameras. For example, TfL will ingest >900 cameras, yet you may
+only wish to download (and later process) far fewer. Don't forget to likewise reduce the cameras to be analysed to
+reflect the reduced list, otherwise the CSV will contain many entries flagged as `missing`.
+
+## Download All Images at Regular Intervals
 
 The python script `scripts/localhost/download_files.py` needs to be called at 10 minute intervals past the hour,
 which will request each image listed in the JSON files
@@ -85,17 +88,68 @@ image was actually captured
 or it something else; for instance, TfL offer both JPEG and MP4.
 
 To trigger regular downloads, the local system's scheduler should be used. Under Microsoft Windows
-there is the [Task Scheduler.](https://docs.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page)
+there is the [Task Scheduler](https://docs.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page)
 (_note: this link is for developer API access rather than the UI_) or
 UN*X [crontab](https://man7.org/linux/man-pages/man5/crontab.5.html) (_also suitable for MacOS_).
 
 `scripts/localhost/download_files.py` internally retries downloads in the case when the
 URL doesn't return a 200 (success code) or 404 (not found) - e.g. if a 504
 "Gateway timeout" error code is returned, then the client should try again.
-A random delay is triggered before retrying.
+A random length delay is triggered before retrying to improve load balance and chances of success.
 Detailed usage instructions are presented in [`scripts/localhost/README.md`](scripts/localhost/README.md).
 
-## Run a specified model over historical data
+### `crontab` Quick Guide (UN*X / MacOS)
+
+Using `crontab` we are able to execute Python scripts automatically at regular intervals. This is perfect for running
+bash scripts which in turn will execute `download_files.py` and `process_scheduled.py`. Below is a quick simple guide
+on installing and setting up `crontab` for users on MacOS. We highly recommend **NOT** setting up chrono_lens within the
+`Documents` folder due to its symbolic link nature. Instead we recommend the 'Home' folder.
+
+**1. Creating Bash Scripts for `crontab`**
+
+Within a text editor you will need to write two simple bash scripts to 1. activate your virtual environment
+(both will do this), 2. one will execute `download_file.py`, and 3. the second will execute `process_scheduled.py`.
+
+**An example bash script for download_files.py:**
+
+`#!/bin/bash`
+`export PYTHONPATH='/location/of/your/chrono_lens_folder'`
+`cd /location/of/your/chrono_lens_folder`
+`source venv/bin/activate`
+`python3 scripts/localhost/download_files.py`
+
+Save the above as `download_files_bash_script.sh`. Repeat accordingly for `process_scheduled.py`.
+
+**2. Accessing `crontab`**
+
+Within the terminal app execute `sudo crontab -u your_username -e` and `crontab` will open in the VI text editor.
+Enter `SHIFT + I` to allow editing ("insert" mode in the VI editor). Enter the following:
+
+`0/10 * * * * /location/of/your/download_files_bash_script.sh`
+`0/10 * * * * /location/of/your/process_scheduled_bash_script.sh`
+
+Enter `ESC` and then `SHIFT + Z` and `SHIFT + Z` again. This will save your edits to `crontab`.
+
+The `0/10 * * * *` commands an execution every 10-minutes starting at 0 minutes past the hour; we found
+[crontab guru](https://crontab.guru/#0/10_*_*_*_*) useful for an explanation of the fields.
+
+**3. Setting Permissions (to Enable `crontab` to Access Your Scripts)**
+
+**WARNING** this step will ensure `crontab` can access your files - you may be able to use weaker permissions, but the below
+approach has been tested to work. You should consider carefully if you want to do this on a shared / multi-user machine,
+as this will render your files visible to other users.
+
+We need to ensure all of the bash scripts and tree of directories above has 'read, execute access for everyone'.
+We can achieve this by executing simple commands within the terminal application. Simply go to the location of your
+saved bash script and execute the following separately:
+
+`chmod 755 download_files_bash_script.sh`
+`chmod 755 process_scheduled_bash_script.sh`
+`chmod 755` within the folder containing your bash scripts and each parent folder above.
+
+Images and counts should now be populating your `chrono_lens/local_host` sub-folders within 10 minutes.
+
+## Run a Specified Model Over Historical Data
 The storage of the data in a local folder enables us to re-process data with different
 models, and to compare results to see impact of models. With this in mind,
 we need to be able to run any model, and store its results for comparison.
@@ -124,7 +178,7 @@ as an additional file - see next section.
 The script to use is `scripts/locahost/process_scheduled.py`;
 detailed usage instructions are presented in [`scripts/localhost/README.md`](scripts/localhost/README.md).
 
-### Newcastle model
+### Newcastle Model
 This model is detected by its name starting with `Newcastle` - underneath it is an RCNN
 defined using tensorflow. The JSON configuration file defines the file name of the
 serialised model weights, and reference information for the user (ignored by the pipeline),
@@ -133,7 +187,7 @@ each model in a different root folder. A local copy of the serialised weights is
 `tests/test_data/test_detector_data/fig_frcnn_rebuscov-3.pb` and must be copied into the
 `localhost/config/models/NewcastleV0/` folder.
 
-### Faulty image filter (pre-process)
+### Faulty Image Filter (Pre-process)
 This filter rejects images if they are corrupt; two forms are detected:
 1. Large portion of image contain repeated rows of exactly the same R,G,B values, and
 2. Large proportion of a pure greyscale where R=G=B (for different values of pure grey in the area); this
@@ -148,7 +202,7 @@ is what is supplied (for instance, you may make a v1 variant, so model name woul
 `FaultyImageFilterV1_NewcastleV0` or with the static object filter with
 `FaultyImageFilterV1_NewcastleV0_StaticObjectFilterV0`).
 
-### Static object filter (post-process)
+### Static Object Filter (Post-process)
 The constants that define thresholds for static object detection are defined in the
 JSON configuration file. To run alternative settings, a different folder should be created
 so that existing model configurations are unchanged to enable re-running of models as required
@@ -156,7 +210,7 @@ and hence ensure repeatability. The new configuration hence has a new configurat
 is what is supplied (for instance, you may make a v1 variant, so model name would be
 `FaultyImageFilterV1`, and could be used with the Newcastle model via `NewcastleV0_StaticObjectFilterV1`).
 
-## Running models
+## Running Models
 The python script `scripts/localhost/batch_process_images.py` will run selected models over named cameras
 across a selected date range. Refer to `scripts/localhost/README.md` for full instructions.
 
@@ -168,20 +222,20 @@ deletes images older than 28 days (4 weeks), as this is deemed a sufficient wind
 recent issues and sufficient historical images to correct the time series.
 Detailed usage instructions are presented in [`scripts/localhost/README.md`](scripts/localhost/README.md).
 
-# Differing results to ONS Faster Indicators
+# Differing Results to ONS Faster Indicators
 
 Note, running the default models and camera locations provided will yield results that differ from those published by
 ONS Faster Indicators. This difference will arise from internal factors such as variation in camera sampling times and
 manual imputation when cameras are unavailable for sustained periods. Furthermore, external changes such as camera addresses
 changing over time will impact results. The current lists of selected cameras are valid as of 25/01/2021.
 
-# Adding cameras to be processed after images have been downloaded
+# Adding Cameras to be Processed After Images Have Been Downloaded
 
 The python script `scripts/localhost/update_sources.py` populates the folder
 `localhost/config/ingest`, creating one JSON file per camera image supplier. However, images are not analysed unless
 they are specified in `localhost/config/analyse` JSON files
 
-## Uploading models
+## Uploading Models
 
 **Our default models have already been installed for you. However this section will detail how to add your own models
 if you so wish to do so.**
@@ -201,7 +255,7 @@ If, for instance, the pre-processor `FaultyImageFilterV0` and the model `Newcast
 named `FaultyImageFilterV0_NewcastleV0` will be created in `localhost/counts` where a CSV file will be generated
 for each calendar day.
 
-### Adding cameras to be analysed
+### Adding Cameras to be Analysed
 
 **Camera locations have already been added for you and include TfL.
 The following section details how one would add additional locations.**
