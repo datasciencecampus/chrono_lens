@@ -28,11 +28,11 @@ script:
   # includes extra 'test' specific dependencies
   - pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt
   # for codecov support
-  - pip3 install --use-feature=2020-resolver --quiet pytest==4.3.1 pytest-cov==2.9.0
+  - pip3 install --use-feature=2020-resolver --quiet coverage==6.1.2
   # to report installed packages
   - pip3 freeze
   # command to run tests
-  - PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
+  - PYTHONPATH=. coverage run --source=. -m pytest tests/
   - echo -en 'travis_fold:end:testing_localhost_chrono_lens\\r'
 
 
@@ -54,11 +54,12 @@ script:
   - pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt
   - pip3 install --use-feature=2020-resolver --quiet -r tests/chrono_lens/gcloud/requirements.txt
   # for codecov support
-  - pip3 install --use-feature=2020-resolver --quiet pytest==4.3.1 pytest-cov==2.9.0
+  - pip3 install --use-feature=2020-resolver --quiet coverage==6.1.2
   # to report installed packages
   - pip3 freeze
   # Pretend we're running on GCP
-  - GCP_PROJECT="Travis" BUILD_ID="Travis" PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ tests/
+  - GCP_PROJECT="Travis" BUILD_ID="Travis" PYTHONPATH=. coverage run --append --source=. -m pytest tests/
+
   - echo -en 'travis_fold:end:testing_gcloud_chrono_lens\\r'
 
 
@@ -71,28 +72,67 @@ script:
   # Find all subfolders with src, as these are the folders with GCP function code and create ci/cd triggers
   # Hiding fold keyword in variable to prevent erroneous fold when showing bash code before execution
   - |
+    overall_test_code=0
     for repo_dir in **/src/
     do
+      cd ../..
       FOLD_SPECIAL_WORD="travis_fold"
-      FUNCTION_NAME=${repo_dir%/*/} # get only base dir name e.g. distribute_json_sources/src/ -> distribute_json_sources
+      FUNCTION_NAME=${repo_dir%/*/}
       echo -en "${FOLD_SPECIAL_WORD}:start:testing_${FUNCTION_NAME}\\\\r"
       echo
       echo "Testing cloud function <${FUNCTION_NAME}> locally"
       python3 -m venv ${FUNCTION_NAME}-venv
       source ${FUNCTION_NAME}-venv/bin/activate
-      cd ${FUNCTION_NAME}
-      echo "Copying root 'chrono_lens' folder as subdir to 'src' to enable local reuse of shared folder"
-      cp -r ../../../chrono_lens src/
-      pip3 install --use-feature=2020-resolver --quiet pytest==4.3.1 pytest-cov==2.9.0
+
+      pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt
+      cd cloud/functions/${FUNCTION_NAME}
+      pip3 install --use-feature=2020-resolver --quiet coverage==6.1.2
       pip3 install --use-feature=2020-resolver --quiet -r src/requirements.txt
       if [ -f "tests/requirements.txt" ]; then pip3 install --use-feature=2020-resolver --quiet -r tests/requirements.txt; fi
-      cd src
-      echo "GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=. pytest --cov-config .coveragerc --cov=./ ../tests/"
-      GCP_PROJECT="Travis" BUILD_ID="Travis"  PYTHONPATH=. pytest --cov-config ../../../../.coveragerc --cov=./ ../tests/
-      cd ../..
+
+      cd ../../..
+      pwd
+      echo "GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src:. coverage run --append --source=cloud/functions/${FUNCTION_NAME}/src -m pytest cloud/functions/${FUNCTION_NAME}/tests/"
+      GCP_PROJECT='Travis' BUILD_ID='Travis' PYTHONPATH=cloud/functions/${FUNCTION_NAME}/src:. coverage run --append --source=cloud/functions/${FUNCTION_NAME}/src -m pytest cloud/functions/${FUNCTION_NAME}/tests/
+      these_tests_failed=$?
+      if [[ ${these_tests_failed} -ne 0 ]]
+      then
+        overall_test_code=${these_tests_failed}
+        echo
+        echo "ERROR - detected tests failed"
+        echo
+      else
+        echo
+        echo "Detected tests passed"
+        echo
+      fi
+      echo
+      echo "Test failure detected: ${overall_test_code}"
+      echo
+
+      cd cloud/functions
       echo -en "${FOLD_SPECIAL_WORD}:end:testing_${FUNCTION_NAME}\\\\r"
       echo
+
+      if [[ ${these_tests_failed} -ne 0 ]]
+      then
+        echo
+        echo "ERROR - detected tests failed, code=${these_tests_failed}"
+        echo
+      fi
     done
+
+    if [[ ${overall_test_code} -ne 0 ]]
+    then
+      echo
+      echo "ERROR - detected Cloud Function tests failed with code ${overall_test_code}, exiting script with failure"
+      echo
+      exit ${overall_test_code}
+    else
+      echo
+      echo "All Cloud Function tests passed"
+      echo
+    fi
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

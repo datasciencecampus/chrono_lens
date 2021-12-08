@@ -81,7 +81,13 @@ def main(command_line_args):
     handler = logging.StreamHandler(sys.stdout)
     logging.basicConfig(handlers=[handler], level=logging.getLevelName(args.log_level))
 
-    batch_process(args.config_folder, args.download_folder, args.counts_path, args.start_date, args.end_date)
+    batch_process(
+        config_path=args.config_folder,
+        download_path=args.download_folder,
+        counts_path=args.counts_path,
+        start_date=args.start_date,
+        end_date=args.end_date
+    )
 
 
 if __name__ == '__main__':
