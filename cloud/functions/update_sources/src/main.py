@@ -5,12 +5,12 @@ import os
 
 from opentelemetry import trace
 
-import dsc_lib.gcloud.logging
-import dsc_lib.images.sources.tfl
-from dsc_lib.error_handling import report_exception
-from dsc_lib.gcloud.buckets import write_to_bucket
+import chrono_lens.gcloud.logging
+import chrono_lens.images.sources.tfl
+from chrono_lens.gcloud.buckets import write_to_bucket
+from chrono_lens.gcloud.error_handling import report_exception
 
-dsc_lib.gcloud.logging.setup_logging_and_trace()
+chrono_lens.gcloud.logging.setup_logging_and_trace()
 
 
 def update_sources(event, context):
@@ -36,8 +36,8 @@ def update_sources(event, context):
             with tracer.start_as_current_span('update TfL'):
                 logging.info(f'Updating TfL image sources...')
                 tfl_images_gc_destination = 'ingest/TfL-images.json'
-                tfl_sources = dsc_lib.images.sources.tfl.download_urls()
-                url_list = dsc_lib.images.sources.tfl.filter_image_urls(tfl_sources)
+                tfl_sources = chrono_lens.images.sources.tfl.download_urls()
+                url_list = chrono_lens.images.sources.tfl.filter_image_urls(tfl_sources)
                 write_to_bucket(sources_bucket_name, tfl_images_gc_destination, json.dumps(url_list))
                 logging.info(f'...TfL image sources updated.')
 

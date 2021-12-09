@@ -15,13 +15,23 @@ sudo adduser --disabled-password --gecos "" runner
 echo
 echo "*** INFO Updating and upgrading apt-get"
 echo
-sudo apt-get update
+# From https://manpages.debian.org/unstable/apt/apt-get.8.en.html - see "--allow-releaseinfo-change"
+# Required as "buster" version of Debian has moved status to "oldstable":
+#
+# N: Repository 'http://security.debian.org/debian-security buster/updates InRelease' changed its 'Suite' value from 'stable' to 'oldstable'
+# N: Repository 'http://deb.debian.org/debian buster InRelease' changed its 'Version' value from '10.5' to '10.11'
+# N: Repository 'http://deb.debian.org/debian buster InRelease' changed its 'Suite' value from 'stable' to 'oldstable'
+# N: Repository 'http://deb.debian.org/debian buster-updates InRelease' changed its 'Suite' value from 'stable-updates' to 'oldstable-updates'
+#
+# Rather than re-validate R rjdemetra and related dependencies, staying with old copy of Debian at VM construction.
+
+sudo apt-get --allow-releaseinfo-change update
 sudo apt-get -y upgrade
 
 echo
 echo "*** INFO Installing R"
 echo
-# R (seems to be R 3.3.3)
+# R (seems to be R 3.5.2)
 sudo apt-get install -y -qq r-base
 
 echo
@@ -40,9 +50,6 @@ echo "*** INFO Installing R devtools (for R github package support)"
 echo
 #sudo R -e 'install.packages("devtools", dependencies=TRUE)'
 sudo apt-get -y -qq install r-cran-devtools
-# depends on r-api-3 which is detected as 3.3.3-1 but current R is 3.6.3 (!)
-# https://cloud.r-project.org/bin/linux/debian/ suggests 3.6.3 is supported on Debian stretch...
-# Suggests Debian 10 may fix this?
 
 echo
 echo "*** INFO Installing R xts library"
@@ -135,7 +142,6 @@ sudo cp *.R ~runner
 
 sudo cp backfill-ne-auth-token.json ~runner
 sudo cp -r chrono_lens ~runner
-sudo cp -r dsc_lib ~runner
 sudo cp *.py ~runner
 sudo cp NEtraveldata_cctv.json ~runner
 
@@ -155,7 +161,7 @@ echo "*** INFO installing Python dependencies"
 echo
 sudo apt-get -y -qq install python3-pip
 sudo python3 -m pip install -U pip
-sudo pip3 install -r requirements.txt
+sudo pip3 install -r requirements-gcloud.txt
 
 # check six version; reports:
 # google-api-core 1.23.0 has requirement six>=1.13.0, but you'll have six 1.12.0 which is incompatible.

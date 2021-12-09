@@ -1,0 +1,30 @@
+# Libraries used to test all of chrono_lens...
+
+# Automatically pre-installed packages
+# from https://cloud.google.com/functions/docs/writing/specifying-dependencies-python#pre-installed_packages
+click==7.1.2
+Flask==1.1.2
+itsdangerous==1.1.0
+Jinja2==2.11.3
+MarkupSafe==1.1.1
+# pip==20.1.1
+requests==2.24.0
+setuptools==47.3.1
+Werkzeug==1.0.1
+# auto installed wheel==0.34.2
+wheel==0.35.0
+
+# Additional local requirements
+python-dateutil==2.8.1
+google-cloud-storage==1.33.0
+aiohttp==3.7.4
+opencv-python-headless==4.3.0.36
+opencv-contrib-python==4.3.0.36
+
+numpy==1.19.5  # to keep tensorflow 2.5.1 happy
+tensorflow==2.5.2
+
+scikit-image==0.17.2
+BeautifulSoup4==4.9.1
+lxml==4.6.3
+testfixtures==6.17.0

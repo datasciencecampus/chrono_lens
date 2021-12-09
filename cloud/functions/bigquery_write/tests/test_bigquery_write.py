@@ -11,7 +11,7 @@ gcloud_project = os.environ.get('GCP_PROJECT', '')  # Built-in env var
 if gcloud_project == '':
     assert False, "GCP_PROJECT environment variable is not set"
 
-with mock.patch('dsc_lib.gcloud.logging.setup_logging_and_trace'):
+with mock.patch('chrono_lens.gcloud.logging.setup_logging_and_trace'):
     from main import bigquery_write, DATASET_NAME
 
 """
@@ -80,8 +80,9 @@ class TestBigQueryWrite(TestCase):
         self.assertEqual('RuntimeError: "model_results_json" not defined via JSON or arguments in http header',
                          response['Message'])
 
+    @skipIf(os.environ.get('BUILD_ID') == 'Travis',
+            "Can't test BigQuery integration from Travis, only from within GCP - skipping")
     def test_first_use_creates_table_adds_row(self):
-
         model_blob_name = 'test_first_use_creates_table_adds_row'
         expected_source = 'someplace'
         expected_camera_id = 'example_camera'
@@ -130,6 +131,8 @@ class TestBigQueryWrite(TestCase):
 
     @skipIf(os.environ.get("HOME", "") == "/builder/home",
             "Skipping on google cloud as tests are unreliable with BigQuery showing inconsistent results due to delays")
+    @skipIf(os.environ.get('BUILD_ID') == 'Travis',
+            "Can't test BigQuery integration from Travis, only from within GCP - skipping")
     def test_second_use_with_same_data_does_not_add_new_row(self):
 
         model_blob_name = 'test_second_use_with_same_data_does_not_add_new_row'
@@ -176,6 +179,8 @@ class TestBigQueryWrite(TestCase):
 
     @skipIf(os.environ.get("HOME", "") == "/builder/home",
             "Skipping on google cloud as tests are unreliable with BigQuery showing inconsistent results due to delays")
+    @skipIf(os.environ.get('BUILD_ID') == 'Travis',
+            "Can't test BigQuery integration from Travis, only from within GCP - skipping")
     def test_second_use_different_data_adds_second_row(self):
 
         model_blob_name = 'test_second_use_different_data_adds_second_row'
@@ -239,6 +244,8 @@ class TestBigQueryWrite(TestCase):
             # Remove table if it exists, ensure we tidy up after ourselves and don't leave detritus...
             self.remove_table(model_blob_name)
 
+    @skipIf(os.environ.get('BUILD_ID') == 'Travis',
+            "Can't test BigQuery integration from Travis, only from within GCP - skipping")
     def test_table_name_is_model_name_with_non_alphanumeric_replaced_with_underscores(self):
         model_blob_name = 'abcdxyz AB_C#DXYZ-=!@£$%^&*()_+{}[]:"|;\'\\<>?,.`\'~1234#567890/fish/fish.bin'
         # This isn't an authentication token etc. just a wide test of characters so safe to permit at commit
@@ -277,6 +284,8 @@ class TestBigQueryWrite(TestCase):
             # Remove table if it exists, ensure we tidy up after ourselves and don't leave detritus...
             self.remove_table(expected_table_name)
 
+    @skipIf(os.environ.get('BUILD_ID') == 'Travis',
+            "Can't test BigQuery integration from Travis, only from within GCP - skipping")
     def test_second_use_different_schema_fails(self):
 
         model_blob_name = 'test_second_use_different_schema_fails'

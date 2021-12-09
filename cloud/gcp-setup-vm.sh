@@ -1,6 +1,17 @@
 #!/bin/bash
 set -e
 
+echo
+echo "*** WARNING ***"
+echo
+echo "*** Using Debian debian-10-buster-v20200910 which is superceded by newer versions."
+echo "*** Staying with old version due to complexity of configuring rjdemetra and related dependencies."
+echo
+echo "*** END WARNING ***"
+echo
+echo
+
+
 if [[ $# -ne 2 ]] ; then
     echo 'You must provide "[project id]" "[branch id]" as two arguments'
     exit 0
@@ -19,7 +30,7 @@ echo
 echo "*** INFO 1/6 Creating VM ***"
 echo
 # uses default service account:     --service-account=${PROJECT_NUMBER}-compute@developer.gserviceaccount.com
-# uses startup script https://cloud.google.com/compute/docs/startupscript?_ga=2.25283581.-1189484477.1552145003&_gac=1.15516418.1596815947.EAIaIQobChMI1OODlv-G6wIVCLrtCh2wcg7lEAAYASABEgKcRvD_BwE#providing_startup_script_contents_directly
+# uses startup script https://cloud.google.com/compute/docs/instances/startup-scripts/linux#passing-local
 # No external IP address (use "enable-network.sh" and "disable-network.sh" to enable/disable external network)
 
 gcloud beta compute --project=${PROJECT_ID} instances \
@@ -59,11 +70,10 @@ gcloud compute --project=${PROJECT_ID} scp vm/bigquery-r-auth-token.json ${VM_US
 gcloud compute --project=${PROJECT_ID} scp vm/backfill-ne-auth-token.json ${VM_USERNAME}@${VM_NAME}:. --zone=${ZONE}
 gcloud compute --project=${PROJECT_ID} scp vm/*.R ${VM_USERNAME}@${VM_NAME}:. --zone=${ZONE}
 
-gcloud compute --project=${PROJECT_ID} scp ../requirements.txt ${VM_USERNAME}@${VM_NAME}:. --zone=${ZONE}
+gcloud compute --project=${PROJECT_ID} scp ../requirements-gcloud.txt ${VM_USERNAME}@${VM_NAME}:. --zone=${ZONE}
 gcloud compute --project=${PROJECT_ID} scp ../chrono_lens ${VM_USERNAME}@${VM_NAME}:. --zone=${ZONE} --recurse
-gcloud compute --project=${PROJECT_ID} scp dsc_lib ${VM_USERNAME}@${VM_NAME}:. --zone=${ZONE} --recurse
-gcloud compute --project=${PROJECT_ID} scp ../scripts/*.py ${VM_USERNAME}@${VM_NAME}:. --zone=${ZONE}
-gcloud compute --project=${PROJECT_ID} scp ../scripts/NEtraveldata_cctv.json ${VM_USERNAME}@${VM_NAME}:. --zone=${ZONE}
+gcloud compute --project=${PROJECT_ID} scp ../scripts/gcloud/*.py ${VM_USERNAME}@${VM_NAME}:. --zone=${ZONE}
+gcloud compute --project=${PROJECT_ID} scp ../scripts/gcloud/NEtraveldata_cctv.json ${VM_USERNAME}@${VM_NAME}:. --zone=${ZONE}
 
 echo
 echo "*** INFO 5/6 Installing software on VM"
