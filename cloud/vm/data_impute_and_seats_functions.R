@@ -15,7 +15,6 @@ library(ggplot2) # plotting
 library(ggExtra) # ggplot theme options
 library(viridis) # colour palette
 library(stringr) # string manipulation
-library(readr) # for reading text from a file
 
 options(scipen = 20) # to prevent large integer numbers changing to scientific format and failing to parse in BigQuery
 
@@ -24,10 +23,49 @@ options(scipen = 20) # to prevent large integer numbers changing to scientific f
 
 # ============================= FUNCTIONS ==================================
 
+## Function to load in existing data set, aggregate and perform SEATS
+loadLocationDataAndPerformSeats <- function(location, today, traffic_type, final_df){
+  imputed_data_filename <- paste0("cache/imputed_dataset_", location, ".Rda")
+  # Load existing imputed data if it exists
+  load_existing_data <- loadExistingImputedData(imputed_data_filename)
+  new_imputed_data <- load_existing_data$imputed_data
+  last_processed_date <- load_existing_data$last_processed_date
+  locations_for_weekly_query <- unique(new_imputed_data$source)
+
+  num_of_days_to_impute <- as.numeric(today - (last_processed_date - 7)) - 1
+
+  if (today - 1 == last_processed_date & ! is.null(locations_for_weekly_query)) {
+    CAMERA_LOCATIONS <- unique(new_imputed_data$source)
+
+    # Daily time series
+    final_data = NULL
+    final_data <- lapply(CAMERA_LOCATIONS, FUN = applyAggregateAndSeasonalAdjustmentOuter, df_imputed = new_imputed_data,
+    df_final_data = final_data, dailyOrHourly = "daily", trafficTypes = traffic_type)
+    final_data <- as.data.frame(data.table::rbindlist(final_data, idcol = FALSE))
+
+    if (is.null(final_df)) {
+      final_df <- final_data
+    } else {
+      final_df <- rbind(final_df, final_data)
+    }
+
+    return(final_df)
+  } else {
+    print(paste0("Exiting script early as there is either less than five weeks of data (first run) or no dates between the last processed date ", last_processed_date, " and today ", today))
+  }
+}
+
 # Function to query bigquery to get the start date and time for each location not in the csv
-getStartDateForLocationFromBigQuery <- function(location, locations_and_dates, model_name){
+getStartDateForLocationFromBigQuery <- function(location, locations_and_dates, model_name, maxinum_number_of_retries, minimum_retry_delay, maximum_retry_delay){
   print("Querying BigQuery to get start dates for each location not found in csv")
-  sql <- paste0('
+
+  bq_data <- NULL
+  retryCounter <- 0
+  while (is.null(bq_data) && retryCounter < maxinum_number_of_retries) {
+    retryCounter = retryCounter + 1
+    bq_data = tryCatch(
+    {
+      sql <- paste0('
                 SELECT date, time
                 FROM PROJECT_ID_PLACEHOLDER.detected_objects.', model_name, '
                 WHERE date > "2020-01-01"
@@ -35,7 +73,22 @@ getStartDateForLocationFromBigQuery <- function(location, locations_and_dates, m
                 ORDER BY date ASC, time ASC
                 LIMIT 1
                 ')
-  bq_data <- bq_table_download(bq_project_query(project, sql))
+      bq_data <- bq_table_download(bq_project_query(project, sql))
+    },
+    error = function(e){
+      message("Caught an error!")
+      print(e)
+      message("Sleeping before retrying query.")
+      Sys.sleep(sample(minimum_retry_delay : maximum_retry_delay, 1))
+      message("Retrying BigQuery Download")
+    },
+    warning = function(w){
+      message('Caught a warning!')
+      print(w)
+    }
+    )
+  }
+
   date_time <- as.data.frame(c("source" = location, bq_data))
 
   if (is.null(locations_and_dates)) {
@@ -47,26 +100,47 @@ getStartDateForLocationFromBigQuery <- function(location, locations_and_dates, m
   return(locations_and_dates)
 }
 
+
 # Function to download new location data, tidy and impute it if there is at least five weeks data inside bigquery
 # If there isn't at least five weeks of data for a location then it will download the latest week in order for QA pdfs to be produced
-checkStartDateOfNewLocation <- function(location, locations_and_dates, today, last_processed_date, project, new_locations_data, new_locations_pdf, model_name){
+prepareDataIfNewLocationOtherwiseReportStatus <- function(location, locations_and_dates, today, last_processed_date, project, new_locations_data, new_locations_pdf, model_name, maxinum_number_of_retries, minimum_retry_delay, maximum_retry_delay){
   # Get start date of new location
   start_date_of_new_location <- locations_and_dates[locations_and_dates$source == location, "date"]
   # If there is at least five weeks of data in bigquery then download it up to last_processed_date
   if(start_date_of_new_location <= today - 7*5){
     print(paste0("Start date for ", location, " is at least five weeks before current date"))
     print(paste0("Downloading data for ", location, " from bigquery since ", start_date_of_new_location))
-    sql = paste0('
+
+    data_for_new_source <- NULL
+    retryCounter <- 0
+    while (is.null(data_for_new_source) && retryCounter < maxinum_number_of_retries) {
+      retryCounter = retryCounter + 1
+      data_for_new_source = tryCatch(
+      {
+        sql = paste0('
                 SELECT *
                 FROM `PROJECT_ID_PLACEHOLDER.detected_objects.', model_name, '`
                 WHERE date > DATE(', format(start_date_of_new_location - 1, "%Y, %m, %d"), ') and date < DATE(', format(last_processed_date + 1, "%Y, %m, %d"), ')
                 AND source = "' , location, '"
                 ')
-    print(paste0("Loading data for new data source ", location, " from BigQuery"))
-      data_for_new_source <- bq_table_download(bq_project_query(project, sql), page_size = 40000)
-    print("Finished loading new data from BigQuery")
+        print(paste0("Loading data for new data source ", location, " from BigQuery"))
+        data_for_new_source <- bq_table_download(bq_project_query(project, sql), page_size = 40000)
+      },
+      error = function(e){
+        message("Caught an error!")
+        print(e)
+        message("Sleeping before retrying query.")
+        Sys.sleep(sample(minimum_retry_delay : maximum_retry_delay, 1))
+        message("Retrying BigQuery Download")
+      },
+      warning = function(w){
+        message('Caught a warning!')
+        print(w)
+      }
+      )
+    }
 
-      # Ensure there are no duplicate rows
+    # Ensure there are no duplicate rows
     data_for_new_source_distinct <- distinct(data_for_new_source)
     rm(data_for_new_source)
 
@@ -75,42 +149,77 @@ checkStartDateOfNewLocation <- function(location, locations_and_dates, today, la
     data_for_new_source_tidy <- tidyData(data_for_new_source_distinct)
     rm(data_for_new_source_distinct)
 
-    if(is.null(new_locations_data)){
-      new_locations_data <- data_for_new_source_tidy
-    } else {
-      new_locations_data <- rbind(new_locations_data, data_for_new_source_tidy)
-    }
-  } else {
-      print(paste0("There are not enough days of data available for ", location, " (five weeks required) so downloading latest week and outputting pdfs"))
-    sql = paste0('
+    # Impute missing data
+    print("Running imputeData function on new data source")
+    data_for_new_source_imputed <- imputeData(df = data_for_new_source_tidy)
+    print("Finished imputeData function on new data source")
+    rm(data_for_new_source_tidy)
+
+    print("Saving update imputed dataset")
+    imputed_data_filename <- paste0("cache/imputed_dataset_", location, ".Rda")
+    saveRDS(data_for_new_source_imputed, file = imputed_data_filename)
+
+    new_locations_data <- data.frame("source" = location, "last_date_processed" = max(data_for_new_source_imputed$date))
+  } else if (! (start_date_of_new_location <= today - 7 * 5) & start_date_of_new_location < today) {
+    data_for_new_source <- NULL
+    retryCounter <- 0
+    while (is.null(data_for_new_source) && retryCounter < maxinum_number_of_retries) {
+      retryCounter = retryCounter + 1
+      data_for_new_source = tryCatch(
+      {
+        print(paste0("There are not enough days of data available for ", location, " (five weeks required) so downloading latest week and outputting pdfs"))
+        sql = paste0('
                 SELECT *
                 FROM `PROJECT_ID_PLACEHOLDER.detected_objects.', model_name, '`
                 WHERE date > DATE(', format(today - 8, "%Y, %m, %d"), ') and date < DATE(', format(today, "%Y, %m, %d"), ')
                 AND source = "' , location, '"
                 ')
+        print(paste0("Loading data for new data source ", location, " from BigQuery"))
+        data_for_new_source <- bq_table_download(bq_project_query(project, sql), page_size = 20000)
+      },
+      error = function(e){
+        message("Caught an error!")
+        print(e)
+        message("Sleeping before retrying query.")
+        Sys.sleep(sample(minimum_retry_delay : maximum_retry_delay, 1))
+        message("Retrying BigQuery Download")
+      },
+      warning = function(w){
+        message('Caught a warning!')
+        print(w)
+      }
+      )
+    }
 
-    print(paste0("Loading data for new data source ", location, " from BigQuery"))
-      data_for_new_source <- bq_table_download(bq_project_query(project, sql), page_size = 20000)
-    print("Finished loading new data from BigQuery")
-
-      # Ensure there are no duplicate rows
+    # Ensure there are no duplicate rows
     data_for_new_source_distinct <- distinct(data_for_new_source)
     rm(data_for_new_source)
 
-      # Tidy data
+    # Tidy data
     print("Running tidyData function on new data source")
     data_for_new_source_tidy <- tidyData(data_for_new_source_distinct)
     rm(data_for_new_source_distinct)
 
-      if(is.null(new_locations_pdf)){
-      new_locations_pdf <- data_for_new_source_tidy
-    } else {
-      new_locations_pdf <- rbind(new_locations_pdf, data_for_new_source_tidy)
-    }
+    print("There isn't five weeks or more of data so outputting pdfs for latest week for QA")
+
+    print("Producing graph for faulty, missing, present camera counts")
+    produceCameraStatusGraph(df = data_for_new_source_tidy, date = today, filename = paste0("_new_data_source_", location))
+
+    print("Produce PDF per camera per location")
+    produceStatusReportPerCameraPDF(df = data_for_new_source_tidy, date = today, filename = paste0("_new_data_source_", location))
+
+    print("Produce PDF per camera per location (long version)")
+    produceStatusReportPerCameraPDFLongVersion(df = data_for_new_source_tidy, date = today, filename = paste0("_new_data_source_", location))
+
+    print("Produce PDF heatmap per location")
+    produceStatusReportPerLocationPDF(df = data_for_new_source_tidy, date = today, filename = paste0("_new_data_source_", location))
+  } else {
+    print("There is no data between start date of new location and today's date")
   }
 
-    return(list(new_locations_data = new_locations_data, new_locations_pdf = new_locations_pdf))
+  return(list(new_locations_data = new_locations_data, new_locations_pdf = new_locations_pdf))
 }
+
 
 # Function to produce and output status report pdf of present, missing, faulty per camera per location (long version)
 produceStatusReportPerCameraPDFLongVersion <- function(df, date, filename = ""){
@@ -118,20 +227,11 @@ produceStatusReportPerCameraPDFLongVersion <- function(df, date, filename = ""){
   df$Legend <- "present"
   df$Legend <- ifelse(df$missing == TRUE, "missing", df$Legend)
   df$Legend <- ifelse(df$faulty == TRUE, "faulty", df$Legend)
-  locations <- sort(unique(df$source))
+  location <- sort(unique(df$source))
 
   # Set name for pdf to be created
   pdf_file_name <- paste0("outputs/Status_report_per_camera_long_version_", format(date, "%Y%m%d"), filename, ".pdf")
   pdf(file = pdf_file_name)
-  # Apply produceStatusReportPDFgraphs to each loaction
-  sapply(locations, FUN = produceStatusReportPerCameraPDFgraphsLongVersion, df = df)
-  dev.off()
-
-  return(print("PDF generated"))
-}
-produceStatusReportPerCameraPDFgraphsLongVersion <- function(location, df){
-  # Select only data for chosen location
-  df <- df[df$source == location,]
 
   counter_df <- data.frame(camera_id = sort(unique(df$camera_id)))
   counter_df <- counter_df %>%
@@ -170,13 +270,18 @@ produceStatusReportPerCameraPDFgraphsLongVersion <- function(location, df){
       print(p)
     }
   }
+
+  dev.off()
+
+  return(print("PDF generated"))
 }
 
+
 # Functions to output PDF for last four weeks data for cars for each location (graph form)
-produceLastFourWeekHistoryDataPDF <- function(df, date){
+produceLastFourWeekHistoryDataPDF <- function(df, date, camera_locations){
   pdf_file_name <- paste0("outputs/Four_week_history_", format(date, "%Y%m%d"), ".pdf")
   pdf(file = pdf_file_name)
-  sapply(CAMERA_LOCATIONS, FUN = produceLastFourWeekHistoryDataPDFgraphs, df = df)
+  sapply(camera_locations, FUN = produceLastFourWeekHistoryDataPDFgraphs, df = df)
   dev.off()
   return(print("PDF generated"))
 }
@@ -202,13 +307,13 @@ produceLastFourWeekHistoryDataPDFgraphs <- function(location , df){
 }
 
 # Function to aggregate and seasonally adjust newly imputed data (outer loop)
-applyAggregateAndSeasonalAdjustmentOuter <- function(camera, df_imputed, df_final_data, trafficTypes){
+applyAggregateAndSeasonalAdjustmentOuter <- function(camera, df_imputed, df_final_data, dailyOrHourly, trafficTypes){
   print(paste0("Running aggregateData for ", camera))
-  df_daily <- aggregateData(df = df_imputed, camLocation = camera)
+  df_dailyOrHourly <- aggregateData(df = df_imputed, camLocation = camera, dailyOrHourly = dailyOrHourly)
 
   final_daily = NULL
-  final_daily <- lapply(trafficTypes, FUN = applyAggregateAndSeasonalAdjustmentInner, df = df_daily,
-                        final_df = final_daily, camera = camera)
+  final_daily <- lapply(trafficTypes, FUN = applyAggregateAndSeasonalAdjustmentInner, df = df_dailyOrHourly,
+  final_df = final_daily, camera = camera, dailyOrHourly = dailyOrHourly)
 
   final_daily <- as.data.frame(data.table::rbindlist(final_daily, idcol = FALSE))
 
@@ -222,10 +327,14 @@ applyAggregateAndSeasonalAdjustmentOuter <- function(camera, df_imputed, df_fina
 }
 
 # Function to aggregate and seasonally adjust newly imputed data (inner loop)
-applyAggregateAndSeasonalAdjustmentInner <- function(traf_type, df, final_df, camera){
+applyAggregateAndSeasonalAdjustmentInner <- function(traf_type, df, final_df, camera, dailyOrHourly){
   print(paste0("Running timeseries for ", traf_type))
 
-  result_daily <- timeseriesDaily(df = df, trafficType = traf_type)
+  if (dailyOrHourly == "hourly") {
+    result_daily <- timeseriesHourly(df = df, trafficType = traf_type)
+  } else {
+    result_daily <- timeseriesDaily(df = df, trafficType = traf_type)
+  }
 
   if(length(traf_type) == 2){
     traf_name <- paste0(traf_type[1],"_", traf_type[2])
@@ -251,18 +360,12 @@ produceStatusReportPerCameraPDF <- function(df, date, filename = ""){
   df$Legend <- "present"
   df$Legend <- ifelse(df$missing == TRUE, "missing", df$Legend)
   df$Legend <- ifelse(df$faulty == TRUE, "faulty", df$Legend)
-  locations <- sort(unique(df$source))
+  location <- sort(unique(df$source))
 
   # Set name for pdf to be created
   pdf_file_name <- paste0("outputs/Status_report_per_camera_", format(date, "%Y%m%d"), filename, ".pdf")
   pdf(file = pdf_file_name)
-  # Apply produceStatusReportPDFgraphs to each loaction
-  sapply(locations, FUN = produceStatusReportPerCameraPDFgraphs, df = df)
-  dev.off()
 
-  return(print("PDF generated"))
-}
-produceStatusReportPerCameraPDFgraphs <- function(location, df){
   # Create date time points for x axis
   dateMin <- min(df$date)
   dateMax <- max(df$date)
@@ -272,8 +375,6 @@ produceStatusReportPerCameraPDFgraphs <- function(location, df){
                              by = "12 hours", length.out = (as.numeric(dateMax - dateMin) + 1) * 2))
   datetime_labels <- as.character(seq.POSIXt(from = as.POSIXct(paste0(dateMin, " 00:00:00"), tz = "UTC"),
                                              by = "12 hours", length.out = (as.numeric(dateMax - dateMin) + 1) * 2))
-  # Select only data for chosen location
-  df <- df[df$source == location,]
 
   counter_df <- data.frame(camera_id = sort(unique(df$camera_id)))
   counter_df <- counter_df %>%
@@ -304,26 +405,22 @@ produceStatusReportPerCameraPDFgraphs <- function(location, df){
     }
     print(p)
   }
+
+  dev.off()
+
+  return(print("PDF generated"))
 }
+
 
 # Function to produce and output status report pdf of present, missing, faulty per location
 produceStatusReportPerLocationPDF <- function(df, date, filename = ""){
   # Add a new column that is TRUE if camera isn't missing or faulty, FALSE otherwise
   df$present <- ifelse(df$missing == FALSE & df$faulty == FALSE, TRUE, FALSE)
-  locations <- sort(unique(df$source))
+  location <- sort(unique(df$source))
 
   # Set name for pdf to be created
   pdf_file_name <- paste0("outputs/Status_report_per_location_", format(date, "%Y%m%d"), filename, ".pdf")
   pdf(file = pdf_file_name)
-  # Apply produceStatusReportPDFgraphs to each loaction
-  sapply(locations, FUN = produceStatusReportPerLocationPDFgraphs, df = df)
-  dev.off()
-
-  return(print("PDF generated"))
-}
-produceStatusReportPerLocationPDFgraphs <- function(location, df){
-  # Select location data
-  df <- df[df$source == location,]
 
   # Aggregate faulty, missing, present counts by datetime
   plot_data <- aggregate(df[, c("faulty", "missing", "present")], by = list(datetime = floor_date(df$datetime, unit = "hour")), FUN = sum)
@@ -356,7 +453,12 @@ produceStatusReportPerLocationPDFgraphs <- function(location, df){
     theme(axis.ticks = element_blank()) +
     removeGrid()
   print(p)
+
+  dev.off()
+
+  return(print("PDF generated"))
 }
+
 
 # Function to produce and output percentage stacked barchart showing missing, faulty, present counts per location
 produceCameraStatusGraph <- function(df, date, filename = ""){
@@ -410,20 +512,104 @@ loadExistingImputedData <- function(imputed_filename){
 }
 
 # Function to get data from SQL, after "last date" and before "today"
-loadBigQueryData <- function(last_processed_date, project, date, locations_for_weekly_query, model_name){
-  today <- date
-  sql = paste0("
+loadLatestBigQueryDataImputeAndAppend <- function(location, locations_and_dates, project, today, model_name, new_locations_and_dates, maxinum_number_of_retries, minimum_retry_delay, maximum_retry_delay){
+
+  last_processed_date <- locations_and_dates[locations_and_dates$source == location, "last_date_processed"]
+
+  if (today - 1 == last_processed_date) {
+    return(locations_and_dates[locations_and_dates$source == location,])
+  }
+
+  bq_data <- NULL
+  retryCounter <- 0
+  while (is.null(bq_data) && retryCounter < maxinum_number_of_retries) {
+    retryCounter = retryCounter + 1
+    bq_data = tryCatch(
+    {
+      sql = paste0("
               SELECT *
               FROM `PROJECT_ID_PLACEHOLDER.detected_objects.", model_name, "`
               WHERE date > DATE(", format(last_processed_date, "%Y, %m, %d"), ") and date < DATE(", format(today, "%Y, %m, %d"), ")
-              AND source IN ('" , paste(locations_for_weekly_query, collapse = "','"), "')
+              AND source IN ('" , paste(location, collapse = "','"), "')
               ")
-  print(paste0("Loading new data from BigQuery after ", format(last_processed_date, "%Y-%m-%d"), " and before ", format(today, "%Y-%m-%d")))
-  bq_data <- bq_table_download(bq_project_query(project, sql), page_size = 20000)
-  print("Finished loading new data from BigQuery")
+      print(paste0("Loading new data for ", location, " from BigQuery after ", format(last_processed_date, "%Y-%m-%d"), " and before ", format(today, "%Y-%m-%d")))
+      bq_data <- bq_table_download(bq_project_query(project, sql), page_size = 20000)
+    },
+    error = function(e){
+      message("Caught an error!")
+      print(e)
+      message("Sleeping before retrying query.")
+      Sys.sleep(sample(minimum_retry_delay : maximum_retry_delay, 1))
+      message("Retrying BigQuery Download")
+    },
+    warning = function(w){
+      message('Caught a warning!')
+      print(w)
+    }
+    )
+  }
 
-  return(bq_data)
+  if (is.null(bq_data) && retryCounter >= 5) {
+    stop("Failed to download data for BigQuery 5 times so aborting script.")
+  }
+
+  # Ensure there are no duplicate rows
+  new_data_distinct <- distinct(bq_data)
+  rm(bq_data)
+
+  print("Running tidyData function on new data")
+  new_tidy_data <- tidyData(new_data_distinct)
+  rm(new_data_distinct)
+
+  print("Producing graph for faulty, missing, present camera counts")
+  produceCameraStatusGraph(df = new_tidy_data, date = today, filename = paste0("_", location))
+
+  print("Produce PDF per camera per location")
+  produceStatusReportPerCameraPDF(df = new_tidy_data, date = today, filename = paste0("_", location))
+
+  print("Produce PDF per camera per location (long version)")
+  produceStatusReportPerCameraPDFLongVersion(df = new_tidy_data, date = today, filename = paste0("_", location))
+
+  print("Produce PDF heatmap per location")
+  produceStatusReportPerLocationPDF(df = new_tidy_data, date = today, filename = paste0("_", location))
+
+  # Load existing imputed data if it exists
+  imputed_data_filename <- paste0("cache/imputed_dataset_", location, ".Rda")
+  load_existing_data <- loadExistingImputedData(imputed_data_filename)
+  imputed_data <- load_existing_data$imputed_data
+  last_processed_date <- load_existing_data$last_processed_date
+  num_of_days_to_impute <- as.numeric(today - last_processed_date) - 1
+
+  # If previous imputed data exists then take last 4 weeks to merge onto new data, otherwise just keep the whole data set
+  imputed_data_with_unimputed_tail <- getPrevFourWeeksAppendedWithLatest(prev_imputed_data = imputed_data, tidied_data = new_tidy_data)
+
+  rm(new_tidy_data)
+
+  print("Running imputeData function")
+  new_imputed_data <- imputeData(df = imputed_data_with_unimputed_tail)
+  print("Finished imputeData function")
+
+  rm(imputed_data_with_unimputed_tail)
+
+  # If imputing with last 4 weeks of data, merge the new week but on with the existing imputed data
+  if (! is.null(imputed_data)) {
+    print("Merging newly imputed week back onto existing imputed data")
+    data_to_add_imputed <- new_imputed_data[new_imputed_data$date > max(new_imputed_data$date) - num_of_days_to_impute,]
+    new_imputed_data <- rbind(imputed_data, data_to_add_imputed)
+    rm(data_to_add_imputed)
+  }
+
+  rm(imputed_data)
+
+  print("Saving imputed dataset")
+  saveRDS(new_imputed_data, file = imputed_data_filename)
+
+  last_processed_date <- max(new_imputed_data$date)
+  new_locations_and_dates <- data.frame("source" = unique(new_imputed_data$source), "last_date_processed" = last_processed_date)
+
+  return(new_locations_and_dates)
 }
+
 
 # Function to get the previous four weeks from the latest imputed dataset (if it exists)
 getPrevFourWeeksAppendedWithLatest <- function(prev_imputed_data, tidied_data){
@@ -555,8 +741,8 @@ imputeData <- function(df, last_imputed_date = NULL){
   return(df)
 }
 
-# Function to aggregate data from every 10 minutes to daily
-aggregateData <- function(df, camLocation){
+# Function to aggregate data from every 10 minutes to hourly or daily
+aggregateData <- function(df, camLocation, dailyOrHourly){
 
   # Create datetime column
   # Drop columns faulty and missing
@@ -567,7 +753,14 @@ aggregateData <- function(df, camLocation){
     mutate(datetime = as.POSIXct(datetime, tz = "UTC")) %>%
     select(-c(missing, faulty, camera_id, date, time, source))
 
-  dates <- as.Date(df$datetime)
+  if (dailyOrHourly == "hourly") {
+    # Convert datatime to POSIXct type
+    dates <- as.POSIXct(df$datetime, tz = "UTC")
+    # Round datetime to hours
+    dates <- floor_date(dates, unit = "hour")
+  } else {
+    dates <- as.Date(df$datetime)
+  }
 
   # Replace datatime column with new converted dates
   df$datetime <- as.character(dates)
@@ -578,7 +771,11 @@ aggregateData <- function(df, camLocation){
                             by = list(datetime = df$datetime) , FUN = sum)
 
   # Convert date column into posixc or date
-  dates <- as.Date(data_cam_sum$datetime)
+  if (dailyOrHourly == "hourly") {
+    dates <- as.POSIXct(data_cam_sum$datetime, tz = "UTC")
+  } else {
+    dates <- as.Date(data_cam_sum$datetime)
+  }
 
   returnList <- list("dataset" = data_cam_sum, "dates" = dates)
   return(returnList)
@@ -659,6 +856,61 @@ timeseriesDaily <- function(df, trafficType){
   tr <- (xts(c1$decomposition$t, order.by = time(y)) + ls_ts)^2
   ir <- xts(c1$decomposition$i, order.by = time(y))
   s <- xts(c1$decomposition$s, order.by = time(y))
+
+  returnList <- list("sa" = round(sa), "tr" = round(tr), "y" = round(y_orig))
+  temp <- merge(returnList$sa, returnList$tr, returnList$y)
+  temp_index <- as.data.frame(index(temp))
+  temp <- as.data.frame(temp)
+  to_return <- cbind(temp_index, temp)
+  colnames(to_return) <- c("Date", "SA", "Trend", "Original")
+
+  return(to_return)
+}
+
+# Function to perform SEATS on hourly data
+timeseriesHourly <- function(df, trafficType){
+  data_to_use <- df$dataset
+  dates <- df$dates
+
+  if (length(trafficType) == 2) {
+    y_trafficType <- rowSums(data_to_use[, trafficType])
+    traf_name <- paste0(trafficType[1], "_", trafficType[2])
+  } else {
+    y_trafficType <- data_to_use[, trafficType]
+    traf_name <- trafficType
+  }
+
+  # Order y by dates
+  y_trafficType_xts <- xts(y_trafficType, order.by = dates)
+  colnames(y_trafficType_xts) <- traf_name
+
+  y_orig <- y_trafficType_xts
+  # Square root y
+  y <- sqrt(y_trafficType_xts)
+  # Perform fractional airline estimation with period 24 and 24*7, critical values 4
+  cleaning <- rjdhf::fractionalAirlineEstimation(y, period = c(24, 24 * 7), outliers = c("ao", "ls", "wo"), criticalValue = 4)
+
+  # Calculate t value
+  tval_b <- cleaning$model$b / sqrt(diag(cleaning$model$bcov))
+  data.frame(cleaning$model$variables, tval_b)
+
+  y_clean <- cleaning$model$linearized
+
+  # Perform fractional airline decomposition with period 24, 24*7
+  c1 <- rjdhf::fractionalAirlineDecomposition(y_clean, period = 24 * 7)
+  c2 <- rjdhf::fractionalAirlineDecomposition(c1$decomposition$sa, period = 24)
+
+  # Get outliers ao, ls, wo
+  outliers <- getOutliers(dfCleaning = cleaning, dfY = y)
+  ls_ts <- outliers$ls_ts
+  aowo_ts <- outliers$aowo_ts
+
+  sa <- (xts(c2$decomposition$sa, order.by = time(y)) +
+    ls_ts +
+    aowo_ts) ^ 2
+  tr <- (xts(c2$decomposition$t, order.by = time(y)) + ls_ts) ^ 2
+  ir <- xts(c2$decomposition$i, order.by = time(y))
+  s <- xts(c2$decomposition$s + (c1$decomposition$s) ^ 2, order.by = time(y))
 
   returnList <- list("sa" = round(sa), "tr" = round(tr), "y" = round(y_orig))
   temp <- merge(returnList$sa, returnList$tr, returnList$y)
