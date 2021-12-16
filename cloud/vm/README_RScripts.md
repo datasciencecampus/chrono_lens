@@ -12,7 +12,7 @@ This guide covers an overview of the main R scripts used.
 This script is in charge of downloading data from BigQuery, tidying and imputing the data and outputting QA files.
 Each location is processed separately and will be stored in separate `.Rda` files, e.g. `TfL-images.Rda`. The CSV
 file `list_of_location_datasets.csv` will list the location names of datasets currently being processed weekly and
-their corresponding latest date in each dataset. This file isused so the R script knows which locations to download
+their corresponding latest date in each dataset. This file is used so the R script knows which locations to download
 and process for the weekly query.
 The CSV file `Traffic_cameras_locations_and_start_dates.csv` lists the locations present in BigQuery and their
 corresponding start dates. This file is used so the R script knows when a new location is added to BigQuery and when
