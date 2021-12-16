@@ -69,7 +69,12 @@ imputed_dataset_filename="cache/imputed_dataset.Rda"
 gsutil cp gs://exports-${PROJECT_ID}/FasterIndicators/cache/imputed_dataset_latest.Rda ${imputed_dataset_filename} >> $1 2>&1
 
 # Run R script
-Rscript data_impute_and_seats_run.R >> $1 2>&1
+echo >> $1
+echo "R code starting..." >> $1
+Rscript data_impute_run.R >> $1 2>&1
+Rscript data_seats_run.R >> $1 2>&1
+echo "...R code finished" >> $1
+echo >> $1
 
 # Copy results to bucket
 today=$(date +"%Y%m%d")
@@ -77,7 +82,7 @@ today=$(date +"%Y%m%d")
 gsutil cp ${imputed_dataset_filename} gs://exports-${PROJECT_ID}/FasterIndicators/cache/imputed_dataset_${today}.Rda >> $1 2>&1
 gsutil cp ${imputed_dataset_filename} gs://exports-${PROJECT_ID}/FasterIndicators/cache/imputed_dataset_latest.Rda >> $1 2>&1
 
-gsutil cp -r outputs/*${today}*.* >> $1 2>&1
+gsutil cp -r outputs/*${today}*.* gs://exports-${PROJECT_ID}/FasterIndicators/${today}/ >> $1 2>&1
 
 fi
 

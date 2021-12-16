@@ -152,7 +152,8 @@ sudo mkdir ~runner/outputs
 sudo chown -R runner ~runner/*
 sudo chgrp -R runner ~runner/*
 sudo sed -i "s/PROJECT_ID_PLACEHOLDER/${PROJECT_ID}/" ~runner/runner-startup.sh
-sudo sed -i "s/PROJECT_ID_PLACEHOLDER/${PROJECT_ID}/" ~runner/data_impute_and_seats_run.R
+sudo sed -i "s/PROJECT_ID_PLACEHOLDER/${PROJECT_ID}/" ~runner/data_impute_run.R
+sudo sed -i "s/PROJECT_ID_PLACEHOLDER/${PROJECT_ID}/" ~runner/data_seats_run.R
 sudo sed -i "s/PROJECT_ID_PLACEHOLDER/${PROJECT_ID}/" ~runner/data_impute_and_seats_functions.R
 
 
