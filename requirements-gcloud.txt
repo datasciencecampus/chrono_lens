@@ -11,7 +11,7 @@ requests==2.24.0
 # over-ride auto installed wheel==0.34.2 with...
 # wheel==0.35.0
 
-numpy==1.19.5  # consistent with count_objects cloud function
+numpy==1.22.0  # consistent with count_objects cloud function
 opencv-python-headless==4.3.0.36  # consistent with count_objects cloud function
 
 python-dateutil==2.8.1
