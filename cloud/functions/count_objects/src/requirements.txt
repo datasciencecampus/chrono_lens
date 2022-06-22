@@ -16,7 +16,7 @@ wheel==0.35.0
 google-cloud-storage==1.33.0
 opencv-python-headless==4.3.0.36
 opencv-contrib-python==4.3.0.36
-numpy==1.19.5  # to keep tensorflow 2.5.1 happy
+numpy==1.22.0  # to keep tensorflow 2.5.1 happy
 tensorflow==2.5.2
 scikit-image==0.17.2
 
