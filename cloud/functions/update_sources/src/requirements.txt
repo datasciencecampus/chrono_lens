@@ -15,7 +15,7 @@ wheel==0.35.0
 # Additional local requirements
 google-cloud-storage==1.33.0
 BeautifulSoup4==4.9.3
-lxml==4.6.5
+lxml==4.9.1
 
 python-json-logger==2.0.1
 google-cloud-logging==2.0.2
