@@ -10,7 +10,7 @@ requests==2.24.0
 setuptools==47.3.1
 Werkzeug==1.0.1
 # auto installed wheel==0.34.2
-wheel==0.35.0
+wheel==0.38.1
 
 # Additional local requirements
 google-cloud-storage==1.33.0
